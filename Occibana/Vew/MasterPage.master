@@ -1,0 +1,91 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/Controller/MasterPage.master.cs" Inherits="Vew_MasterPage" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+
+        .auto-style1 #nav{
+            background: #0056FF;
+        }
+
+        .auto-style1 {
+            width: 100%;
+            border: 1px  #0056FF;
+        }
+        .auto-style3 {
+            width: 368px;
+            text-align: center;
+            
+        }
+        .auto-style4 {
+            width: 663px;
+            
+        }
+        .auto-style10 {
+            width: 100px;
+            text-align: center;
+           
+        }
+        .auto-style11 {
+            width: 100px;
+            text-align: center;
+            
+        }
+        .auto-style14 {
+            width: 100px;
+            
+        }
+        .auto-style15 {
+            text-align: center;
+            color: #FFFFFF;
+            font-weight: 800;
+        }
+        .auto-style15 a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <table class="auto-style1">
+            <tr>
+                <td id="nav" class="auto-style3" aria-dropeffect="link">
+                    <asp:Image ID="Image1" runat="server" Height="93px" ImageUrl="~/Vew/img/fotoefectos.com_.jpg" Width="115px" DescriptionUrl="~/Vew/Login.aspx" />
+                </td>
+                <td id="nav" class="auto-style4">&nbsp;</td>
+                <td id="nav" class="auto-style11">
+                    <asp:Button ID="B_Inicio" runat="server" Text="INICIO" Width="102px" Font-Size="12px" BackColor="Red" ForeColor="White" Height="30px" OnClick="B_Inicio_Click" />
+                </td>
+                <td id="nav" class="auto-style14">
+                    <asp:Button ID="B_Registro" runat="server" Text="REGISTRARME" Width="102px" Font-Size="12px" BackColor="Red" ForeColor="White" Height="30px" OnClick="B_Registro_Click" />
+                </td>
+                <td id="nav" class="auto-style10">
+                    <asp:Button ID="B_Login" runat="server" Text="INICIAR SESIÓN" Width="102px" Font-Size="12px" BackColor="Red" ForeColor="White" Height="30px" OnClick="B_Login_Click" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5">
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td id="nav" class="auto-style15" colspan="5">OCCIBANA - CONTÁCTANOS<br />
+                    <br />
+                    Correo: <a href="mailto:occibana@gmail.com"><span>occibana@gmail.com</span></a><b />
+                    Teléfono: +57 1234567<br />
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="DAOhotel" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAgAAAAAACAAAAAABAAAQFAAAAAAAAAAAAAGgA=</HashCode>
+      <FileName>App_Code\Datos\DAOhotel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAOLogin" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAgAAAAAAAAEAAAACAAAAAAAAAAAAAAwAQAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Datos\DAOLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DAOSeguridad" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACACAAAAAAAAAIBAAAAACACAAAAAIABCAEAAAAAAAA=</HashCode>
+      <FileName>App_Code\Datos\DAOSeguridad.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mapeo" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAQgRBAAAAAAAAAAgAAAAAIAQAIAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Datos\Mapeo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Hotel" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiAABIClAgCLJwCACXMRhABxUYBAIFAAAAgAAAAIAAQ=</HashCode>
+      <FileName>App_Code\Encapsular\Hotel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelMunicipio" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAACAAQAAgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Encapsular\HotelMunicipio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HotelZona" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAEAAgABAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>App_Code\Encapsular\HotelZona.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Registro" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAACAAAAAAQAAAKEAAACgAAAAIAAAATAAAAEQggAAgY=</HashCode>
+      <FileName>App_Code\Encapsular\Registro.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Token" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiACAAAgACAIAAAgCAAAAAAAAAAAAAAAAAAAAAIAAgA=</HashCode>
+      <FileName>App_Code\Encapsular\Token.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mail" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAAAAgAAAAACAAAAAIA=</HashCode>
+      <FileName>App_Code\Mail.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Mailrecuperarcontrasena" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>App_Code\Mailrecuperarcontrasena.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

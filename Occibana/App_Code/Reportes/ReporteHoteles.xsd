@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ReporteHoteles" targetNamespace="http://tempuri.org/ReporteHoteles.xsd" xmlns:mstns="http://tempuri.org/ReporteHoteles.xsd" xmlns="http://tempuri.org/ReporteHoteles.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ReporteHoteles" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_DataSetName="ReporteHoteles" msprop:Generator_UserDSName="ReporteHoteles">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="ReporteHoteles" msprop:Generator_TableClassName="ReporteHotelesDataTable" msprop:Generator_TableVarName="tableReporteHoteles" msprop:Generator_RowChangedName="ReporteHotelesRowChanged" msprop:Generator_TablePropName="_ReporteHoteles" msprop:Generator_RowDeletingName="ReporteHotelesRowDeleting" msprop:Generator_RowChangingName="ReporteHotelesRowChanging" msprop:Generator_RowEvHandlerName="ReporteHotelesRowChangeEventHandler" msprop:Generator_RowDeletedName="ReporteHotelesRowDeleted" msprop:Generator_RowClassName="ReporteHotelesRow" msprop:Generator_UserTableName="ReporteHoteles" msprop:Generator_RowEvArgName="ReporteHotelesRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Numbre_del_Hotel" msprop:Generator_ColumnVarNameInTable="columnNumbre_del_Hotel" msprop:Generator_ColumnPropNameInRow="Numbre_del_Hotel" msprop:Generator_ColumnPropNameInTable="Numbre_del_HotelColumn" msprop:Generator_UserColumnName="Numbre_del_Hotel" type="xs:string" minOccurs="0" />
+              <xs:element name="Precio_Noche" msprop:Generator_ColumnVarNameInTable="columnPrecio_Noche" msprop:Generator_ColumnPropNameInRow="Precio_Noche" msprop:Generator_ColumnPropNameInTable="Precio_NocheColumn" msprop:Generator_UserColumnName="Precio_Noche" type="xs:int" minOccurs="0" />
+              <xs:element name="_x0023_Hbitaciones" msprop:Generator_ColumnVarNameInTable="_column_Hbitaciones" msprop:Generator_ColumnPropNameInRow="__Hbitaciones" msprop:Generator_ColumnPropNameInTable="__HbitacionesColumn" msprop:Generator_UserColumnName="#Hbitaciones" type="xs:int" minOccurs="0" />
+              <xs:element name="Precio_Noche_Doble" msprop:Generator_ColumnVarNameInTable="columnPrecio_Noche_Doble" msprop:Generator_ColumnPropNameInRow="Precio_Noche_Doble" msprop:Generator_ColumnPropNameInTable="Precio_Noche_DobleColumn" msprop:Generator_UserColumnName="Precio_Noche_Doble" type="xs:int" minOccurs="0" />
+              <xs:element name="Precio_Noche_Premium" msprop:Generator_ColumnVarNameInTable="columnPrecio_Noche_Premium" msprop:Generator_ColumnPropNameInRow="Precio_Noche_Premium" msprop:Generator_ColumnPropNameInTable="Precio_Noche_PremiumColumn" msprop:Generator_UserColumnName="Precio_Noche_Premium" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
