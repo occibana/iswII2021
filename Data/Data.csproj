@@ -90,10 +90,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAOComentarios.cs" />
     <Compile Include="DAOHabitacion.cs" />
     <Compile Include="DAOhotel.cs" />
     <Compile Include="DAOLogin.cs" />
     <Compile Include="DAOReserva.cs" />
+    <Compile Include="DAOSeguridad.cs" />
     <Compile Include="Mapeo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

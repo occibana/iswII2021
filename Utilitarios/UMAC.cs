@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Utilitarios
 {
-    class UMAC
+    public class UMAC
     {
+        private URegistro registro;
+        private DateTime fechaInicio;
+        private string url;
+
+        public URegistro Registro { get => registro; set => registro = value; }
+        public DateTime FechaInicio { get => fechaInicio; set => fechaInicio = value; }
+        public string Url { get => url; set => url = value; }
+        
     }
 }

@@ -42,6 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MAC.cs" />
+    <Compile Include="Mailrecuperarcontrasena.cs" />
+    <Compile Include="UAcceso.cs" />
+    <Compile Include="UComentarios.cs" />
     <Compile Include="UHabitacion.cs" />
     <Compile Include="UHotelMunicipio.cs" />
     <Compile Include="Mail.cs" />
@@ -49,8 +53,10 @@
     <Compile Include="UFiltro.cs" />
     <Compile Include="UHotel.cs" />
     <Compile Include="UHotelZona.cs" />
+    <Compile Include="UMAC.cs" />
     <Compile Include="URegistro.cs" />
     <Compile Include="UReserva.cs" />
+    <Compile Include="UToken.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

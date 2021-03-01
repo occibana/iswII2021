@@ -20,11 +20,10 @@ public partial class Vew_PanelHotel : System.Web.UI.Page
             hotel = new LPanelHotel().informacion_del_hotel(hotel);
 
             L_Panelhotelnombre.Text = hotel.Nombre.ToUpper();
-            //L_Panelhotelzona.Text = (new DAOhotel().zona(hotel)).Nombre;
-            //L_Panelhotelmunicipio.Text = (new DAOhotel().municipio(hotel)).Nombre;
 
-            L_Panelhotelzona.Text = "demo";
-            L_Panelhotelmunicipio.Text = "demo";
+            L_Panelhotelzona.Text = hotel.Zona;
+            L_Panelhotelmunicipio.Text = hotel.Municipio;
+
             L_Panelhotelhabitaciones.Text = hotel.Numhabitacion.ToString();
             L_Panelhotelprecio.Text = hotel.Precionoche.ToString();
             L_PanelHotelPrecioDoble.Text = hotel.PrecioNocheDoble.ToString();

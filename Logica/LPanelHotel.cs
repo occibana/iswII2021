@@ -14,12 +14,15 @@ namespace Logica
         public UHotel informacion_del_hotel(UHotel hotel)
         {
             hotel = new DAOhotel().infohotel(hotel);
+            hotel.Zona = (new DAOhotel().zona(hotel)).Nombre;
+            hotel.Municipio = (new DAOhotel().municipio(hotel)).Nombre;
             return hotel;
         }
 
         public UHabitacion informacion_de_habitacion(UHabitacion habitacioninfo)
         {
             habitacioninfo = new DAOHabitacion().infoHabitacion(habitacioninfo.Id);
+           
             return habitacioninfo;
         }
     }

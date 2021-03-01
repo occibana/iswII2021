@@ -72,10 +72,10 @@
                                 <div class="auto-style19">
                                     <asp:Label ID="L_Error_noregistro" runat="server"></asp:Label>
                                     <br />
-                                    <asp:Button ID="Button4" runat="server" Text="ENVIAR" Width="140px" OnClick="Button4_Click" />
+                                    <asp:Button ID="B_recuperarContrasena" runat="server" Text="ENVIAR" Width="140px" OnClick="B_recuperarContrasena_Click" />
                                     <br />
                                     <br />
-                                    <asp:Button ID="Button5" runat="server" Text="VOLVER AL Login" Width="140px" OnClick="Button5_Click" />
+                                    <asp:Button ID="B_redireccionarlogin" runat="server" Text="VOLVER AL Login" Width="140px" OnClick="B_redireccionarlogin_Click" />
                                     <br />
                                     <br />
                                 </div>

@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Utilitarios;
+using Logica;
+
 public partial class Vew_Login : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -17,33 +20,15 @@ public partial class Vew_Login : System.Web.UI.Page
 
     protected void B_Ingresar_Click(object sender, EventArgs e)
     {
-        /*
-        Registro login = new Registro();
+        URegistro login = new URegistro();
 
         login.Usuario = TB_user.Text;
         login.Contrasena = TB_contrasena.Text;
+        string session_id = Session.SessionID;
+        UMAC user = new LLogin().ingreso_login(login,session_id);
 
-        login = new DAOLogin().verificar(login);
-        if (login == null)
-        {
-            L_msj.Text = "Verifica tus datos\n usuario o contraseña incorrecto";
-        }
-        else
-        {
-            Session["usuario"] = login;
-            MAC conexion = new MAC();
-            Acceso acceso = new Acceso();
-            acceso.FechaInicio = DateTime.Now;
-            acceso.Ip = conexion.ip();
-            acceso.Mac = conexion.mac();
-            acceso.Session = Session.SessionID;
-            acceso.Userid = login.Id;
-            
-            new DAOSeguridad().insertarAcceso(acceso);
-
-            Response.Redirect("Perfil.aspx");
-        }      
-        */
+        Session["usuario"] = user.Registro;
+        Response.Redirect(user.Url);
     }
 
     protected void LB_OlvidemicontrasenaLogin_Click(object sender, EventArgs e)

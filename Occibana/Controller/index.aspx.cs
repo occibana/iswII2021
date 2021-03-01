@@ -58,9 +58,12 @@ public partial class Vew_index : System.Web.UI.Page
         busqueda.calificacion = DDL_Calificacion.Text;
         busqueda.zona = DDL_Zona.Text;
         busqueda.municipio = DDL_Municipio.Text;
- 
-        busqueda = new LFiltro().filtro_general(busqueda);
+        busqueda.tipo = DDL_Tipo.Text;
 
+        //string msj = (new LFiltro().filtro_general(busqueda)).Item2;
+        busqueda = (new LFiltro().filtro_general(busqueda)).Item1;
+
+        //L_MensajeFalloFechas.Text = msj;
         Session["hotelseleccionado"] = busqueda;
         DL_Listaprincipalhoteles.DataBind();
         

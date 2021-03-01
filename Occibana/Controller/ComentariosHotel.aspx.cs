@@ -1,14 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+
+using Utilitarios;
+using Logica;
+
 
 public partial class Vew_ComentariosHotel : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        UHotel hotel = new UHotel();
+        hotel.Idhotel = ((UHotel)Session["visitarhotel"]).Idhotel;
+        hotel = new LComentariosHotel().info_hotel(hotel);
+        L_NombreHotel.Text = hotel.Nombre.ToUpper();
+        L_Nombrehotel2.Text = hotel.Nombre.ToUpper();
         /*
         if (Session["visitarhotel"] != null)
         {
@@ -33,7 +37,7 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
             }
         }
        */
-            
+
     }
 
     protected void B_Comentar_Click(object sender, EventArgs e)

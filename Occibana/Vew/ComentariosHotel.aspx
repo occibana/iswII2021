@@ -67,7 +67,7 @@
                                 <asp:BoundField DataField="Comentario" HeaderText="Comentario" SortExpression="Comentario" />
                             </Columns>
                         </asp:GridView>
-                        <asp:ObjectDataSource ID="ODS_Comentario" runat="server" SelectMethod="obtenerComentarios" TypeName="DAOComentarios">
+                        <asp:ObjectDataSource ID="ODS_Comentario" runat="server" SelectMethod="obtenerComentarios" TypeName="Data.DAOComentarios">
                             <SelectParameters>
                                 <asp:SessionParameter Name="id" SessionField="visitarhotel" Type="Object" />
                             </SelectParameters>

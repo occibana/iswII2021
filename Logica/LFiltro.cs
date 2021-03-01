@@ -33,9 +33,8 @@ namespace Logica
             }
         }
 
-        public UFiltro  filtro_general(UFiltro busqueda)
+        public Tuple<UFiltro,string> filtro_general(UFiltro busqueda)
         {
-            //Tuple<UFiltro,string>
             string precioMin = busqueda.preciomin.ToString();
             string precioMax = busqueda.preciomin.ToString();
             string numPersonas = busqueda.numpersonas.ToString();
@@ -106,14 +105,13 @@ namespace Logica
             {
                 busqueda.calificacion = null;
             }
-            /*
             if (busqueda.tipo.Equals("--Seleccionar--"))
             {
                 busqueda.tipo = null;
-            }*/
+            }
 
-            //return Tuple.Create(busqueda,msj);
-            return busqueda;
+            return Tuple.Create(busqueda,msj);
+            //return busqueda;
         }
 
         

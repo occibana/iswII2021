@@ -19,12 +19,12 @@ namespace Data
         public DbSet<UHotel> hotel { get; set; }
         public DbSet<UHotelMunicipio> hotelmunicipio { get; set; }
         public DbSet<UHotelZona> hotelzona { get; set; }
-        //public DbSet<Token> token { get; set; }
-        //public DbSet<Acceso> acceso { get; set; }
+        public DbSet<UToken> token { get; set; }
+        public DbSet<UAcceso> acceso { get; set; }
         //public DbSet<Membresia> membresia { get; set; }
         public DbSet<UReserva> reserva { get; set; }
         public DbSet<UHabitacion> habitacion { get; set; }
-        //public DbSet<Comentarios> comentario { get; set; }
+        public DbSet<UComentarios> comentario { get; set; }
 
     }
 }
