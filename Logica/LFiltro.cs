@@ -33,85 +33,101 @@ namespace Logica
             }
         }
 
-        public Tuple<UFiltro,string> filtro_general(UFiltro busqueda)
+        public UFiltro filtro_general(string preciomin, string preciomax, string maxpersonas, string DateAntesDe, string DateDespuesDe, string Calificacion, string Zona, string Municipio, string Tipo)
         {
-            string precioMin = busqueda.preciomin.ToString();
-            string precioMax = busqueda.preciomin.ToString();
-            string numPersonas = busqueda.numpersonas.ToString();
-            string fechaAntesDe = busqueda.fecha_antesde.ToString();
-            string fechaDespuesDe = busqueda.fecha_despuesde.ToString();
-            string msj = null;
+            UFiltro busqueda = new UFiltro();
+            busqueda = this.verificar_vacios(preciomin, preciomax, maxpersonas, DateAntesDe, DateDespuesDe, Calificacion, Zona, Municipio, Tipo);
 
-            if (precioMin == String.Empty)
-            {
-                busqueda.preciomin = null;
-            }
-            if (precioMax == String.Empty)
-            {
-                busqueda.preciomax = null;
-            }
-            if (precioMin != String.Empty)
-            {
-                busqueda.preciomin = int.Parse(precioMin);
-            }
-            if (precioMax != String.Empty)
-            {
-                busqueda.preciomax = int.Parse(precioMax);
-            }
-            if (numPersonas == String.Empty)
-            {
-                busqueda.numpersonas = null;
-            }
-            if (numPersonas != String.Empty)
-            {
-                busqueda.numpersonas = int.Parse(numPersonas);
-            }
-            if (fechaAntesDe != String.Empty)
-            {
+            return busqueda;
+        }
 
-                if (DateTime.Parse(fechaAntesDe) < DateTime.Parse(fechaDespuesDe))
+        public UFiltro verificar_vacios(string preciomin, string preciomax, string maxpersonas, string DateAntesDe, string DateDespuesDe, string Calificacion, string Zona, string Municipio, string Tipo)
+        {
+            UFiltro filtro = new UFiltro();
+
+            if (preciomin == "")
+            {
+                filtro.preciomin = null;
+            }
+            else if(preciomin != "")
+            {
+                filtro.preciomin = int.Parse(preciomin);
+            }
+            if (preciomax == "")
+            {
+                filtro.preciomax = null;
+            }else if (preciomax != "")
+            {
+                filtro.preciomax = int.Parse(preciomax);
+            }
+            if (maxpersonas == "")
+            {
+                filtro.numpersonas = null;
+            }else if (maxpersonas != "")
+            {
+                filtro.numpersonas = int.Parse(maxpersonas);
+            }
+            if (DateAntesDe == "")
+            {
+                filtro.fecha_antesde = null;
+            }else if (DateAntesDe != "")
+            {
+                if (DateTime.Parse(DateAntesDe) < DateTime.Parse(DateDespuesDe))
                 {
-                    msj = "La fecha Antes de, debe ser mayor de   " + DateTime.Parse(fechaDespuesDe).ToString("dd-MM-yyyy");
+                    filtro.mensaje = "La fecha Antes de, debe ser mayor de   " + DateTime.Parse(DateDespuesDe).ToString("dd-MM-yyyy");
                 }
                 else
                 {
-                    msj = " ";
-                    busqueda.fecha_antesde = DateTime.Parse(fechaAntesDe);
+                    filtro.mensaje = " ";
+                    filtro.fecha_antesde = DateTime.Parse(DateAntesDe);
                 }
-
             }
-            if (fechaDespuesDe != String.Empty)
+            if (DateDespuesDe == "")
             {
-                if (DateTime.Parse(fechaDespuesDe) < DateTime.Now)
+                filtro.fecha_despuesde = null;
+            }else if (DateDespuesDe != "")
+            {
+                if (DateTime.Parse(DateDespuesDe) < DateTime.Now)
                 {
-                    msj = "La fecha especificada debe ser después de     " + DateTime.Now.ToString("dd-MM-yyyy");
+                    filtro.mensaje = "La fecha especificada debe ser después de     " + DateTime.Now.ToString("dd-MM-yyyy");
                 }
                 else
                 {
-                    msj = " ";
-                    busqueda.fecha_despuesde = DateTime.Parse(fechaDespuesDe);
+                    filtro.mensaje = " ";
+                    filtro.fecha_despuesde = DateTime.Parse(DateDespuesDe);
                 }
             }
- 
-            if (busqueda.zona.Equals("--Seleccione--"))
+
+            if (Zona.Equals("--Seleccione--"))
             {
-                busqueda.zona = null;
+                filtro.zona = null;
+            }else if (Zona != "--Seleccione--")
+            {
+                filtro.zona = Zona;
             }
-            if (busqueda.municipio.Equals("--Seleccione--"))
+            if (Municipio.Equals("--Seleccione--"))
             {
-                busqueda.municipio = null;
+                filtro.municipio = null;
+            }else if (Municipio != "--Seleccione--")
+            {
+                filtro.municipio = Municipio;
             }
-            if (busqueda.calificacion.Equals("--Seleccionar--"))
+            if (Calificacion.Equals("--Seleccionar--"))
             {
-                busqueda.calificacion = null;
+                filtro.calificacion = null;
+            }else if (Calificacion != "--Seleccione--")
+            {
+                filtro.calificacion = Calificacion;
             }
-            if (busqueda.tipo.Equals("--Seleccionar--"))
+            if (Tipo.Equals("--Seleccionar--"))
             {
-                busqueda.tipo = null;
+                filtro.tipo = null;
+            }else if (Tipo != "--Seleccione--")
+            {
+                filtro.tipo = Tipo;
             }
 
-            return Tuple.Create(busqueda,msj);
-            //return busqueda;
+            return filtro;
         }
 
         

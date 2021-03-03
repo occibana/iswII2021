@@ -42,6 +42,7 @@ namespace Utilitarios
         [NotMapped]
         private int numHabitDisponibles;
 
+
         [Key]
         [Column("idhotel")]
         public int Idhotel { get => idhotel; set => idhotel = value; }

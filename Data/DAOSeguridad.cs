@@ -25,12 +25,12 @@ namespace Data
         {
             return new Mapeo().token.Where(x => x.User_id == userid && x.Fecha_caducidad > DateTime.Now).FirstOrDefault();
         }
-        /*
-        public Token validartoken(string token)
+        
+        public UToken validartoken(string token)
         {
             return new Mapeo().token.Where(x => x.Tokengenerado == token).FirstOrDefault();
         }
-        */
+        
 
         /*
         //actualiza contraseña

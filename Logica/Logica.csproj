@@ -49,8 +49,10 @@
     <Compile Include="LFiltro.cs" />
     <Compile Include="LLogin.cs" />
     <Compile Include="LPanelHotel.cs" />
+    <Compile Include="LReactivarCuenta.cs" />
     <Compile Include="LRecuperarcontrasena.cs" />
     <Compile Include="LRegistro.cs" />
+    <Compile Include="LReserva.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

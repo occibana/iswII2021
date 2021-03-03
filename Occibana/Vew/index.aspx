@@ -225,7 +225,8 @@
                                             <td class="auto-style44">
                                                 <br />
                                                 maximo<br />
-                                                <asp:TextBox ID="TB_PrecioMax" runat="server" Width="90%" MaxLength="10"></asp:TextBox>
+                                                <asp:TextBox ID="TB_PrecioMax" runat="server" Width="90%" MaxLength="10" >
+</asp:TextBox>
                                                 <br />
                                                 <br />
                                                 <asp:RegularExpressionValidator ID="REV_TB_Preciomax" runat="server" ControlToValidate="TB_PrecioMax" ErrorMessage="No caracteres especiales" ValidationExpression="[0-9]+" ValidationGroup="filtrar"></asp:RegularExpressionValidator>

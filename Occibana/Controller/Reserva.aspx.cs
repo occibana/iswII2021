@@ -5,58 +5,30 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Logica;
+using Utilitarios;
+
 public partial class Vew_Reserva : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        /*
-        deshabilitarbotones();
-        try
-        {        
-            Hotel hotel = new Hotel();
-            hotel.Idhotel = ((Hotel)Session["visitarhotel"]).Idhotel;
-            hotel = new DAOhotel().infohotel(hotel);
-            L_NombreHotel.Text = hotel.Nombre.ToUpper();
+        UHotel hotel = new UHotel();
+        hotel.Idhotel = ((UHotel)Session["visitarhotel"]).Idhotel;
+        UHabitacion habitacion = new UHabitacion();
+        habitacion = (UHabitacion)Session["idhabitacion"];
+        URegistro registro = new URegistro();
+        registro = (URegistro)Session["usuario"];
+        UDatosUsuario datos = new UDatosUsuario();
+        LReserva reserva = new LReserva();
+        datos = reserva.pageload_ingreso_reserva(hotel,habitacion,registro);
 
-            if (((Habitacion)Session["idhabitacion"]).Tipo.Equals("Básica"))
-            {
-                L_PrecioNoche.Text = hotel.Precionoche.ToString();
-            }
-            if (((Habitacion)Session["idhabitacion"]).Tipo.Equals("Doble"))
-            {
-                L_PrecioNoche.Text = hotel.PrecioNocheDoble.ToString();
-            }
-            if (((Habitacion)Session["idhabitacion"]).Tipo.Equals("Premium"))
-            {
-                L_PrecioNoche.Text = hotel.PrecioNochePremium.ToString();
-            }
-
-            L_NumeroDePersonas.Text = (((Habitacion)Session["idhabitacion"]).Numpersonas).ToString();
-            L_Habitaciondisponible.Text = "Seleccione una fecha";
-            if (Session["usuario"] != null)
-            {
-                L_Nombreusuario.Text = ((Registro)Session["usuario"]).Nombre;
-                L_MensajeestadoSession.Text = "Si la reserva no se hará a su nombre ingrese los datos de la persona que será responsable de la reserva";
-                TB_Apellido.Text = ((Registro)Session["usuario"]).Apellido;
-                TB_Nombre.Text = ((Registro)Session["usuario"]).Nombre;
-                TB_Correo.Text = ((Registro)Session["usuario"]).Correo;
-
-            }
-            else
-            {
-                //TB_Apellido.Text = "";
-                //TB_Nombre.Text = "";
-                //TB_Correo.Text = "";
-                L_Nombreusuario.Text = "Cliente";
-                L_MensajeestadoSession.Text = "Al parecer no te haz registrado o iniciado sesión, no hay problema igualmente puedes reservar, solo dejanos saber algunos datos.";
-            }
-        }
-        catch (Exception ex)
-        {
-            Response.Redirect("index.aspx");
-        }
-        */
-
+        L_NombreHotel.Text = datos.Hotel.Nombre;
+        L_PrecioNoche.Text = datos.Hotel.Precionoche.ToString();
+        L_NumeroDePersonas.Text = datos.Habitacion.Numpersonas.ToString();
+        L_Habitaciondisponible.Text = "Seleccione una fecha";
+        L_Nombreusuario.Text = datos.Registro.Nombre;
+        TB_Apellido.Text = datos.Registro.Apellido;
+        TB_Nombre.Text = datos.Registro.Nombre;
     }
 
     protected void B_Volver_Click(object sender, EventArgs e)

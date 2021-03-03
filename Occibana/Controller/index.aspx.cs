@@ -38,30 +38,10 @@ public partial class Vew_index : System.Web.UI.Page
 
     protected void B_Filtrar_Click(object sender, EventArgs e)
     {
+        LFiltro filtro = new LFiltro();
         UFiltro busqueda = new UFiltro();
-
-        try
-        {
-            busqueda.preciomin = int.Parse(TB_PrecioMin.Text);
-            busqueda.preciomax = int.Parse(TB_PrecioMax.Text);
-            busqueda.numpersonas = int.Parse(TB_Maxpersonas.Text);
-            busqueda.fecha_antesde = DateTime.Parse(TB_DateAntesDe.Text);
-            busqueda.fecha_despuesde = DateTime.Parse(TB_DateDespuesDe.Text);
-        }
-        catch
-        {
-            busqueda.preciomin = null;
-            busqueda.preciomax = null;
-            busqueda.numpersonas = null;
-        }
-
-        busqueda.calificacion = DDL_Calificacion.Text;
-        busqueda.zona = DDL_Zona.Text;
-        busqueda.municipio = DDL_Municipio.Text;
-        busqueda.tipo = DDL_Tipo.Text;
-
-        //string msj = (new LFiltro().filtro_general(busqueda)).Item2;
-        busqueda = (new LFiltro().filtro_general(busqueda)).Item1;
+    
+        busqueda = filtro.filtro_general(TB_PrecioMin.Text,TB_PrecioMax.Text,TB_Maxpersonas.Text, TB_DateAntesDe.Text, TB_DateDespuesDe.Text, DDL_Calificacion.Text, DDL_Zona.Text, DDL_Municipio.Text, DDL_Tipo.Text);   
 
         //L_MensajeFalloFechas.Text = msj;
         Session["hotelseleccionado"] = busqueda;
@@ -77,7 +57,5 @@ public partial class Vew_index : System.Web.UI.Page
         //DDL_Municipio.Text = "--Seleccionar--";
 
         Response.Redirect("index.aspx");
-
-
     }
 }

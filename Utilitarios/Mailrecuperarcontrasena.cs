@@ -29,7 +29,7 @@ namespace Utilitarios
 
             //Configuracion del SMTP
             SmtpSever.Port = 587;
-            SmtpSever.Credentials = new System.Net.NetworkCredential("occibana@gmail.com", "proyectoisw2");//correo origen, contra*
+            SmtpSever.Credentials = new System.Net.NetworkCredential("occibana@gmail.com", "occibana123");//correo origen, contra*
             SmtpSever.EnableSsl = true;
             SmtpSever.Send(mail);//eviar
                                  //mail

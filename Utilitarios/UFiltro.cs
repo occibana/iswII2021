@@ -19,6 +19,7 @@ namespace Utilitarios
         public String zona;
         public Nullable<DateTime> fecha_antesde;
         public Nullable<DateTime> fecha_despuesde;
-        public string tipo;       
+        public string tipo;
+        public String mensaje;
     }
 }
