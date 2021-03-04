@@ -23,7 +23,6 @@ namespace Utilitarios
         private string fotoperfil;
         private DateTime fecha_vencimiento;
 
-
         [Key]
         [Column("id")]
         public int Id { get => id; set => id = value; }
@@ -43,5 +42,6 @@ namespace Utilitarios
         public int Idestado { get => idestado; set => idestado = value; }
         [Column("fotoperfil")]
         public string Fotoperfil { get => fotoperfil; set => fotoperfil = value; }
+        
     }
 }

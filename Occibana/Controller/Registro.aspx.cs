@@ -31,8 +31,15 @@ public partial class Vew_Registro : System.Web.UI.Page
             registro.Usuario = TB_usuarioregistro.Text;
             registro.Contrasena = TB_contrasenaregistro.Text;
 
-            string registroResult = new LRegistro().registro(registro);
-            L_fallo.Text = registroResult;
+            URegistroMensaje registroResult = new LRegistro().registro(registro);
+            L_fallo.Text = registroResult.Mensaje;
+            TB_nombre.Text = registroResult.TB_nombre;
+            TB_apellido.Text = registroResult.TB_apellido;
+            TB_correo.Text = registroResult.TB_correo;
+            TB_telefono.Text = registroResult.TB_telefono;
+            TB_usuarioregistro.Text = registroResult.TB_usuarioregistro;
+            TB_contrasenaregistro.Text = registroResult.TB_contrasenaregistro;
+            TB_ccontrasena.Text = registroResult.TB_ccontrasena;
 
             //URegistro pedidos = new DAOLogin().verificaruser(registro);
             //if (pedidos == null)

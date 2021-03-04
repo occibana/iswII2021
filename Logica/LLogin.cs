@@ -15,16 +15,14 @@ namespace Logica
         {
             UMAC datos = new UMAC();
             UAcceso acceso = new UAcceso();
-            string msj=null;
-
             datos.Registro = new DAOLogin().verificar(login);
 
             if (datos.Registro.Usuario == null)
             {
-                msj = "usuario incorrecto";
+                datos.Mensaje = "usuario incorrecto";
             }else if (datos.Registro.Contrasena == null)
             {
-                msj = "contrasena incorrecta";
+                datos.Mensaje = "contrasena incorrecta";
             }
             else
             {

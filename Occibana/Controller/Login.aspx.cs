@@ -26,7 +26,7 @@ public partial class Vew_Login : System.Web.UI.Page
         login.Contrasena = TB_contrasena.Text;
         string session_id = Session.SessionID;
         UMAC user = new LLogin().ingreso_login(login,session_id);
-
+        L_msj.Text = user.Mensaje;
         Session["usuario"] = user.Registro;
         Response.Redirect(user.Url);
     }

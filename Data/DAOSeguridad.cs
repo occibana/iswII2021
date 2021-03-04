@@ -59,12 +59,11 @@ namespace Data
             }
         }
         //capturar momento de des-logeo
-        /*
         public void cerrarAcceso(int userid)
         {
             using (var db = new Mapeo())
             {
-                Acceso acceso = new Acceso();
+                UAcceso acceso = new UAcceso();
                 acceso = db.acceso.Where(x=> x.Userid == userid && x.FechaFin == null).FirstOrDefault();
                 acceso.FechaFin = DateTime.Now;
 
@@ -74,7 +73,7 @@ namespace Data
                 db.SaveChanges();
             }
         }
-        */
+        
         //guardar datos de compra
         /*
         public void insertarCompra(Membresia datos)
@@ -86,7 +85,7 @@ namespace Data
             }
         }
         */
-        /*
+        
         //actualizar estado membresia
         public void actualizarmembresia(URegistro datoE)
         {
@@ -100,14 +99,14 @@ namespace Data
                 db.SaveChanges();
             }
         }
-        */
-        /*
+        
+        
         //verifica vencimiento usuario con membresia
-        public Membresia verificarvencimientomembresia(int userid)
+        public UMembresia verificarvencimientomembresia(int userid)
         {
             return new Mapeo().membresia.Where(x => x.Idusuario == userid && x.Fecha_vencimiento < DateTime.Now).FirstOrDefault();
         }
-    */
+    
         //info compra
         /*
         public Membresia fechavencimiento(URegistro usuarioidE)

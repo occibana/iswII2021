@@ -5,10 +5,22 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Logica;
+using Utilitarios;
+
 public partial class Vew_Actualizarcontrasena : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        LActualizarContrasena datosActualizar = new LActualizarContrasena();
+        UActualizarContrasena respuesta = new UActualizarContrasena();
+        respuesta = datosActualizar.verificarsession((URegistro)Session["usuario"]);
+        L_Error_noregistro.Text = respuesta.Mensaje;
+
+        //Response.Redirect(respuesta.URL1);
+        
+        
+        
         /*
         try
         {
@@ -40,6 +52,10 @@ public partial class Vew_Actualizarcontrasena : System.Web.UI.Page
 
     protected void B_Enviar_Click(object sender, EventArgs e)
     {
+        LActualizarContrasena actualizar = new LActualizarContrasena();
+        UActualizarContrasena mensaje = new UActualizarContrasena();
+        mensaje = actualizar.verificarsession((URegistro)Session["usuario"]);
+        L_Error_noregistro.Text = mensaje.Mensaje;
         /*
         ClientScriptManager cm = this.ClientScript;//script
         Registro login = new Registro();

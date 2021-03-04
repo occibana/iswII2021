@@ -45,6 +45,7 @@
     <Compile Include="MAC.cs" />
     <Compile Include="Mailrecuperarcontrasena.cs" />
     <Compile Include="UAcceso.cs" />
+    <Compile Include="UActualizarContrasena.cs" />
     <Compile Include="UComentarios.cs" />
     <Compile Include="UDatosUsuario.cs" />
     <Compile Include="UHabitacion.cs" />
@@ -55,8 +56,11 @@
     <Compile Include="UHotel.cs" />
     <Compile Include="UHotelZona.cs" />
     <Compile Include="UMAC.cs" />
+    <Compile Include="UMembresia.cs" />
+    <Compile Include="UPerfil.cs" />
     <Compile Include="UReactivarCuentaDatos.cs" />
     <Compile Include="URegistro.cs" />
+    <Compile Include="URegistroMensaje.cs" />
     <Compile Include="UReserva.cs" />
     <Compile Include="UToken.cs" />
   </ItemGroup>

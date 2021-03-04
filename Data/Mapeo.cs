@@ -21,7 +21,7 @@ namespace Data
         public DbSet<UHotelZona> hotelzona { get; set; }
         public DbSet<UToken> token { get; set; }
         public DbSet<UAcceso> acceso { get; set; }
-        //public DbSet<Membresia> membresia { get; set; }
+        public DbSet<UMembresia> membresia { get; set; }
         public DbSet<UReserva> reserva { get; set; }
         public DbSet<UHabitacion> habitacion { get; set; }
         public DbSet<UComentarios> comentario { get; set; }

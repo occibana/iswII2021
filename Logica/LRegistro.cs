@@ -11,27 +11,38 @@ namespace Logica
 {
     public class LRegistro
     {
-        public string registro(URegistro registro)
+        public URegistroMensaje registro(URegistro registro)
         {
             URegistro pedidos = new DAOLogin().verificaruser(registro);
+            URegistroMensaje msj = new URegistroMensaje();
             if (pedidos == null)
             {
                 if (registro.Contrasena.Length < 5)
                 {
-                    return "Ingrese una contraseña minimo de 5 caracteres";                             
+                    msj.Mensaje = "Ingrese una contraseña minimo de 5 caracteres";
+                    msj.TB_contrasenaregistro = "";
+                    msj.TB_ccontrasena = "";
                 }
                 else
                 {
                     new DAOLogin().insertRegistro(registro);
                     new Mail().enviarmail(registro);
-                    return "Registro Exitoso, Por Favor Inice Sesion";                    
+                    msj.Mensaje = "Registro Exitoso, Por Favor Inice Sesion";
+                    msj.TB_nombre = "";
+                    msj.TB_apellido = "";
+                    msj.TB_correo = "";
+                    msj.TB_telefono = "";
+                    msj.TB_usuarioregistro = "";
+                    msj.TB_contrasenaregistro = "";
+                    msj.TB_ccontrasena = "";
                 }
 
             }
             else
             {
-                return "Este usuario o correo ya existe o esta registrado";
+                msj.Mensaje =  "Este usuario o correo ya existe o esta registrado";
             }
+            return msj;
         }
         
     }

@@ -45,10 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LActualizarContrasena.cs" />
     <Compile Include="LComentariosHotel.cs" />
     <Compile Include="LFiltro.cs" />
     <Compile Include="LLogin.cs" />
     <Compile Include="LPanelHotel.cs" />
+    <Compile Include="LPerfil.cs" />
     <Compile Include="LReactivarCuenta.cs" />
     <Compile Include="LRecuperarcontrasena.cs" />
     <Compile Include="LRegistro.cs" />
