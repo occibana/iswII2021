@@ -46,9 +46,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LActualizarContrasena.cs" />
+    <Compile Include="LActualizarDatos.cs" />
     <Compile Include="LComentariosHotel.cs" />
     <Compile Include="LFiltro.cs" />
     <Compile Include="LLogin.cs" />
+    <Compile Include="LMisReservas.cs" />
     <Compile Include="LPanelHotel.cs" />
     <Compile Include="LPerfil.cs" />
     <Compile Include="LReactivarCuenta.cs" />

@@ -41,6 +41,8 @@ public partial class Vew_Registro : System.Web.UI.Page
             TB_contrasenaregistro.Text = registroResult.TB_contrasenaregistro;
             TB_ccontrasena.Text = registroResult.TB_ccontrasena;
 
+            cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+ registroResult.Mensaje + "');</script>");
+
             //URegistro pedidos = new DAOLogin().verificaruser(registro);
             //if (pedidos == null)
             //{

@@ -191,7 +191,7 @@
                     <table class="auto-style35">
                         <tr>
                             <td class="auto-style42">
-                                <asp:Label ID="L_Aviso" runat="server" CssClass="auto-style47" Text="Realize su busqueda por el nombre del hotel o empresa"></asp:Label>
+                                <asp:Label ID="L_Aviso" runat="server" CssClass="auto-style47" Text="Realice su busqueda por el nombre del hotel o empresa"></asp:Label>
                                 <br />
                                 <asp:TextBox ID="TB_Busquedageneral" runat="server" Width="80%" Height="18px" MaxLength="30"></asp:TextBox>
                                 <br />

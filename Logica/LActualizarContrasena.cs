@@ -20,7 +20,7 @@ namespace Logica
             login.Contrasena = session.Contrasena;
 
             login = new DAOLogin().verificar(login);
-            
+
             if (login == null)
             {
                 mensaje.Mensaje = "Verifica tus datos\n usuario o contraseña incorrecto";
@@ -35,7 +35,7 @@ namespace Logica
 
         }
 
-        public UActualizarContrasena actualizar(URegistro datosE, string contrasenaAct, string contrasenaNueva)
+        public UActualizarContrasena actualizarContrasena(URegistro datosE, string contrasenaAct, string contrasenaNueva)
         {
             URegistro login = new URegistro();
             UActualizarContrasena mensaje = new UActualizarContrasena();
@@ -66,8 +66,6 @@ namespace Logica
                     new DAOLogin().actualizarcontrasena(login);
                     new Mail().mailactualizarcontrasena(login);
                     mensaje.Mensaje = "Contraseña actualizada";
-                    //this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Contraseña actualizada correctamente');window.location=\"Perfil.aspx\"</script>");
-                    //L_Error_noregistro.Text = "Contraseña actualizada";
                 }
             }
             return mensaje;

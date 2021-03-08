@@ -30,14 +30,14 @@ namespace Logica
                     datosUsuario.Hotel.Precionoche = datosUsuario.Hotel.Precionoche;
                     //L_PrecioNoche.Text = hotel.Precionoche.ToString();
                 }
-                if (infoHabitacion.Tipo.Equals("Doble"))
+                else if (infoHabitacion.Tipo.Equals("Doble"))
                 {
-                    datosUsuario.Hotel.PrecioNocheDoble = datosUsuario.Hotel.PrecioNocheDoble;
+                    datosUsuario.Hotel.Precionoche = datosUsuario.Hotel.PrecioNocheDoble;
                     //L_PrecioNoche.Text = hotel.PrecioNocheDoble.ToString();
                 }
-                if (infoHabitacion.Tipo.Equals("Premium"))
+                else if (infoHabitacion.Tipo.Equals("Premium"))
                 {
-                    datosUsuario.Hotel.PrecioNochePremium = datosUsuario.Hotel.PrecioNochePremium;
+                    datosUsuario.Hotel.Precionoche = datosUsuario.Hotel.PrecioNochePremium;
                     //L_PrecioNoche.Text = hotel.PrecioNochePremium.ToString();
                 }
 
@@ -63,6 +63,7 @@ namespace Logica
                     //TB_Nombre.Text = "";
                     datosUsuario.Registro.Contrasena = "";
                     //TB_Correo.Text = "";
+                    datosUsuario.Mensaje = "Al parecer no te haz registrado o iniciado sesión, no hay problema igualmente puedes reservar, solo dejanos saber algunos datos.";
                     ///////////////////L_Nombreusuario.Text = "Cliente";
                     ////////////////////L_MensajeestadoSession.Text = "Al parecer no te haz registrado o iniciado sesión, no hay problema igualmente puedes reservar, solo dejanos saber algunos datos.";
                 }

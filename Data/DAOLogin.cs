@@ -16,7 +16,9 @@ namespace Data
             //verificacion login
             public URegistro verificar(URegistro loginE)
             {
-                return new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefault();
+                URegistro verificacion = new URegistro();
+                verificacion = new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefault();
+                return verificacion;
             }
 
             //insert registro

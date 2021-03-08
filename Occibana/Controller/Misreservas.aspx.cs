@@ -5,25 +5,45 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Utilitarios;
+using Logica;
+
 public partial class Vew_Misreservas : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        /*
+        
         try
         {
-            L_Usuario.Text = ((Registro)Session["usuario"]).Nombre;
+            L_Usuario.Text = ((URegistro)Session["usuario"]).Nombre;
         }
         catch
         {
             Response.Redirect("Login.aspx");
             Session.Remove("usuario");
         }
-        */
+        
     }
 
     protected void GV_Mishoteles_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        int idreserva = int.Parse(e.CommandArgument.ToString());
+        string accion = e.CommandName;
+        UMisReservas mensaje = new UMisReservas();
+        LMisReservas misreservas = new LMisReservas();
+        idreserva = int.Parse(GV_Mishoteles.DataKeys[idreserva].Value.ToString());
+        mensaje = misreservas.accionCalificarComentar(idreserva, accion);
+        Session["calificarhotel"] = idreserva;
+        string textoEmergente = mensaje.Mensaje;
+        try
+        {
+            Response.Redirect(mensaje.URL1);
+        }
+        catch
+        {
+            this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('" + textoEmergente + "');</script>");
+        }
+
         /*
         int idreserva = int.Parse(e.CommandArgument.ToString());
 
@@ -56,10 +76,9 @@ public partial class Vew_Misreservas : System.Web.UI.Page
             {
                 this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('No es posible realizar la eliminación');</script>");
             }
-
         }
-
         */
+
     }
 
     protected void B_ReporteReservas_Click(object sender, EventArgs e)

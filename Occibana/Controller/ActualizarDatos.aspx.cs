@@ -5,33 +5,33 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Utilitarios;
+using Logica;
+
 public partial class Vew_ActualizarDatos : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        /*
-        if (Session["usuario"] == null)
+        LActualizarDatos actualizarDatos = new LActualizarDatos();
+        UActualizarDatos datos = new UActualizarDatos();
+        datos = actualizarDatos.pageLoad((URegistro)Session["usuario"]);
+       
+        try
         {
-            Response.Redirect("Login.aspx");
+            L_Actusuario.Text = datos.Actusuario;
+            L_Actnombre.Text = datos.Actnombre;
+            L_Actapellido.Text = datos.Actapellido;
+            L_Actcorreo.Text = datos.Actcorreo;
+            L_Acttelefono.Text = datos.Acttelefono;
+            L_Actusuario0.Text = datos.Actusuario;
         }
-        else
+        catch
         {
-            try
-            {
-                L_Actusuario.Text = "Bienvenido usuario: "+((Registro)Session["usuario"]).Nombre;
-                L_Actnombre.Text = ((Registro)Session["usuario"]).Nombre;
-                L_Actapellido.Text = ((Registro)Session["usuario"]).Apellido;
-                L_Actcorreo.Text = ((Registro)Session["usuario"]).Correo;
-                L_Acttelefono.Text = ((Registro)Session["usuario"]).Telefono;
-                L_Actusuario0.Text = ((Registro)Session["usuario"]).Usuario;
-            }
-            catch
-            {
-                Session.Remove("usuario");
-                Response.Redirect("Login.aspx");
+            Session.Remove("usuario");
+            Response.Redirect(datos.URL1);
 
-            }
-        }*/
+        }
+        
     }
 
     protected void B_Volver_Click(object sender, EventArgs e)
@@ -41,6 +41,12 @@ public partial class Vew_ActualizarDatos : System.Web.UI.Page
 
     protected void B_Actualizar_Click(object sender, EventArgs e)
     {
+        ClientScriptManager cm = this.ClientScript;
+        URegistro nuevodato = new URegistro();
+        nuevodato.Usuario = TB_Actusuario.Text.ToUpper();
+        nuevodato.Correo = TB_Actcorreo.Text.ToUpper();
+        nuevodato.Id = ((URegistro)Session["usuario"]).Id;
+
         /*
         ClientScriptManager cm = this.ClientScript;
         Registro nuevodato = new Registro();

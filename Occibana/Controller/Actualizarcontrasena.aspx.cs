@@ -54,8 +54,13 @@ public partial class Vew_Actualizarcontrasena : System.Web.UI.Page
     {
         LActualizarContrasena actualizar = new LActualizarContrasena();
         UActualizarContrasena mensaje = new UActualizarContrasena();
-        mensaje = actualizar.verificarsession((URegistro)Session["usuario"]);
+        ClientScriptManager cm = this.ClientScript;
+        mensaje = actualizar.actualizarContrasena((URegistro)Session["usuario"],TB_Contrasenaactual.Text,TB_Nuevacontrasena.Text);
         L_Error_noregistro.Text = mensaje.Mensaje;
+        string msj = mensaje.Mensaje;
+        this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('"+msj+"');window.location=\"Perfil.aspx\"</script>");
+        
+        
         /*
         ClientScriptManager cm = this.ClientScript;//script
         Registro login = new Registro();

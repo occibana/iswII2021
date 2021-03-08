@@ -35,18 +35,24 @@ namespace Logica
                     perfil.Datos.Idestado = 0;
                     new DAOSeguridad().actualizarmembresia(perfil.Datos);
                     perfil.URL1 = "Perfil.aspx";
+
+                    perfil.B_ComprarMembresia1 = false;
+                    perfil.B_ActualizarMembresia1 = true;
+                    perfil.B_AgregarHotel1 = true;
+                    perfil.B_mishoteles1 = true;
+
                 }
             }
             else
             {
-                //B_ComprarMembresia.Visible = true;
-                //B_ActualizarMembresia.Visible = false;
-                //B_AgregarHotel.Visible = false;
                 perfil.Mensaje = "Sin Membresia";
-                //L_EstadoMembresia.Text = "Sin Membresia";
-                //B_mishoteles.Visible = false;
-            }
 
+                perfil.B_ComprarMembresia1 = true;
+                perfil.B_ActualizarMembresia1 = false;
+                perfil.B_AgregarHotel1 = false;
+                perfil.B_mishoteles1 = false;
+
+            }
             return perfil;
         }
         public string cerrarsession(URegistro sessionId)

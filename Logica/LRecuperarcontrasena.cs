@@ -49,9 +49,7 @@ namespace Logica
                     msj = "Verifique su correo electónico para continuar con la recuperacion de contraseña";
                 }
             }
-
             return msj;
-            
         }
 
         private string encriptar(string input)

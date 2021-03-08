@@ -16,17 +16,12 @@ namespace Logica
             UMAC datos = new UMAC();
             UAcceso acceso = new UAcceso();
             datos.Registro = new DAOLogin().verificar(login);
-
-            if (datos.Registro.Usuario == null)
+            if (datos.Registro == null)
             {
-                datos.Mensaje = "usuario incorrecto";
-            }else if (datos.Registro.Contrasena == null)
-            {
-                datos.Mensaje = "contrasena incorrecta";
+                datos.Mensaje = "contrasena o usuario incorrecto";
             }
             else
             {
-
                 MAC conexion = new MAC();
                 acceso.FechaInicio = DateTime.Now;
                 acceso.Ip = conexion.ip();
@@ -36,28 +31,6 @@ namespace Logica
                 new DAOSeguridad().insertarAcceso(acceso);
                 datos.Url = "Perfil.aspx";
             }
-
-            //if (login == null)
-            //{
-            //    string msj = "Verifica tus datos\n usuario o contraseña incorrecto";
-            //    return msj;
-            //}
-            //else
-            //{
-            //    Session["usuario"] = login;
-            //    MAC conexion = new MAC();
-            //    UAcceso acceso = new UAcceso();
-            //    acceso.FechaInicio = DateTime.Now;
-            //    acceso.Ip = conexion.ip();
-            //    acceso.Mac = conexion.mac();
-            //    acceso.Session = Session.SessionID;
-            //    acceso.Userid = login.Id;
-
-            //    new DAOSeguridad().insertarAcceso(acceso);
-
-            //    return datos;
-            //}
-
             return datos;
         }
     }
