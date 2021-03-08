@@ -43,7 +43,7 @@ namespace Logica
             else if ((datosRegistro != null) && (datosRegistro.Correo != String.Empty))//si tb tiene algo
             {
                 datos.Mensaje = "Utiliza otro correo, este ya existe o esta registrado";
-            }
+            }/*
             else
             {
                 URegistro nuevodat = new URegistro();
@@ -91,7 +91,7 @@ namespace Logica
                 B_Volver.Text = "VOLVER";
 
                 return;
-            }
+            }*/
 
             return datos;
         }
