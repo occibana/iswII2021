@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Utilitarios;
+using Logica;
+
 public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -30,6 +33,23 @@ public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
 
     protected void B_CargarHotel_Click(object sender, EventArgs e)
     {
+        UHotel hotel = new UHotel();
+        hotel.Nombre = TB_NombreHotel.Text;
+        hotel.Precionoche = int.Parse(TB_PrecioNoche.Text);
+        hotel.Idmunicipio = int.Parse(DDL_Municipio.Text);
+        hotel.Idzona = int.Parse(DDL_Zona.Text);
+        hotel.Checkin = TB_Checkin.Text;
+        hotel.Checkout = TB_Checkout.Text;
+        hotel.Descripcion = TB_Descripcion.Text;
+        hotel.Condicion = TB_Condiciones.Text;
+        hotel.Usuarioencargado = ((URegistro)Session["usuario"]).Usuario;
+        hotel.Condicionesbioseguridad = TB_descripcioncovid19.Text;
+        hotel.Direccion = TB_Direccion.Text;
+        hotel.PrecioNocheDoble = int.Parse(TB_PrecioNocheDoble.Text);
+        hotel.PrecioNochePremium = int.Parse(TB_PrecioNochePremium.Text);
+
+        hotel = new LAgregarServicioHotel().insertHotel(hotel);
+
         /*
         ClientScriptManager cm = this.ClientScript;
         Hotel serviciohotel = new Hotel();
