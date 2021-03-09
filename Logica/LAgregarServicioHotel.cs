@@ -15,6 +15,7 @@ namespace Logica
         {
             UHotel sHotel = new UHotel();
             new DAOhotel().insertHotel(sHotel);
+            //Hola esta es la prueba
             return sHotel;
         }
     }
