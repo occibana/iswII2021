@@ -23,7 +23,6 @@ public partial class Vew_Perfil : System.Web.UI.Page
         L_Pusuario.Text = datos.Datos.Usuario;
         fotoperfil.ImageUrl = datos.Datos.Fotoperfil;
         L_EstadoMembresia.Text = datos.EstadoMembresia;
-
         B_ComprarMembresia.Visible = datos.B_ComprarMembresia1;
         B_ActualizarMembresia.Visible = datos.B_ActualizarMembresia1;
         B_AgregarHotel.Visible = datos.B_AgregarHotel1;
