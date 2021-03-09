@@ -47,7 +47,7 @@ public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
         hotel.Direccion = TB_Direccion.Text;
         hotel.PrecioNocheDoble = int.Parse(TB_PrecioNocheDoble.Text);
         hotel.PrecioNochePremium = int.Parse(TB_PrecioNochePremium.Text);
-        //Este por si acaso
+
         hotel = new LAgregarServicioHotel().insertHotel(hotel);
 
         /*
