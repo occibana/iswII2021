@@ -14,7 +14,9 @@ namespace Logica
         public UHotel insertHotel(UHotel servicioHotel)
         {
             UHotel sHotel = new UHotel();
+            sHotel.Nombre = "Probando";
             new DAOhotel().insertHotel(sHotel);
+
             //Hola esta es la prueba
             return sHotel;
         }
