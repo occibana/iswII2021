@@ -41,5 +41,37 @@ namespace Logica
                 return hotel;
             }
         }
+
+        public UComentarioDatos comentar(URegistro session, UComentarios comentario, UHotel hotelSession)
+        {
+            UComentarioDatos datos = new UComentarioDatos();
+            if (session != null)
+            {
+                UComentarios comenta = new UComentarios();
+                comenta.Id_hotel = hotelSession.Idhotel;
+                comenta.Id_usuario = session.Id;
+                comenta.Comentario = comentario.Comentario;
+                comenta.Fecha_comentario = DateTime.Now;
+
+                Boolean consulta = new DAOComentarios().consulta(comenta);
+                if (consulta == true)
+                {
+                    new DAOComentarios().insertComentario(comenta);
+                    datos.ComentarioTb = "";
+                    datos.Mensaje = "Comentario Agregado.";
+                }
+                else
+                {
+                    datos.Mensaje = "No puede comentar";
+                }
+            }
+            else
+            {
+                datos.Mensaje = "Para comentar, inicie sesion.";
+                datos.ComentarioTb = "";
+            }
+
+            return datos;
+        }
     }
 }

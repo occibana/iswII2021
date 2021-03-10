@@ -8,11 +8,29 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 using Utilitarios;
+using Logica;
 
 public partial class Vew_Membresias : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        LMembresias logica = new LMembresias();
+        UMembresias datos = new UMembresias();
+        datos = logica.pageLoad((URegistro)Session["usuario"]);
+
+        TB_Numerotarjeta.Enabled = datos.NumeroTarjeta;
+        TB_Codigoseguridad.Enabled = datos.CodigoSeguridad;
+        TB_Nombrepropietario.Enabled = datos.NombrePropietario;
+        TB_Direccionpropietario.Enabled = datos.DireccionPropietario;
+        TB_cedulapropietario.Enabled = datos.CedulaPropietario;
+        TB_Usuario.Enabled = datos.Usuario;
+        TB_Contrasena.Enabled = datos.Contrasena;
+        B_comprar.Enabled = datos.Comprar;
+
+        L_Actualizar_Comprar.Text = datos.Actualizar_Comprar;
+        L_Mensajecompra.Text = datos.Mensajecompra;
+        L_Costo.Text = datos.Costo;
+        L_vencimiento.Text = datos.Vencimiento;
         /*
         try
         {
@@ -55,6 +73,28 @@ public partial class Vew_Membresias : System.Web.UI.Page
 
     protected void B_comprar_Click(object sender, EventArgs e)
     {
+        ClientScriptManager cm = this.ClientScript;
+        UMembresia datoscompra = new UMembresia();
+        datoscompra.Cedulapropietario = TB_cedulapropietario.Text;
+        datoscompra.Codigoseguridad = TB_Codigoseguridad.Text;
+        datoscompra.Direccionpropietario = TB_Direccionpropietario.Text;
+        datoscompra.Nombrepropietario = TB_Nombrepropietario.Text;
+        datoscompra.Numerotarjeta =TB_Numerotarjeta.Text;
+        datoscompra.Fecha_compra = DateTime.Now;
+        datoscompra.Fecha_vencimiento = DateTime.Now.AddYears(1);
+        URegistro usuario = new URegistro();
+        usuario.Usuario = TB_Usuario.Text;
+        usuario.Contrasena = TB_Contrasena.Text;
+        usuario.Id = ((URegistro)Session["usuario"]).Id;
+        usuario.Correo = ((URegistro)Session["usuario"]).Correo;
+
+        LMembresias logica = new LMembresias();
+        UMembresias datos = new UMembresias(); 
+
+        datos = logica.comprar(datoscompra,usuario, (URegistro)Session["usuario"]);
+
+        cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+ datos.Error+ "');</script>");
+        L_error.Text = datos.Error;
         /*
         ClientScriptManager cm = this.ClientScript;
         Membresia datoscompra = new Membresia();
@@ -109,22 +149,7 @@ public partial class Vew_Membresias : System.Web.UI.Page
             Response.Redirect("index.aspx");
         }
         */
-        
-    }
 
-    //encripta numero tarjeta
-    private string encriptar(string input)
-    {
-        SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
-        byte[] inputBytes = Encoding.UTF8.GetBytes(input);
-        byte[] hashedBytes = provider.ComputeHash(inputBytes);
-        StringBuilder output = new StringBuilder();
-
-        for (int i = 0; i < hashedBytes.Length; i++)
-        {
-            output.Append(hashedBytes[i].ToString("x2").ToLower());
-        }
-        return output.ToString();
     }
 
     protected void B_Volver_Click(object sender, EventArgs e)

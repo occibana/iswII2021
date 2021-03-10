@@ -75,8 +75,7 @@ namespace Data
         }
         
         //guardar datos de compra
-        /*
-        public void insertarCompra(Membresia datos)
+        public void insertarCompra(UMembresia datos)
         {
             using (var db = new Mapeo())
             {
@@ -84,7 +83,7 @@ namespace Data
                 db.SaveChanges();
             }
         }
-        */
+        
         
         //actualizar estado membresia
         public void actualizarmembresia(URegistro datoE)
@@ -108,12 +107,12 @@ namespace Data
         }
     
         //info compra
-        /*
-        public Membresia fechavencimiento(URegistro usuarioidE)
+        
+        public UMembresia fechavencimiento(URegistro usuarioidE)
         {
             return new Mapeo().membresia.Where(x=> x.Idusuario == usuarioidE.Id).FirstOrDefault();
         }
-        */
+        
         //registro de ingresos
         /*
         public List<Acceso> RegistrosAcceso(int usuarioE)

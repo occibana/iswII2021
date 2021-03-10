@@ -2,7 +2,7 @@
 
 using Utilitarios;
 using Logica;
-
+using System.Web.UI;
 
 public partial class Vew_ComentariosHotel : System.Web.UI.Page
 {
@@ -42,6 +42,15 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
 
     protected void B_Comentar_Click(object sender, EventArgs e)
     {
+        ClientScriptManager cm = this.ClientScript;
+        UComentarios comenta = new UComentarios();
+        comenta.Comentario = TB_Comentario.Text;
+        LComentariosHotel logica = new LComentariosHotel();
+        UComentarioDatos datos = new UComentarioDatos();
+        datos = logica.comentar((URegistro)Session["usuario"],comenta,(UHotel)Session["visitarhotel"]);
+
+        cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+datos.Mensaje+"');</script>");
+
         /*
         ClientScriptManager cm = this.ClientScript;
         try

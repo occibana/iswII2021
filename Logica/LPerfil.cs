@@ -20,6 +20,8 @@ namespace Logica
             perfil.Datos.Telefono = datosSession.Telefono;
             perfil.Datos.Usuario = datosSession.Usuario;
             perfil.Datos.Fotoperfil = datosSession.Fotoperfil;
+            perfil.Datos.Idestado = datosSession.Idestado;
+            perfil.Datos.Id = datosSession.Id; 
 
             if (perfil.Datos.Fotoperfil == null)
             {
@@ -36,11 +38,19 @@ namespace Logica
                     new DAOSeguridad().actualizarmembresia(perfil.Datos);
                     perfil.URL1 = "Perfil.aspx";
 
+                    perfil.Mensaje = "Sin Membresia";
+                    perfil.B_ComprarMembresia1 = true;
+                    perfil.B_ActualizarMembresia1 = false;
+                    perfil.B_AgregarHotel1 = false;
+                    perfil.B_mishoteles1 = false;
+                }
+                else
+                {
+                    perfil.Mensaje = "Con Membresia";
                     perfil.B_ComprarMembresia1 = false;
                     perfil.B_ActualizarMembresia1 = true;
                     perfil.B_AgregarHotel1 = true;
                     perfil.B_mishoteles1 = true;
-
                 }
             }
             else
