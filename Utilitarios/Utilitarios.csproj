@@ -47,6 +47,7 @@
     <Compile Include="UAcceso.cs" />
     <Compile Include="UActualizarContrasena.cs" />
     <Compile Include="UActualizarDatos.cs" />
+    <Compile Include="UComentarioDatos.cs" />
     <Compile Include="UComentarios.cs" />
     <Compile Include="UDatosUsuario.cs" />
     <Compile Include="UHabitacion.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="UHotelZona.cs" />
     <Compile Include="UMAC.cs" />
     <Compile Include="UMembresia.cs" />
+    <Compile Include="UMembresias.cs" />
     <Compile Include="UMisReservas.cs" />
     <Compile Include="UPerfil.cs" />
     <Compile Include="UReactivarCuentaDatos.cs" />
