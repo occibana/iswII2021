@@ -17,6 +17,8 @@ namespace Utilitarios
         private bool B_AgregarHotel;
         private bool B_mishoteles;
 
+        private string fotoperfil;
+
 
         private URegistro datos;
 
@@ -32,5 +34,6 @@ namespace Utilitarios
         public bool B_ActualizarMembresia1 { get => B_ActualizarMembresia; set => B_ActualizarMembresia = value; }
         public bool B_AgregarHotel1 { get => B_AgregarHotel; set => B_AgregarHotel = value; }
         public bool B_mishoteles1 { get => B_mishoteles; set => B_mishoteles = value; }
+        public string Fotoperfil { get => fotoperfil; set => fotoperfil = value; }
     }
 }

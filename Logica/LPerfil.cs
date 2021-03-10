@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Utilitarios;
 using Data;
+using System.Web.UI.WebControls;
 
 namespace Logica
 {
@@ -70,6 +71,43 @@ namespace Logica
             new DAOSeguridad().cerrarAcceso(sessionId.Id);
             string url = "Login.aspx";
             return url;
+        }
+
+        public UPerfil subirFoto(FileUpload foto, URegistro session, string direccion)
+        {
+            UPerfil datos = new UPerfil();
+            if (foto.HasFile)
+            {
+                string ext = System.IO.Path.GetExtension(foto.FileName);//obtiene la extencion del archivo
+                ext = ext.ToLower();//minusculas
+
+                int tam = foto.PostedFile.ContentLength;//obtiene tamano archivo
+                                                        //string fotoperfil;
+
+                if ((ext == ".jpg" || ext == ".png" || ext == ".jpeg") && (tam < 1048576))//menor a 1MB en bytes
+                {
+                    foto.SaveAs(direccion);//mapea y guarda el archivo en la direccion
+                    datos.Mensaje = "*Imagen aceptada";
+                    //actualiza foto de perfil
+                    URegistro nuevodat = new URegistro();
+                    nuevodat.Id = session.Id;
+                    nuevodat.Fotoperfil = direccion;
+                    new DAOLogin().actualizarfoto(nuevodat);
+                    datos.Fotoperfil = session.Fotoperfil;
+                    datos.Mensaje = "*Imagen cargada con exito";
+                }
+                else
+                {
+                    datos.Mensaje = "*Imagen no esta en formato correcto o es muy pesada";
+                }
+
+            }
+            else
+            {
+                datos.Mensaje = "*Selecciona una imagen";
+            }
+
+            return datos;
         }
     }
 }
