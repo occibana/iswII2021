@@ -91,16 +91,6 @@ public partial class Vew_Perfil : System.Web.UI.Page
 
     protected void B_SubirFoto_Click(object sender, EventArgs e)
     {
-        string direccion;
-        direccion = "~/Vew/imgusuarios/" + ((URegistro)Session["usuario"]).Usuario + FU_FotoPerfil.FileName;
-        direccion = Server.MapPath(direccion);
-        LPerfil logica = new LPerfil();
-        UPerfil datos = new UPerfil();
-
-        datos = logica.subirFoto(FU_FotoPerfil,(URegistro)Session["usuario"], direccion);
-
-        L_Pcargaimagen.Text = datos.Mensaje;
-        fotoperfil.ImageUrl = datos.Fotoperfil;
         /*
         //verifica si hay archivos seleccionados
         if (FU_FotoPerfil.HasFile)
@@ -137,7 +127,6 @@ public partial class Vew_Perfil : System.Web.UI.Page
             L_Pcargaimagen.Text = "*Selecciona una imagen";
         }
         */
-        
     }
 
     protected void B_ActualizarDatos_Click(object sender, EventArgs e)
