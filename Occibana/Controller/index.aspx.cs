@@ -58,4 +58,9 @@ public partial class Vew_index : System.Web.UI.Page
 
         Response.Redirect("index.aspx");
     }
+
+    protected void B_DescargaManual_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("https://drive.google.com/file/d/1Qe0pdKkkGwYtIuNSlGKGYyXOAf_fwyMF/view?usp=sharing");
+    }
 }

@@ -28,7 +28,7 @@
         }
 
         .auto-style21 {
-            height: 296px;
+            height: 323px;
             width: 85%;
             margin-left: auto;
             background: #0040BD;
@@ -47,6 +47,7 @@
             width: 90%;
             margin-right: auto;
             margin-left: auto;
+            height: 139px;
         }
 
         .auto-style25 {
@@ -436,7 +437,11 @@
                             <br />
                             LEMA<br />
                             <br />
-                            Los mejores hoteles de la sabana occidente a un solo clic</div>
+                            Los mejores hoteles de la sabana occidente a un solo clic<br />
+                            <br />
+                            MANUAL DE USUARIO<br />
+                            <asp:Button ID="B_DescargaManual" runat="server" OnClick="B_DescargaManual_Click" Text="Cargar manual" />
+                        </div>
                         <br />
                         <br />
                         <br />
