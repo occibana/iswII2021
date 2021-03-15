@@ -59,6 +59,9 @@
         .auto-style31 {
             font-size: large;
         }
+        .auto-style32 {
+            height: 79px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -133,11 +136,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
+                                        <td class="auto-style32">
                                             <br />
                                             PRECIO HABITACIÓN PREMIUM:<br />
                                         </td>
-                                        <td>
+                                        <td class="auto-style32">
                                             <br />
                                             <asp:TextBox ID="TB_PrecioNochePremium" runat="server" MaxLength="10"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RFV_TB_PrecioNochePremium" runat="server" ControlToValidate="TB_PrecioNochePremium" ErrorMessage="*" ValidationGroup="AnadirHotel"></asp:RequiredFieldValidator>
@@ -150,7 +153,8 @@
                                         <td>
                                             <asp:DropDownList ID="DDL_Municipio" runat="server" DataSourceID="ODS_Municipio" DataTextField="Nombre" DataValueField="Idmunicipio">
                                             </asp:DropDownList>
-                                            <asp:ObjectDataSource ID="ODS_Municipio" runat="server" SelectMethod="municipio" TypeName="DAOhotel"></asp:ObjectDataSource>
+                                            <br />
+                                            <asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource>
                                         </td>
                                     </tr>
                                     <tr>

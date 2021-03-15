@@ -33,9 +33,12 @@ public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
 
     protected void B_CargarHotel_Click(object sender, EventArgs e)
     {
+        string direccionImagen;
+        string direccionImagenA1; 
+        string direccionImagenA2;
+
         UHotel hotel = new UHotel();
         hotel.Nombre = TB_NombreHotel.Text;
-        hotel.Precionoche = int.Parse(TB_PrecioNoche.Text);
         hotel.Idmunicipio = int.Parse(DDL_Municipio.Text);
         hotel.Idzona = int.Parse(DDL_Zona.Text);
         hotel.Checkin = TB_Checkin.Text;
@@ -47,8 +50,17 @@ public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
         hotel.Direccion = TB_Direccion.Text;
         hotel.PrecioNocheDoble = int.Parse(TB_PrecioNocheDoble.Text);
         hotel.PrecioNochePremium = int.Parse(TB_PrecioNochePremium.Text);
-
-        hotel = new LAgregarServicioHotel().insertHotel(hotel);
+        hotel.Precionoche = int.Parse(TB_PrecioNoche.Text);
+        hotel.Imagen = null;
+        hotel.Imagen_secundaria = null;
+        hotel.Imagen_secundaria2 = null;
+        direccionImagen = "~/hoteles/imgprincipal/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgPrincipal.FileName;
+        direccionImagenA1 = "~/Vew/hoteles/imgadicional/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional.FileName;
+        direccionImagenA2 = "~/Vew/hoteles/imgadicional/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional0.FileName;
+        direccionImagen = Server.MapPath(direccionImagen);
+        direccionImagenA1 = Server.MapPath(direccionImagenA1);
+        direccionImagenA2 = Server.MapPath(direccionImagenA2);
+        hotel = new LAgregarServicioHotel().insertHotel(FU_ImgPrincipal, FU_ImgAdicional, FU_ImgAdicional0 ,direccionImagen, direccionImagenA1, direccionImagenA2,hotel);
 
         /*
         ClientScriptManager cm = this.ClientScript;

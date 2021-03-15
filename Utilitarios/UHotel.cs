@@ -30,6 +30,8 @@ namespace Utilitarios
         private Nullable<int> promediocalificacion;
         private string direccion;
         [NotMapped]
+        private string mensaje;
+        [NotMapped]
         private string zona;
         [NotMapped]
         private int nummaxpersonas;
@@ -83,6 +85,8 @@ namespace Utilitarios
         [Column("direccion")]
         public string Direccion { get => direccion; set => direccion = value; }
         [NotMapped]
+        public string Mensaje { get => mensaje; set => mensaje = value; }
+        [NotMapped]
         public string Municipio { get => municipio; set => municipio = value; }
         [NotMapped]
         public string Zona { get => zona; set => zona = value; }
@@ -96,6 +100,6 @@ namespace Utilitarios
         public DateTime Fecha_antesde { get => fecha_antesde; set => fecha_antesde = value; }
         [NotMapped]
         public int NumHabitDisponibles { get => numHabitDisponibles; set => numHabitDisponibles = value; }
-
+        
     }
 }
