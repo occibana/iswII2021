@@ -12,17 +12,17 @@ public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        /*
+        
         try
         {
-            L_SesionAnadirHotel.Text = ((Registro)Session["usuario"]).Nombre;
+            L_SesionAnadirHotel.Text = ((URegistro)Session["usuario"]).Nombre;
         }
         catch
         {
             Session.Remove("usuario");
             Response.Redirect("Login.aspx");
         }
-        */
+        
     }
 
     protected void B_Volver_Click(object sender, EventArgs e)
@@ -54,9 +54,9 @@ public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
         hotel.Imagen = null;
         hotel.Imagen_secundaria = null;
         hotel.Imagen_secundaria2 = null;
-        direccionImagen = "~/hoteles/imgprincipal/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgPrincipal.FileName;
-        direccionImagenA1 = "~/Vew/hoteles/imgadicional/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional.FileName;
-        direccionImagenA2 = "~/Vew/hoteles/imgadicional/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional0.FileName;
+        direccionImagen = "/Vew/hoteles/imgprincipal/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgPrincipal.FileName;
+        direccionImagenA1 ="/Vew/hoteles/imgadicional/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional.FileName;
+        direccionImagenA2 = "/Vew/hoteles/imgadicional/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional0.FileName;
         direccionImagen = Server.MapPath(direccionImagen);
         direccionImagenA1 = Server.MapPath(direccionImagenA1);
         direccionImagenA2 = Server.MapPath(direccionImagenA2);

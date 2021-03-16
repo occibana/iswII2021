@@ -153,8 +153,8 @@
                                         <td>
                                             <asp:DropDownList ID="DDL_Municipio" runat="server" DataSourceID="ODS_Municipio" DataTextField="Nombre" DataValueField="Idmunicipio">
                                             </asp:DropDownList>
+                                            <asp:ObjectDataSource ID="ODS_Municipio" runat="server" SelectMethod="municipio" TypeName="Data.DAOhotel"></asp:ObjectDataSource>
                                             <br />
-                                            <asp:ObjectDataSource ID="ObjectDataSource1" runat="server"></asp:ObjectDataSource>
                                         </td>
                                     </tr>
                                     <tr>
@@ -162,7 +162,8 @@
                                         <td>
                                             <asp:DropDownList ID="DDL_Zona" runat="server" DataSourceID="ODS_Zona" DataTextField="Nombre" DataValueField="Idzona">
                                             </asp:DropDownList>
-                                            <asp:ObjectDataSource ID="ODS_Zona" runat="server" SelectMethod="zona" TypeName="DAOhotel"></asp:ObjectDataSource>
+                                            <br />
+                                            <asp:ObjectDataSource ID="ODS_Zona" runat="server" SelectMethod="zona" TypeName="Data.DAOhotel"></asp:ObjectDataSource>
                                         </td>
                                     </tr>
                                     <tr>

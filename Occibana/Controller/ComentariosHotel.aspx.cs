@@ -3,6 +3,7 @@
 using Utilitarios;
 using Logica;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 
 public partial class Vew_ComentariosHotel : System.Web.UI.Page
 {
@@ -46,7 +47,7 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
         UComentarios comenta = new UComentarios();
         comenta.Comentario = TB_Comentario.Text;
         LComentariosHotel logica = new LComentariosHotel();
-        UComentarioDatos datos = new UComentarioDatos();
+        UComentario_CalificacionDatos datos = new UComentario_CalificacionDatos();
         datos = logica.comentar((URegistro)Session["usuario"],comenta,(UHotel)Session["visitarhotel"]);
 
         cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+datos.Mensaje+"');</script>");
@@ -95,6 +96,9 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
 
     protected void B_Calificar_Click(object sender, EventArgs e)
     {
+
+        RadioButton[] arrayRadioButton = { RB_0estrella, RB_1estrella, RB_2estrella, RB_3estrella, RB_4estrella, RB_5estrella };
+
         /*
         DateTime fechaparacalificar;
         Reserva inforeserva = new Reserva();
