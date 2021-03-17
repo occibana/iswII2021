@@ -6,39 +6,36 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Utilitarios;
+using Logica;
+
 public partial class Vew_Reportes_ReporteHoteles_ReporteUsuarioReservas : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        /*
         try
         {
-            L_NombreUsuario.Text = ((Registro)Session["usuario"]).Usuario;
-            pintarReporte((Registro)Session["usuario"]);
+            L_NombreUsuario.Text = ((URegistro)Session["usuario"]).Usuario;
+            CRS_ReservasUsuario.ReportDocument.SetDataSource(llenarReserva((URegistro)Session["usuario"]));
+            CRV_Reserva.ReportSource = CRS_ReservasUsuario;
         }
         catch (Exception ex)
         {
             Session.Remove("usuario");
             Response.Redirect("~/vew/Login.aspx");
         }
-        */
-    }
-    /*
-    protected void pintarReporte(Registro usuario)
-    {
-        CRS_ReservasUsuario.ReportDocument.SetDataSource(llenarReserva(usuario));
-        CRV_Reserva.ReportSource = CRS_ReservasUsuario;
     }
 
-    public HistorialReservas llenarReserva(Registro usuario)
+    public HistorialReservas llenarReserva(URegistro usuario)
     {
         HistorialReservas informe = new HistorialReservas();
-        List<Reserva> misReservas = new DAOReserva().mostrarmisreservas(usuario);
+        LReporte reporte = new LReporte();
+        List<UReserva> misReservas = reporte.listaMisHoteles(usuario); 
 
         DataTable datosReportes = informe._HistorialReservas;
         DataRow filas;
 
-        foreach (Reserva reservas in misReservas)
+        foreach (UReserva reservas in misReservas)
         {
             filas = datosReportes.NewRow();
             filas["NombreUsuario"] = reservas.Nombre;
@@ -51,5 +48,5 @@ public partial class Vew_Reportes_ReporteHoteles_ReporteUsuarioReservas : System
 
         }
         return informe;
-    }*/
+    }
 }

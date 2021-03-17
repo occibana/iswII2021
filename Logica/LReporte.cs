@@ -21,5 +21,11 @@ namespace Logica
             List<UHotel> listaMisHoteles = new DAOhotel().obtenerhoteles(usuario);
             return listaMisHoteles;
         }
+
+        public List<UReserva> listaMisHoteles(URegistro usuario)
+        {
+            List<UReserva> listaMisHoteles = new DAOReserva().mostrarmisreservas(usuario);
+            return listaMisHoteles;
+        }
     }
 }
