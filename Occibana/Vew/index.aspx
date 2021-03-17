@@ -271,7 +271,7 @@
                                             <asp:ListItem Value="--Seleccione--">--Seleccione--</asp:ListItem>
 
                                         </asp:DropDownList>
-                                        <asp:ObjectDataSource ID="ODS_FiltrarZona" runat="server" SelectMethod="zona" TypeName="Data.DAOhotel"></asp:ObjectDataSource>
+                                        <asp:ObjectDataSource ID="ODS_FiltrarZona" runat="server" SelectMethod="listaZonas" TypeName="Logica.Listas"></asp:ObjectDataSource>
                                     </p>
                                 </td>
                             </tr>
@@ -307,7 +307,7 @@
                                         <asp:DropDownList ID="DDL_Municipio" runat="server" Height="17px" Width="90%" DataSourceID="ODS_FiltrarMunicipio" DataTextField="Nombre" DataValueField="Nombre" AppendDataBoundItems="True">
                                             <asp:ListItem Value="--Seleccione--">--Seleccione--</asp:ListItem>
                                         </asp:DropDownList>
-                                        <asp:ObjectDataSource ID="ODS_FiltrarMunicipio" runat="server" SelectMethod="municipio" TypeName="Data.DAOhotel"></asp:ObjectDataSource>
+                                        <asp:ObjectDataSource ID="ODS_FiltrarMunicipio" runat="server" SelectMethod="listaMunicipios" TypeName="Logica.Listas"></asp:ObjectDataSource>
                                     </p>
                                 </td>
                             </tr>
@@ -376,7 +376,7 @@
                                     <br />
                                 </ItemTemplate>
                             </asp:DataList>
-                            <asp:ObjectDataSource ID="ODS_Hoteles" runat="server" SelectMethod="hotelesregistrados" TypeName="Data.DAOhotel">
+                            <asp:ObjectDataSource ID="ODS_Hoteles" runat="server" SelectMethod="hotelesPrincipal" TypeName="Logica.Listas">
                                 <SelectParameters>
                                     <asp:SessionParameter Name="consulta" SessionField="hotelseleccionado" Type="Object" />
                                 </SelectParameters>
@@ -408,7 +408,7 @@
                         </asp:DataList>
                     </div>
                     <br />
-                    <asp:ObjectDataSource ID="ODS_Hotelesdestacados" runat="server" SelectMethod="hotelesdestacados" TypeName="Data.DAOhotel"></asp:ObjectDataSource>
+                    <asp:ObjectDataSource ID="ODS_Hotelesdestacados" runat="server" SelectMethod="hotelesDestacados" TypeName="Logica.Listas"></asp:ObjectDataSource>
                 </div>
                 <br />
                 <br />

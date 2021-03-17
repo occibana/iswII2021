@@ -65,7 +65,7 @@
                                 </asp:GridView>
                                 </div>
                                 <br />
-                                <asp:ObjectDataSource ID="ODS_MisReservas" runat="server" SelectMethod="mostrarmisreservas" TypeName="Data.DAOReserva">
+                                <asp:ObjectDataSource ID="ODS_MisReservas" runat="server" SelectMethod="mostrarMisreservas" TypeName="Logica.Listas">
                                     <SelectParameters>
                                         <asp:SessionParameter Name="disponibilidadE" SessionField="usuario" Type="Object" />
                                     </SelectParameters>

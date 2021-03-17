@@ -64,7 +64,7 @@
                                     <asp:Button ID="B_Volver" runat="server" OnClick="B_Volver_Click" Text="VOLVER" />
                                 <br />
                                 </div>
-                                <asp:ObjectDataSource ID="ODS_Mishoteles" runat="server" SelectMethod="obtenerhoteles" TypeName="DAOhotel" DataObjectTypeName="Hotel" DeleteMethod="deleteHotel">
+                                <asp:ObjectDataSource ID="ODS_Mishoteles" runat="server" SelectMethod="obtenerHoteles" TypeName="Logica.Listas" DataObjectTypeName="Hotel" DeleteMethod="deleteHotel">
                                     <SelectParameters>
                                         <asp:ControlParameter ControlID="L_Usuario" DefaultValue="" Name="usuario" PropertyName="Text" Type="String" />
                                     </SelectParameters>

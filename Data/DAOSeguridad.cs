@@ -114,12 +114,12 @@ namespace Data
         }
         
         //registro de ingresos
-        /*
-        public List<Acceso> RegistrosAcceso(int usuarioE)
+        
+        public List<UAcceso> RegistrosAcceso(int usuarioE)
         {
             return new Mapeo().acceso.Where(x => x.Userid == usuarioE).ToList();
         }
-        */
+        
     }
 }
     

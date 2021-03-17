@@ -203,7 +203,7 @@
                                             &nbsp;&nbsp;
                                         </div>
                                         <br />
-                                        <asp:ObjectDataSource ID="ODS_Habitaciones" runat="server" SelectMethod="habitacionesHotel" TypeName="Data.DAOHabitacion">
+                                        <asp:ObjectDataSource ID="ODS_Habitaciones" runat="server" SelectMethod="habitacionesHotel" TypeName="Logica.Listas">
                                             <SelectParameters>
                                                 <asp:SessionParameter Name="idE" SessionField="visitarhotel" Type="Object" />
                                                 <asp:Parameter Name="consulta" Type="Object" />
