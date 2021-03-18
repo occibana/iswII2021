@@ -43,10 +43,11 @@ namespace Data
                 {
                     URegistro fotoanterior = db.usuario.Where(x => x.Id == fotoE.Id).First();
                     //eliminar anterior
+                    /*
                     if (File.Exists(fotoanterior.Fotoperfil))
                     {
                         File.Delete(fotoanterior.Fotoperfil);
-                    }
+                    }*/
                     //
                     fotoanterior.Fotoperfil = fotoE.Fotoperfil;
                     var entry = db.Entry(fotoanterior);

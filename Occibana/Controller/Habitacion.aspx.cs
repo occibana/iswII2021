@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Utilitarios;
+using Logica;
+
 public partial class Vew_Habitacion : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -27,6 +30,23 @@ public partial class Vew_Habitacion : System.Web.UI.Page
 
     protected void B_AgregarHabitacion_Click(object sender, EventArgs e)
     {
+        int idtipo = 0;
+        UHabitacion habit = new UHabitacion();
+
+        habit.Numpersonas = int.Parse(TB_NumPersonas.Text);
+        habit.Numbanio = int.Parse(TB_NumBanio.Text);
+        habit.Idhotel = int.Parse(L_Prueba.Text);
+        habit.Tipo = DDL_Tipo.Text;
+        idtipo = DDL_Tipo.SelectedIndex;
+        habit.Numcamas = int.Parse(TB_NumeroDeCamas.Text);
+
+        LHabitacion logica = new LHabitacion();
+        habit = logica.agregarHabitacion(idtipo, habit);
+        //TB_NumPersonas.Text = "";
+        //TB_NumBanio.Text = "";
+        //TB_NumeroDeCamas.Text = "";
+        L_Error_habitacion.Text = habit.Mensaje;
+
         /*
         int idtipo = 0;
         Habitacion habit = new Habitacion();
@@ -77,6 +97,6 @@ public partial class Vew_Habitacion : System.Web.UI.Page
             L_Tipo.Text = "Seleccione una opción";
         }
         */
- 
+
     }
 }

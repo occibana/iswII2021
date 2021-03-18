@@ -23,12 +23,11 @@ namespace Logica
 
             if (login == null)
             {
-                mensaje.Mensaje = "Verifica tus datos\n usuario o contraseña incorrecto";
+                mensaje.URL1 = "Login.aspx";
             }
             else
             {
-                mensaje.Mensaje = "Redireccionando...";
-                mensaje.URL1 = "Login.aspx";
+                mensaje.Mensaje = "Complete los pasos para actualizar la contraseña";
             }
 
             return mensaje;
@@ -57,12 +56,9 @@ namespace Logica
                 if (login.Contrasena.Length < 5)
                 {
                     mensaje.Mensaje = "Su contraseña debe ser mayor a 5 caracteres.";
-                    mensaje.Mensaje = "";
                 }
-
                 else
                 {
-
                     new DAOLogin().actualizarcontrasena(login);
                     new Mail().mailactualizarcontrasena(login);
                     mensaje.Mensaje = "Contraseña actualizada";

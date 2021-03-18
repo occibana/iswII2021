@@ -27,7 +27,6 @@ namespace Logica
             hotel.Condicion = datosHotel.Condicion;
             hotel.Checkin = datosHotel.Checkin;
             hotel.Checkout = datosHotel.Checkout;
-            //hotel.Imagen =
             hotel.Usuarioencargado = datosHotel.Usuarioencargado;
             hotel.Idzona = datosHotel.Idzona;
             hotel.Condicionesbioseguridad = datosHotel.Condicionesbioseguridad;

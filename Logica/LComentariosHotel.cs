@@ -21,25 +21,10 @@ namespace Logica
                 hotel.Idhotel = session.Idhotel;
                 hotel = new DAOhotel().infohotel(hotel);
                 return hotel;
-
-                /*
-                if ((Registro)Session["usuario"] == null)
-                {
-                    L_Usuario.Text = "Inicie sesion para comentar";
-                    B_Comentar.Enabled = false;
-                    B_Calificar.Enabled = false;
-                }
-                else
-                {
-
-                    L_Usuario.Text = ((Registro)Session["usuario"]).Nombre;
-                    B_Comentar.Enabled = true;
-                    B_Calificar.Enabled = true;
-                }
-                */
             }
             else
             {
+                hotel.Url = "index.aspx";
                 return hotel;
             }
         }
@@ -76,21 +61,10 @@ namespace Logica
             return datos;
         }
 
-        public UComentario_CalificacionDatos calificar(URegistro sessionUsuario, UHotel hotelSession, HttpSessionState sessionCalificarHotel, RadioButton[] arrayRadioButton)
+        public UComentario_CalificacionDatos calificar(URegistro sessionUsuario, UHotel hotelSession, UReserva inforeserva, RadioButton[] arrayRadioButton)
         {
             UComentario_CalificacionDatos mensaje = new UComentario_CalificacionDatos();
             DateTime fechaparacalificar;
-            UReserva inforeserva = new UReserva();
-            if (sessionCalificarHotel != null)
-            {
-                inforeserva.Id = int.Parse(sessionCalificarHotel.ToString());
-            }
-            else
-            {
-                inforeserva.Idhotel = hotelSession.Idhotel;
-                inforeserva.Idusuario = sessionUsuario.Id;
-                inforeserva = new DAOReserva().ultimareserva(inforeserva);
-            }
 
             if (inforeserva != null)
             {

@@ -92,8 +92,8 @@ public partial class Vew_Perfil : System.Web.UI.Page
     protected void B_SubirFoto_Click(object sender, EventArgs e)
     {
         string direccion;
-        direccion = "~/Vew/imgusuarios/" + ((URegistro)Session["usuario"]).Usuario + FU_FotoPerfil.FileName;
-        direccion = Server.MapPath(direccion);
+        direccion = ((URegistro)Session["usuario"]).Usuario + FU_FotoPerfil.FileName;
+        direccion = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\") + direccion;
         LPerfil logica = new LPerfil();
         UPerfil datos = new UPerfil();
 

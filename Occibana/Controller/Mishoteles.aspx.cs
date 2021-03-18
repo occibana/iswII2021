@@ -5,21 +5,24 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using Utilitarios;
+using Logica;
+
 public partial class Vew_Mishoteles : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        /*
+        
         try
         {
-            L_Usuario.Text = ((Registro)Session["usuario"]).Usuario;
+            L_Usuario.Text = ((URegistro)Session["usuario"]).Usuario;
         }
         catch
         {
             Session.Remove("usuario");
             Response.Redirect("Login.aspx");
         }
-        */
+        
     }
 
     protected void GV_Mishoteles_SelectedIndexChanged(object sender, EventArgs e)

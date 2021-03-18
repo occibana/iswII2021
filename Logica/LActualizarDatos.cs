@@ -34,7 +34,6 @@ namespace Logica
         public UActualizarDatos actualizarDatos(URegistro datosRegistro, URegistro datosSession)
         {
             UActualizarDatos datos = new UActualizarDatos();
-            //datosRegistro;
             datos.Actnombre = datosRegistro.Nombre;
             datos.Actapellido = datosRegistro.Apellido;
             datos.Actusuario = datosRegistro.Usuario;
@@ -85,56 +84,8 @@ namespace Logica
                 datosSession.Usuario = reg.Usuario;
                 datosSession.Telefono = reg.Telefono;
                 datosSession.Correo = reg.Correo;
+                datos.Mensaje = "Datos actualizados correctamente";
             }
-            /*else
-            {
-                URegistro nuevodat = new URegistro();
-                nuevodat.Id = datosRegistro.Id;
-                nuevodat.Usuario = TB_Actusuario.Text;
-                nuevodat.Nombre = TB_Actnombre.Text;
-                nuevodat.Apellido = TB_Actapellido.Text;
-                nuevodat.Telefono = TB_Acttelefono.Text;
-                nuevodat.Correo = TB_Actcorreo.Text;
-
-                if (TB_Actusuario.Text == String.Empty)
-                {
-                    nuevodat.Usuario = ((URegistro)Session["usuario"]).Usuario;
-                }
-                if (TB_Actnombre.Text == String.Empty)
-                {
-                    nuevodat.Nombre = ((URegistro)Session["usuario"]).Nombre;
-                }
-                if (TB_Actapellido.Text == String.Empty)
-                {
-                    nuevodat.Apellido = ((URegistro)Session["usuario"]).Apellido;
-                }
-                if (TB_Acttelefono.Text == String.Empty)
-                {
-                    nuevodat.Telefono = ((URegistro)Session["usuario"]).Telefono;
-                }
-                if (TB_Actcorreo.Text == String.Empty)
-                {
-                    nuevodat.Correo = ((URegistro)Session["usuario"]).Correo;
-                }
-                new DAOLogin().actualizarperfil(nuevodat);
-
-                ((URegistro)Session["usuario"]).Usuario = nuevodat.Usuario;
-                ((URegistro)Session["usuario"]).Nombre = nuevodat.Nombre;
-                ((URegistro)Session["usuario"]).Apellido = nuevodat.Apellido;
-                ((URegistro)Session["usuario"]).Telefono = nuevodat.Telefono;
-                ((URegistro)Session["usuario"]).Correo = nuevodat.Correo;
-
-                LB_Actfallo.Text = "Datos actualizados correctamente";
-                this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Datos actualizados correctamente');window.location=\"Perfil.aspx\"</script>");
-
-               
-
-                this.Controls.OfType<TextBox>().ToList().ForEach(o => o.Text = "");
-                B_Volver.Text = "VOLVER";
-
-                return;
-            }*/
-
             return datos;
         }
 

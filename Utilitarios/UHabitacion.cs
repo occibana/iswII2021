@@ -17,6 +17,15 @@ namespace Utilitarios
         private string tipo;
         private Nullable<int> precio;
         private Nullable<int> numcamas;
+        [NotMapped]
+        private string mensaje;
+        [NotMapped]
+        private string tb_NumPersonas;
+        [NotMapped]
+        private string tb_NumBanio;
+        [NotMapped]
+        private string tb_NumeroDeCamas;
+            
 
 
         [Key]
@@ -34,5 +43,13 @@ namespace Utilitarios
         public Nullable<int> Numcamas { get => numcamas; set => numcamas = value; }
         [Column("precio")]
         public Nullable<int> Precio { get => precio; set => precio = value; }
+        [NotMapped]
+        public string Mensaje { get => mensaje; set => mensaje = value; }
+        [NotMapped]
+        public string Tb_NumPersonas { get => tb_NumPersonas; set => tb_NumPersonas = value; }
+        [NotMapped]
+        public string Tb_NumBanio { get => tb_NumBanio; set => tb_NumBanio = value; }
+        [NotMapped]
+        public string Tb_NumeroDeCamas { get => tb_NumeroDeCamas; set => tb_NumeroDeCamas = value; }
     }
 }

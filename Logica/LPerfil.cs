@@ -18,6 +18,7 @@ namespace Logica
             perfil.Datos = new URegistro();
             perfil.Datos.Nombre = datosSession.Nombre;
             perfil.Datos.Correo = datosSession.Correo;
+
             perfil.Datos.Telefono = datosSession.Telefono;
             perfil.Datos.Usuario = datosSession.Usuario;
             perfil.Datos.Fotoperfil = datosSession.Fotoperfil;
@@ -86,7 +87,16 @@ namespace Logica
 
                 if ((ext == ".jpg" || ext == ".png" || ext == ".jpeg") && (tam < 1048576))//menor a 1MB en bytes
                 {
-                    foto.SaveAs(direccion);//mapea y guarda el archivo en la direccion
+
+                    try
+                    {
+                        foto.PostedFile.SaveAs(direccion);//mapea y guarda el archivo en la direccion
+                    }
+                    catch
+                    {
+
+                    }
+                    //direccion = "~/Vew/imgusuarios/" + direccion;
                     datos.Mensaje = "*Imagen aceptada";
                     //actualiza foto de perfil
                     URegistro nuevodat = new URegistro();

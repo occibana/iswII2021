@@ -12,18 +12,12 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
         UHotel hotel = new UHotel();
         hotel.Idhotel = ((UHotel)Session["visitarhotel"]).Idhotel;
         hotel = new LComentariosHotel().info_hotel(hotel);
-        L_NombreHotel.Text = hotel.Nombre.ToUpper();
-        L_Nombrehotel2.Text = hotel.Nombre.ToUpper();
-        /*
-        if (Session["visitarhotel"] != null)
+        try
         {
-            Hotel hotel = new Hotel();
-            hotel.Idhotel = ((Hotel)Session["visitarhotel"]).Idhotel;
-            hotel = new DAOhotel().infohotel(hotel);
             L_NombreHotel.Text = hotel.Nombre.ToUpper();
             L_Nombrehotel2.Text = hotel.Nombre.ToUpper();
 
-            if ((Registro)Session["usuario"] == null)
+            if ((URegistro)Session["usuario"] == null)
             {
                 L_Usuario.Text = "Inicie sesion para comentar";
                 B_Comentar.Enabled = false;
@@ -32,13 +26,16 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
             else
             {
 
-                L_Usuario.Text = ((Registro)Session["usuario"]).Nombre;
+                L_Usuario.Text = ((URegistro)Session["usuario"]).Nombre;
                 B_Comentar.Enabled = true;
                 B_Calificar.Enabled = true;
             }
         }
-       */
-
+        catch
+        {
+            Session.Remove("visitarhotel");
+            Response.Redirect(hotel.Url);
+        }
     }
 
     protected void B_Comentar_Click(object sender, EventArgs e)
@@ -98,87 +95,19 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
     {
 
         RadioButton[] arrayRadioButton = { RB_0estrella, RB_1estrella, RB_2estrella, RB_3estrella, RB_4estrella, RB_5estrella };
-
-        /*
-        DateTime fechaparacalificar;
-        Reserva inforeserva = new Reserva();
-        if (Session["calificarhotel"]!=null)
+        LComentariosHotel logica = new LComentariosHotel();
+        UReserva inforeserva = new UReserva();
+        UComentario_CalificacionDatos mensaje = new UComentario_CalificacionDatos();
+        if (Session["calificarhotel"] != null)
         {
             inforeserva.Id = int.Parse(Session["calificarhotel"].ToString());
         }
         else
         {
-            inforeserva.Idhotel = ((Hotel)Session["visitarhotel"]).Idhotel;
-            inforeserva.Idusuario = ((Registro)Session["usuario"]).Id;
-            inforeserva = new DAOReserva().ultimareserva(inforeserva);
+            inforeserva.Idhotel = ((UHotel)Session["visitarhotel"]).Idhotel;
+            inforeserva.Idusuario = ((URegistro)Session["usuario"]).Id;
         }
-
-        if (inforeserva != null)
-        {
-            inforeserva = new DAOReserva().inforeserva(inforeserva);
-            fechaparacalificar = inforeserva.Fecha_salida;
-            if (DateTime.Now>=fechaparacalificar.AddDays(1))
-            {
-                if (inforeserva.Calificacion == null)
-                {
-
-                    if (RB_0estrella.Checked)
-                    {
-                        inforeserva.Calificacion = 0;
-                    }
-                    else if (RB_1estrella.Checked)
-                    {
-                        inforeserva.Calificacion = 1;
-                    }
-                    else if (RB_2estrella.Checked)
-                    {
-                        inforeserva.Calificacion = 2;
-                    }
-                    else if (RB_3estrella.Checked)
-                    {
-                        inforeserva.Calificacion = 3;
-                    }
-                    else if (RB_4estrella.Checked)
-                    {
-                        inforeserva.Calificacion = 4;
-
-                    }
-                    else if (RB_5estrella.Checked)
-                    {
-                        inforeserva.Calificacion = 5;
-                    }
-
-                    if (inforeserva.Calificacion != null)
-                    {
-                        new DAOReserva().actualizarcalificacion(inforeserva);
-                        L_Fallocalificacion.Text = "Calificacion realizada con exito";
-                        new DAOReserva().cantidaddereservasconcalificacion(inforeserva);
-                        var promediocalificacion = new DAOReserva().cantidaddereservasconcalificacion(inforeserva);
-                        Hotel hotel = new Hotel();
-                        hotel.Idhotel = int.Parse((inforeserva.Idhotel).ToString());
-                        hotel.Promediocalificacion = promediocalificacion;
-                        new DAOhotel().actualizarcalificacion(hotel);
-                    }
-                    else
-                    {
-                        L_Fallocalificacion.Text = "Seleccione una opcion a calificar";
-                    }
-
-                }
-                else if (inforeserva.Calificacion != null)
-                {
-                    L_Fallocalificacion.Text = "Este servicio ha sido calificado antes";
-                }
-            }
-            else
-            {
-                L_Fallocalificacion.Text = "No es posible realizar aun esta calificación";
-            }
-
-        }else if (inforeserva == null)
-        {
-            L_Fallocalificacion.Text = "Todas sus reservas han sido calificadas";
-        }
-        */
+        mensaje = logica.calificar(((URegistro)Session["usuario"]), ((UHotel)Session["visitarhotel"]), inforeserva, arrayRadioButton);
+        L_Fallocalificacion.Text = mensaje.Mensaje;
     }
 }

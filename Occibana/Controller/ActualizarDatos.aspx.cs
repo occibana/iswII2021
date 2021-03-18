@@ -41,7 +41,6 @@ public partial class Vew_ActualizarDatos : System.Web.UI.Page
 
     protected void B_Actualizar_Click(object sender, EventArgs e)
     {
-        LB_Actfallo.Text = "";
         ClientScriptManager cm = this.ClientScript;
         URegistro nuevodato = new URegistro();
         nuevodato.Usuario = TB_Actusuario.Text;
@@ -56,10 +55,9 @@ public partial class Vew_ActualizarDatos : System.Web.UI.Page
         UActualizarDatos datos = new LActualizarDatos().actualizarDatos(nuevodato, session);
         //ndatos.actualizarDatos(nuevodato, session);
         LB_Actfallo.Text = datos.Mensaje;
-        if (LB_Actfallo.Text == "")
-        {
-            this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Datos actualizados.');window.location=\"Perfil.aspx\"</script>");
-        }
+       
+        this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('"+datos.Mensaje+"');window.location=\"Perfil.aspx\"</script>");
+        
         /*
         ClientScriptManager cm = this.ClientScript;
         Registro nuevodato = new Registro();

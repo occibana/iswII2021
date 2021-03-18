@@ -43,6 +43,8 @@ namespace Utilitarios
         private DateTime fecha_despuesde;
         [NotMapped]
         private int numHabitDisponibles;
+        [NotMapped]
+        private string url;
 
 
         [Key]
@@ -100,6 +102,7 @@ namespace Utilitarios
         public DateTime Fecha_antesde { get => fecha_antesde; set => fecha_antesde = value; }
         [NotMapped]
         public int NumHabitDisponibles { get => numHabitDisponibles; set => numHabitDisponibles = value; }
-        
+        [NotMapped]
+        public string Url { get => url; set => url = value; }
     }
 }
