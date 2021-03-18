@@ -13,20 +13,30 @@ public partial class Vew_Perfil : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        UPerfil datos = new UPerfil();
-        datos = new LPerfil().cargardatos(((URegistro)Session["usuario"]));
+        try
+        {
+            UPerfil datos = new UPerfil();
+            datos = new LPerfil().cargardatos(((URegistro)Session["usuario"]));
 
-        L_Pnombre.Text = datos.Datos.Nombre;
-        L_Pcorreo.Text = datos.Datos.Correo;
-        L_Ptelefono.Text = datos.Datos.Telefono;
-        L_Pusuariodatospersonales.Text = datos.Datos.Usuario;
-        L_Pusuario.Text = datos.Datos.Usuario;
-        fotoperfil.ImageUrl = datos.Datos.Fotoperfil;
-        L_EstadoMembresia.Text = datos.EstadoMembresia;
-        B_ComprarMembresia.Visible = datos.B_ComprarMembresia1;
-        B_ActualizarMembresia.Visible = datos.B_ActualizarMembresia1;
-        B_AgregarHotel.Visible = datos.B_AgregarHotel1;
-        B_mishoteles.Visible = datos.B_mishoteles1;
+            L_Pnombre.Text = datos.Datos.Nombre;
+            L_Pcorreo.Text = datos.Datos.Correo;
+            L_Ptelefono.Text = datos.Datos.Telefono;
+            L_Pusuariodatospersonales.Text = datos.Datos.Usuario;
+            L_Pusuario.Text = datos.Datos.Usuario;
+            fotoperfil.ImageUrl = datos.Datos.Fotoperfil;
+            L_EstadoMembresia.Text = datos.EstadoMembresia;
+            B_ComprarMembresia.Visible = datos.B_ComprarMembresia1;
+            B_ActualizarMembresia.Visible = datos.B_ActualizarMembresia1;
+            B_AgregarHotel.Visible = datos.B_AgregarHotel1;
+            B_mishoteles.Visible = datos.B_mishoteles1;
+        }
+        catch
+        {
+            Session.Remove("usuario");
+            Session.Remove("visitarhotel");
+            Response.Redirect("Login.aspx");
+        }
+        
 
         /*
         try

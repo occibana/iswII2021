@@ -30,9 +30,9 @@ namespace Data
         {
             return new Mapeo().token.Where(x => x.Tokengenerado == token).FirstOrDefault();
         }
-        
 
-        /*
+
+
         //actualiza contraseña
         public void actualizarcontrasenarecuperacion(URegistro datoE)
         {
@@ -46,10 +46,10 @@ namespace Data
                 db.SaveChanges();
             }
         }
-        */
+
 
         //Insertar registro de acceso
-        
+
         public void insertarAcceso(UAcceso acceso)
         {
             using (var db = new Mapeo())

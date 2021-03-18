@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 
 using Utilitarios;
 using Data;
+using System.Web.UI;
 
 namespace Logica
 {
@@ -73,6 +74,7 @@ namespace Logica
                     datoscompra.Idusuario = session.Id;
                     try
                     {
+                        
                         new DAOSeguridad().insertarCompra(datoscompra);
                         //cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('Compra realizada con exito.');</script>");
                         datos.Error = "Compra realizada con exito";

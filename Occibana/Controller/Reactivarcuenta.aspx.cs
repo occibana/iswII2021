@@ -17,54 +17,30 @@ public partial class Vew_Reactivarcuenta : System.Web.UI.Page
         datos = reactivarCuenta.page_load(Request.QueryString);
         try
         {
-            Response.Redirect(datos.Url);
-        }
-        catch
-        {
-            Session["user_id"] = datos.User_id;
-        }
-        
-        /*
-        try
-        {
-            if (Request.QueryString.Count > 0)
+            if (datos.User_id != null)
             {
-                Token token = new DAOSeguridad().validartoken(Request.QueryString[0]);//enviando url+token 
-                if (token == null)
-                {
-                    this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('No puede acceder sin un link de recuperacion, verifique su correo');window.location=\"Login.aspx\"</script>");
-                }
-                else if (token.Fecha_caducidad < DateTime.Now)
-                {
-                    this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Tiempo de validez de token ha terminado');window.location=\"Login.aspx\"</script>");
-                }
-                else
-                {
-                    Session["user_id"] = token.User_id;
-                }
+                Session["user_id"] = datos.User_id;
+                L_Error_noregistro.Text = datos.Mensaje;
             }
             else
             {
-                Response.Redirect("Login.aspx");
+                this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('"+ datos.Mensaje +"');window.location=\"Login.aspx\"</script>");
             }
         }
         catch
         {
-           
+            Response.Redirect("Login.aspx");
         }
-        */
     }
 
     protected void B_Enviar_Click(object sender, EventArgs e)
     {
-
-        /*
-        Registro contrasenausuario = new Registro();
+        URegistro contrasenausuario = new URegistro();
         contrasenausuario.Contrasena = TB_UsuarioRecuperarcontrasena.Text;
         contrasenausuario.Id = int.Parse(Session["user_id"].ToString());
-        new DAOSeguridad().actualizarcontrasenarecuperacion(contrasenausuario);
-
-        this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('su contraseña ha sido actualizada con exito');window.location=\"Login.aspx\"</script>");
-        */
+        LReactivarCuenta logica = new LReactivarCuenta();
+        contrasenausuario = logica.actualizarContrasena(contrasenausuario);
+        this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('"+ contrasenausuario.Mensaje+"');window.location=\""+contrasenausuario.Url+"\"</script>");
+        
     }
 }

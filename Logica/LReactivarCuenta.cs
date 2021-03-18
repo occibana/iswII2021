@@ -33,6 +33,7 @@ namespace Logica
                 else
                 {
                     datos.User_id = token.User_id;
+                    datos.Mensaje = "Actualice aqui su contraseña";
                 }
             }
             else
@@ -41,5 +42,33 @@ namespace Logica
             }
             return datos;
         }
+
+        public URegistro actualizarContrasena(URegistro datosLogin)
+        {
+            URegistro mensaje = new URegistro();
+            try
+            {
+                if (datosLogin.Contrasena.Length <5)
+                {
+                    mensaje.Mensaje = "La contraseña debe ser mayor a 5 caracteres";
+                    mensaje.Url = null;
+                }
+                else
+                {
+                    new DAOSeguridad().actualizarcontrasenarecuperacion(datosLogin);
+                    mensaje.Mensaje = "Su contraseña ha sido actualizada con exito";
+                    mensaje.Url = "Login.aspx";
+                }
+
+            }
+            catch
+            {
+                mensaje.Mensaje = "Error al actualizar contraseña\n Por favor, verifique los datos.";
+                
+            }
+            
+            return mensaje;
+        }
+
     }
 }

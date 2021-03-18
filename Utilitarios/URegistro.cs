@@ -22,6 +22,10 @@ namespace Utilitarios
         private int idestado;
         private string fotoperfil;
         private DateTime fecha_vencimiento;
+        [NotMapped]
+        private string mensaje;
+        [NotMapped]
+        private string url;
 
         [Key]
         [Column("id")]
@@ -42,6 +46,9 @@ namespace Utilitarios
         public int Idestado { get => idestado; set => idestado = value; }
         [Column("fotoperfil")]
         public string Fotoperfil { get => fotoperfil; set => fotoperfil = value; }
-        
+        [NotMapped]
+        public string Mensaje { get => mensaje; set => mensaje = value; }
+        [NotMapped]
+        public string Url { get => url; set => url = value; }
     }
 }
