@@ -16,13 +16,13 @@ namespace Logica
             return listaMisHoteles;
         }
 
-        public List<UHotel> listaMisHoteles(string usuario)
+        public List<UHotel> listaMisHoteles(URegistro session)
         {
-            List<UHotel> listaMisHoteles = new DAOhotel().obtenerhoteles(usuario);
+            List<UHotel> listaMisHoteles = new DAOhotel().obtenerhoteles(session);
             return listaMisHoteles;
         }
 
-        public List<UReserva> listaMisHoteles(URegistro usuario)
+        public List<UReserva> listaMisReservas(URegistro usuario)
         {
             List<UReserva> listaMisHoteles = new DAOReserva().mostrarmisreservas(usuario);
             return listaMisHoteles;

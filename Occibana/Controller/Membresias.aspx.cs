@@ -100,9 +100,19 @@ public partial class Vew_Membresias : System.Web.UI.Page
         UMembresias datos = new UMembresias(); 
 
         datos = logica.comprar(datoscompra,usuario, (URegistro)Session["usuario"]);
+        if (datos.Sesion != null)
+        {
+            cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+ datos.Error+ "');window.location=\""+ datos.Url+"\"</script>");
+            Session.Remove(datos.Sesion);
+            L_error.Text = datos.Error;
+        }
+        else
+        {
+            cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('" + datos.Error + "');window.location=\"" + datos.Url + "\"</script>");
+            L_error.Text = datos.Error;
+        }
 
-        cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+ datos.Error+ "');</script>");
-        L_error.Text = datos.Error;
+        
         /*
         ClientScriptManager cm = this.ClientScript;
         Membresia datoscompra = new Membresia();

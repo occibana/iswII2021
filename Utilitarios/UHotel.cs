@@ -23,6 +23,7 @@ namespace Utilitarios
         private string imagen;
         private string nombre;
         private string usuarioencargado;
+        private int idusuario;
         private int idzona;
         private string imagen_secundaria;
         private string imagen_secundaria2;
@@ -31,6 +32,10 @@ namespace Utilitarios
         private string direccion;
         [NotMapped]
         private string mensaje;
+        [NotMapped]
+        private string mensaje2;
+        [NotMapped]
+        private string mensaje3;
         [NotMapped]
         private string zona;
         [NotMapped]
@@ -45,6 +50,8 @@ namespace Utilitarios
         private int numHabitDisponibles;
         [NotMapped]
         private string url;
+        [NotMapped]
+        private bool boton;
 
 
         [Key]
@@ -76,6 +83,8 @@ namespace Utilitarios
         public int Idzona { get => idzona; set => idzona = value; }
         [Column("usuarioencargado")]
         public string Usuarioencargado { get => usuarioencargado; set => usuarioencargado = value; }
+        [Column("idusuario")]
+        public int Idusuario { get => idusuario; set => idusuario = value; }
         [Column("imagen_secundaria")]
         public string Imagen_secundaria { get => imagen_secundaria; set => imagen_secundaria = value; }
         [Column("imagen_secundaria2")]
@@ -86,6 +95,7 @@ namespace Utilitarios
         public Nullable<int> Promediocalificacion { get => promediocalificacion; set => promediocalificacion = value; }
         [Column("direccion")]
         public string Direccion { get => direccion; set => direccion = value; }
+
         [NotMapped]
         public string Mensaje { get => mensaje; set => mensaje = value; }
         [NotMapped]
@@ -104,5 +114,11 @@ namespace Utilitarios
         public int NumHabitDisponibles { get => numHabitDisponibles; set => numHabitDisponibles = value; }
         [NotMapped]
         public string Url { get => url; set => url = value; }
+        [NotMapped]
+        public string Mensaje2 { get => mensaje2; set => mensaje2 = value; }
+        [NotMapped]
+        public string Mensaje3 { get => mensaje3; set => mensaje3 = value; }
+        [NotMapped]
+        public bool Boton { get => boton; set => boton = value; }
     }
 }

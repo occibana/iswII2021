@@ -23,7 +23,7 @@ public partial class Vew_ActualizarDatos : System.Web.UI.Page
             L_Actapellido.Text = datos.Actapellido;
             L_Actcorreo.Text = datos.Actcorreo;
             L_Acttelefono.Text = datos.Acttelefono;
-            L_Actusuario0.Text = datos.Actusuario;
+            L_Actusuario0.Text = datos.Actusuario0;
         }
         catch
         {

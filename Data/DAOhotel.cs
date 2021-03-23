@@ -233,9 +233,9 @@ namespace Data
 
         //obtener mis hoteles
         //Select 
-        public List<UHotel> obtenerhoteles(string usuario)
+        public List<UHotel> obtenerhoteles(URegistro session)
         {
-            return new Mapeo().hotel.Where(x => x.Usuarioencargado.Equals(usuario)).OrderBy(x => x.Idhotel).ToList<UHotel>();
+            return new Mapeo().hotel.Where(x => x.Idusuario.Equals(session.Id)).OrderBy(x => x.Idhotel).ToList<UHotel>();
         }
 
         //eliminar hotel

@@ -74,7 +74,7 @@ namespace Logica
             return url;
         }
 
-        public UPerfil subirFoto(FileUpload foto, URegistro session, string direccion)
+        public UPerfil subirFoto(FileUpload foto, URegistro session, string direccion, string imagen)
         {
             UPerfil datos = new UPerfil();
             if (foto.HasFile)
@@ -90,7 +90,9 @@ namespace Logica
 
                     try
                     {
-                        foto.PostedFile.SaveAs(direccion);//mapea y guarda el archivo en la direccion
+
+                        //imagen
+                        foto.PostedFile.SaveAs(imagen);//mapea y guarda el archivo en la direccion
                     }
                     catch
                     {

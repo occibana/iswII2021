@@ -34,8 +34,14 @@ public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
     protected void B_CargarHotel_Click(object sender, EventArgs e)
     {
         string direccionImagen;
-        string direccionImagenA1; 
+        string nombre;
+        string direccionImagenA1;
+        string nombre1;
         string direccionImagenA2;
+        string nombre2;
+        string dirImagen;
+        string dirImagenA1;
+        string dirImagenA2;
 
         UHotel hotel = new UHotel();
         hotel.Nombre = TB_NombreHotel.Text;
@@ -46,22 +52,36 @@ public partial class Vew_AgregarServicioHotel : System.Web.UI.Page
         hotel.Descripcion = TB_Descripcion.Text;
         hotel.Condicion = TB_Condiciones.Text;
         hotel.Usuarioencargado = ((URegistro)Session["usuario"]).Usuario;
+        hotel.Idusuario = ((URegistro)Session["usuario"]).Id;
         hotel.Condicionesbioseguridad = TB_descripcioncovid19.Text;
         hotel.Direccion = TB_Direccion.Text;
         hotel.PrecioNocheDoble = int.Parse(TB_PrecioNocheDoble.Text);
         hotel.PrecioNochePremium = int.Parse(TB_PrecioNochePremium.Text);
         hotel.Precionoche = int.Parse(TB_PrecioNoche.Text);
-        hotel.Imagen = null;
+        //hotel.Imagen = null;
         hotel.Imagen_secundaria = null;
         hotel.Imagen_secundaria2 = null;
-        direccionImagen = "/Vew/hoteles/imgprincipal/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgPrincipal.FileName;
-        direccionImagenA1 ="/Vew/hoteles/imgadicional/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional.FileName;
-        direccionImagenA2 = "/Vew/hoteles/imgadicional/" + ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional0.FileName;
-        direccionImagen = Server.MapPath(direccionImagen);
-        direccionImagenA1 = Server.MapPath(direccionImagenA1);
-        direccionImagenA2 = Server.MapPath(direccionImagenA2);
-        hotel = new LAgregarServicioHotel().insertHotel(FU_ImgPrincipal, FU_ImgAdicional, FU_ImgAdicional0 ,direccionImagen, direccionImagenA1, direccionImagenA2,hotel);
 
+        nombre = ((URegistro)Session["usuario"]).Usuario + FU_ImgPrincipal.FileName;
+        nombre1 = ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional.FileName;
+        nombre2 = ((URegistro)Session["usuario"]).Usuario + FU_ImgAdicional0.FileName;
+
+        direccionImagen = "/Vew/hoteles/imgprincipal/" + nombre ;       
+        direccionImagenA1 ="/Vew/hoteles/imgadicional/" + nombre1 ;
+        direccionImagenA2 = "/Vew/hoteles/imgadicional/" + nombre2 ;
+        dirImagen = Server.MapPath(direccionImagen);
+        dirImagenA1 = Server.MapPath(direccionImagenA1);
+        dirImagenA2 = Server.MapPath(direccionImagenA2);
+        hotel = new LAgregarServicioHotel().insertHotel(FU_ImgPrincipal, FU_ImgAdicional, FU_ImgAdicional0 ,direccionImagen, direccionImagenA1, direccionImagenA2, dirImagen, dirImagenA1, dirImagenA2, hotel);
+        if (hotel.Mensaje != null)
+        {
+            L_CargarimagenAgregarHotel.Text = hotel.Mensaje;
+            L_CargarimagenAgregarHotel0.Text = hotel.Mensaje2;
+            L_CargarimagenAgregarHotel1.Text = hotel.Mensaje3;
+        }else
+        {
+            this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Hotel agregado correctamente');window.location=\"Perfil.aspx\"</script>");
+        }
         /*
         ClientScriptManager cm = this.ClientScript;
         Hotel serviciohotel = new Hotel();

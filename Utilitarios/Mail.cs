@@ -20,7 +20,7 @@ namespace Utilitarios
         {
             //mail
             MailMessage mail = new MailMessage();
-            SmtpClient SmtpSever = new SmtpClient("smtp.gmail.com");
+            SmtpClient SmtpSever = new SmtpClient("smtp.gmail.com",587);
 
             mail.From = new MailAddress("occibana@gmail.com", "Registro exitoso");//correo que envia, diplay name 
             SmtpSever.Host = "smtp.gmail.com";//servidor gmail
@@ -33,10 +33,12 @@ namespace Utilitarios
 
             //Configuracion del SMTP
             SmtpSever.Port = 587;
+            SmtpSever.UseDefaultCredentials = false;
             SmtpSever.Credentials = new System.Net.NetworkCredential("occibana@gmail.com", "occibana123");//correo origen, contra*
             SmtpSever.EnableSsl = true;
             SmtpSever.Send(mail);//eviar
                                  //mail
+
         }
 
         public void mailactualizarcontrasena(URegistro MailE)
@@ -55,6 +57,7 @@ namespace Utilitarios
 
             //Configuracion del SMTP
             SmtpSever.Port = 587;
+            SmtpSever.UseDefaultCredentials = false;
             SmtpSever.Credentials = new System.Net.NetworkCredential("occibana@gmail.com", "occibana123");//correo origen, contra*
             SmtpSever.EnableSsl = true;
             SmtpSever.Send(mail);//eviar
@@ -77,13 +80,14 @@ namespace Utilitarios
 
             //Configuracion del SMTP
             SmtpSever.Port = 587;
+            SmtpSever.UseDefaultCredentials = false;
             SmtpSever.Credentials = new System.Net.NetworkCredential("occibana@gmail.com", "occibana123");//correo origen, contra*
             SmtpSever.EnableSsl = true;
             SmtpSever.Send(mail);//eviar
                                  //mail
         }
 
-        /*public void mailconfirmarreserva(Reserva MailE)
+        public void mailconfirmarreserva(UReserva MailE)
         {
             //mail
             MailMessage mail = new MailMessage();
@@ -99,11 +103,12 @@ namespace Utilitarios
 
             //Configuracion del SMTP
             SmtpSever.Port = 587;
-            SmtpSever.Credentials = new System.Net.NetworkCredential("occibana@gmail.com", "occibana123");//correo origen, contra*
+            SmtpSever.UseDefaultCredentials = false;
+            SmtpSever.Credentials = new NetworkCredential("occibana@gmail.com", "occibana123");//correo origen, contra*
             SmtpSever.EnableSsl = true;
             SmtpSever.Send(mail);//eviar
                                  //mail
-        }*/
+        }
     }
 }
 

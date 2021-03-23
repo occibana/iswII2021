@@ -68,29 +68,34 @@ namespace Logica
                 if (verificacion == null)
                 {
                     datos.Error = "Verifique que su usuario y su contraseña sean los correctos";
+                    datos.Url = "#";
                 }
                 else
                 {
                     datoscompra.Idusuario = session.Id;
                     try
                     {
-                        
+
                         new DAOSeguridad().insertarCompra(datoscompra);
                         //cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('Compra realizada con exito.');</script>");
                         datos.Error = "Compra realizada con exito";
                         usuario.Idestado = 1;
+                        datos.Sesion = "usuario";
+                        datos.Url = "Login.aspx";
                         new DAOSeguridad().actualizarmembresia(usuario);
                         new Mail().mailconfirmarcompra(usuario);
                     }
                     catch
                     {
                         datos.Error = "Error al realizar la compra, verifique sus datos";
+                        datos.Url = "#";
                     }
                 }
             }
             else
             {
                 datos.Error = "Verifique que su usuario sea el correcto";
+                datos.Url = "#";
             }
 
             return datos;

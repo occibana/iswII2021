@@ -103,6 +103,8 @@
                                             <br />
                                             <asp:RegularExpressionValidator ID="REV_TB_NumeroDeCamas" runat="server" ControlToValidate="TB_NumeroDeCamas" ErrorMessage="Caracteres no validos" ValidationExpression="[0-9]+" ValidationGroup="AgregarHabitacion" Enabled="False"></asp:RegularExpressionValidator>
                                             <br />
+                                            <asp:RangeValidator ID="RV_TB_NumeroDeCamas" runat="server" ControlToValidate="TB_NumeroDeCamas" ErrorMessage="Limite excedido" MaximumValue="4" MinimumValue="1" ValidationGroup="AgregarHabitacion"></asp:RangeValidator>
+                                            <br />
                                         </td>
                                     </tr>
                                     

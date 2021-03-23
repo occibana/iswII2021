@@ -16,7 +16,7 @@ public partial class Vew_Reportes_ReporteHoteles_ReporteHoteles : System.Web.UI.
         try
         {
             L_NombreUsuario.Text = ((URegistro)Session["usuario"]).Usuario;
-            CRS_ReporteHoteles.ReportDocument.SetDataSource(llenarReporte(((URegistro)Session["usuario"]).Usuario));
+            CRS_ReporteHoteles.ReportDocument.SetDataSource(llenarReporte(((URegistro)Session["usuario"])));
             CRV_ReporteHoteles.ReportSource = CRS_ReporteHoteles;
         }
         catch
@@ -27,7 +27,7 @@ public partial class Vew_Reportes_ReporteHoteles_ReporteHoteles : System.Web.UI.
     }
 
     
-    public ReporteHoteles llenarReporte(string usuario)
+    public ReporteHoteles llenarReporte(URegistro usuario)
     {
   
         ReporteHoteles informe = new ReporteHoteles();

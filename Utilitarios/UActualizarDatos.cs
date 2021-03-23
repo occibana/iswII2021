@@ -17,6 +17,8 @@ namespace Utilitarios
         private string actusuario0;
         private string mensaje;
 
+
+
         public string URL1 { get => URL; set => URL = value; }
         public string Actusuario { get => actusuario; set => actusuario = value; }
         public string Actnombre { get => actnombre; set => actnombre = value; }
@@ -25,5 +27,6 @@ namespace Utilitarios
         public string Acttelefono { get => acttelefono; set => acttelefono = value; }
         public string Actusuario0 { get => actusuario0; set => actusuario0 = value; }
         public string Mensaje { get => mensaje; set => mensaje = value; }
+
     }
 }

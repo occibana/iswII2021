@@ -9,6 +9,7 @@ using Utilitarios;
 
 namespace Logica
 {
+    //Clase conexion DAO listas y tablas
     public class Listas
     {
         public List<UHotelZona> listaZonas()
@@ -20,7 +21,7 @@ namespace Logica
         {
             return new DAOhotel().municipio();
         }
-
+        //tablas
         public List<UHotel> hotelesPrincipal(UFiltro consulta)
         {
             return new DAOhotel().hotelesregistrados(consulta);
@@ -31,9 +32,9 @@ namespace Logica
             return new DAOhotel().hotelesdestacados();
         }
 
-        public List<UHotel> obtenerHoteles(string usuario)
+        public List<UHotel> obtenerHoteles(URegistro session)
         {
-            return new DAOhotel().obtenerhoteles(usuario);
+            return new DAOhotel().obtenerhoteles(session);
         }
 
         public List<UReserva> mostrarMisreservas(URegistro disponibilidadE)
@@ -44,5 +45,11 @@ namespace Logica
         {
             return new DAOHabitacion().habitacionesHotel(idE,consulta);
         }
+        //Tablas-Acciones
+        public void eliminarHotelTabla(UHotel id)
+        {
+              new DAOhotel().deleteHotel(id);
+        }
+
     }
 }

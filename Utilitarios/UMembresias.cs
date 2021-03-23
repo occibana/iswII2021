@@ -23,6 +23,9 @@ namespace Utilitarios
         private string vencimiento;
         private string error;
 
+        private string sesion;
+        private string url;
+
         public bool NumeroTarjeta { get => numeroTarjeta; set => numeroTarjeta = value; }
         public bool CodigoSeguridad { get => codigoSeguridad; set => codigoSeguridad = value; }
         public bool NombrePropietario { get => nombrePropietario; set => nombrePropietario = value; }
@@ -36,5 +39,7 @@ namespace Utilitarios
         public string Costo { get => costo; set => costo = value; }
         public string Vencimiento { get => vencimiento; set => vencimiento = value; }
         public string Error { get => error; set => error = value; }
+        public string Sesion { get => sesion; set => sesion = value; }
+        public string Url { get => url; set => url = value; }
     }
 }

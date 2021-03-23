@@ -16,6 +16,8 @@ public partial class Vew_Mishoteles : System.Web.UI.Page
         try
         {
             L_Usuario.Text = ((URegistro)Session["usuario"]).Usuario;
+
+            
         }
         catch
         {

@@ -24,7 +24,7 @@ public partial class Vew_Perfil : System.Web.UI.Page
             L_Pusuariodatospersonales.Text = datos.Datos.Usuario;
             L_Pusuario.Text = datos.Datos.Usuario;
             fotoperfil.ImageUrl = datos.Datos.Fotoperfil;
-            L_EstadoMembresia.Text = datos.EstadoMembresia;
+            L_EstadoMembresia.Text = datos.Mensaje;
             B_ComprarMembresia.Visible = datos.B_ComprarMembresia1;
             B_ActualizarMembresia.Visible = datos.B_ActualizarMembresia1;
             B_AgregarHotel.Visible = datos.B_AgregarHotel1;
@@ -102,12 +102,15 @@ public partial class Vew_Perfil : System.Web.UI.Page
     protected void B_SubirFoto_Click(object sender, EventArgs e)
     {
         string direccion;
-        direccion = ((URegistro)Session["usuario"]).Usuario + FU_FotoPerfil.FileName;
-        direccion = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\") + direccion;
+        string imagen;
+        string nombreArchivo;
+        nombreArchivo = ((URegistro)Session["usuario"]).Usuario + FU_FotoPerfil.FileName;
+        direccion = "~\\Vew\\imgusuarios\\"+nombreArchivo;
+        imagen = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\")+nombreArchivo;
         LPerfil logica = new LPerfil();
         UPerfil datos = new UPerfil();
 
-        datos = logica.subirFoto(FU_FotoPerfil, (URegistro)Session["usuario"], direccion);
+        datos = logica.subirFoto(FU_FotoPerfil, (URegistro)Session["usuario"], direccion,imagen);
 
         L_Pcargaimagen.Text = datos.Mensaje;
         fotoperfil.ImageUrl = datos.Fotoperfil;

@@ -30,7 +30,7 @@ public partial class Vew_Reportes_ReporteHoteles_ReporteUsuarioReservas : System
     {
         HistorialReservas informe = new HistorialReservas();
         LReporte reporte = new LReporte();
-        List<UReserva> misReservas = reporte.listaMisHoteles(usuario); 
+        List<UReserva> misReservas = reporte.listaMisReservas(usuario); 
 
         DataTable datosReportes = informe._HistorialReservas;
         DataRow filas;
