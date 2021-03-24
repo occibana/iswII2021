@@ -48,15 +48,20 @@
   <ItemGroup>
     <Compile Include="LActualizarContrasena.cs" />
     <Compile Include="LActualizarDatos.cs" />
+    <Compile Include="LAgregarServicioHotel.cs" />
     <Compile Include="LComentariosHotel.cs" />
     <Compile Include="LFiltro.cs" />
+    <Compile Include="LHabitacion.cs" />
+    <Compile Include="Listas.cs" />
     <Compile Include="LLogin.cs" />
+    <Compile Include="LMembresias.cs" />
     <Compile Include="LMisReservas.cs" />
     <Compile Include="LPanelHotel.cs" />
     <Compile Include="LPerfil.cs" />
     <Compile Include="LReactivarCuenta.cs" />
     <Compile Include="LRecuperarcontrasena.cs" />
     <Compile Include="LRegistro.cs" />
+    <Compile Include="LReporte.cs" />
     <Compile Include="LReserva.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
