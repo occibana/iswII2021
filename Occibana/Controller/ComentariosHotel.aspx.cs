@@ -46,8 +46,9 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
         LComentariosHotel logica = new LComentariosHotel();
         UComentario_CalificacionDatos datos = new UComentario_CalificacionDatos();
         datos = logica.comentar((URegistro)Session["usuario"],comenta,(UHotel)Session["visitarhotel"]);
-
-        cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+datos.Mensaje+"');</script>");
+        TB_Comentario.Text = datos.ComentarioTb;
+        L_Fallocalificacion.Text = datos.Mensaje;
+        //cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+datos.Mensaje+"');</script>");
 
         /*
         ClientScriptManager cm = this.ClientScript;

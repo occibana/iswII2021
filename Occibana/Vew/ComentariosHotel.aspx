@@ -43,6 +43,9 @@
         .auto-style26 {
             width: 100%;
         }
+        .auto-style27 {
+            margin-bottom: 0px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -146,8 +149,9 @@
         </tr>
         <tr>
             <td class="auto-style21" rowspan="2">
-                <asp:Button ID="B_Comentar" runat="server" OnClick="B_Comentar_Click" Text="Comentar" ValidationGroup="AgregarComentario" />
-                <asp:Label ID="L_Mensaje" runat="server"></asp:Label>
+                <asp:Button ID="B_Comentar" runat="server" OnClick="B_Comentar_Click" Text="Comentar" ValidationGroup="AgregarComentario" CssClass="auto-style27" />
+                <br />
+                <asp:Label ID="L_MensajeC" runat="server"></asp:Label>
                 <br />
             </td>
         </tr>

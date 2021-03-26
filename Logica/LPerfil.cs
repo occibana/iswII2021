@@ -105,7 +105,8 @@ namespace Logica
                     nuevodat.Id = session.Id;
                     nuevodat.Fotoperfil = direccion;
                     new DAOLogin().actualizarfoto(nuevodat);
-                    datos.Fotoperfil = session.Fotoperfil;
+                    session.Fotoperfil = nuevodat.Fotoperfil;
+                    datos.Fotoperfil = nuevodat.Fotoperfil;
                     datos.Mensaje = "*Imagen cargada con exito";
                 }
                 else

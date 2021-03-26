@@ -69,6 +69,10 @@ namespace Logica
             if (inforeserva != null)
             {
                 inforeserva = new DAOReserva().inforeserva(inforeserva);
+                try
+                {
+
+                
                 fechaparacalificar = inforeserva.Fecha_salida;
                 if (DateTime.Now >= fechaparacalificar.AddDays(1))
                 {
@@ -126,6 +130,11 @@ namespace Logica
                 else
                 {
                     mensaje.Mensaje = "No es posible realizar aun esta calificación";
+                }
+                }
+                catch
+                {
+                    mensaje.Mensaje = "No es posible realizar aun esta calificación ";
                 }
 
             }

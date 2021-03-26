@@ -114,6 +114,7 @@ public partial class Vew_Perfil : System.Web.UI.Page
 
         L_Pcargaimagen.Text = datos.Mensaje;
         fotoperfil.ImageUrl = datos.Fotoperfil;
+
         /*
         //verifica si hay archivos seleccionados
         if (FU_FotoPerfil.HasFile)
