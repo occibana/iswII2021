@@ -20,14 +20,14 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
             if ((URegistro)Session["usuario"] == null)
             {
                 L_Usuario.Text = "Inicie sesion para comentar";
-                B_Comentar.Enabled = false;
+                Btn_Comentar.Enabled = false;
                 B_Calificar.Enabled = false;
             }
             else
             {
 
                 L_Usuario.Text = ((URegistro)Session["usuario"]).Nombre;
-                B_Comentar.Enabled = true;
+                Btn_Comentar.Enabled = true;
                 B_Calificar.Enabled = true;
             }
         }
@@ -36,60 +36,6 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
             Session.Remove("visitarhotel");
             Response.Redirect(hotel.Url);
         }
-    }
-
-    protected void B_Comentar_Click(object sender, EventArgs e)
-    {
-        ClientScriptManager cm = this.ClientScript;
-        UComentarios comenta = new UComentarios();
-        comenta.Comentario = TB_Comentario.Text;
-        LComentariosHotel logica = new LComentariosHotel();
-        UComentario_CalificacionDatos datos = new UComentario_CalificacionDatos();
-        datos = logica.comentar((URegistro)Session["usuario"],comenta,(UHotel)Session["visitarhotel"]);
-        TB_Comentario.Text = datos.ComentarioTb;
-        L_Fallocalificacion.Text = datos.Mensaje;
-        //cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('"+datos.Mensaje+"');</script>");
-
-        /*
-        ClientScriptManager cm = this.ClientScript;
-        try
-        {
-            Comentarios comenta = new Comentarios();
-
-            comenta.Id_hotel = ((Hotel)Session["visitarhotel"]).Idhotel;
-            comenta.Id_usuario = ((Registro)Session["usuario"]).Id;
-            comenta.Comentario = TB_Comentario.Text;
-            comenta.Fecha_comentario = DateTime.Now;
-            
-            Boolean consulta = new DAOComentarios().consulta(comenta);
-            if (consulta == true)
-            {
-                new DAOComentarios().insertComentario(comenta);
-                TB_Comentario.Text = "";
-                L_Mensaje.Text = "Comentario Agregado.";
-            }
-            else
-            {
-                L_Mensaje.Text = "No puede comentar.";
-                cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('No tiene permitido comentar');</script>");
-            }
-
-           // new DAOComentarios().insertComentario(comenta);
-           // TB_Comentario.Text = "";
-           // L_Mensaje.Text = "Comentario Agregado.";
-           //// cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('Comentario Agregado');</script>");
-            
-        }
-        catch (Exception ex) 
-        {
-            L_Mensaje.Text = "Para comentar, inicie sesion.";
-            L_Mensaje.Visible = true;
-            TB_Comentario.Text = "";
-            cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('No tiene permitido comentar');</script>");
-            //Response.Redirect("ComentariosHotel.aspx"); 
-        }
-
-        */
     }
 
     protected void B_Calificar_Click(object sender, EventArgs e)
@@ -110,5 +56,18 @@ public partial class Vew_ComentariosHotel : System.Web.UI.Page
         }
         mensaje = logica.calificar(((URegistro)Session["usuario"]), ((UHotel)Session["visitarhotel"]), inforeserva, arrayRadioButton);
         L_Fallocalificacion.Text = mensaje.Mensaje;
+    }
+
+    protected void Btn_Comentar_Click(object sender, EventArgs e)
+    {
+        ClientScriptManager cm = this.ClientScript;
+        UComentarios comenta = new UComentarios();
+        comenta.Comentario = TB_Comentario.Text;
+        LComentariosHotel logica = new LComentariosHotel();
+        UComentario_CalificacionDatos datos = new UComentario_CalificacionDatos();
+        datos = logica.comentar((URegistro)Session["usuario"], comenta, (UHotel)Session["visitarhotel"]);
+        TB_Comentario.Text = datos.ComentarioTb;
+        L_MensajeC.Text = datos.Mensaje;
+        
     }
 }

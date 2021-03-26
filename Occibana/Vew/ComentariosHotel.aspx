@@ -76,9 +76,7 @@
                             </SelectParameters>
                         </asp:ObjectDataSource>
                     </ContentTemplate>
-                    <Triggers>
-                        <asp:AsyncPostBackTrigger ControlID="B_Comentar" EventName="Click" />
-                    </Triggers>
+                    
                 </asp:UpdatePanel>
             </td>
         </tr>
@@ -149,7 +147,8 @@
         </tr>
         <tr>
             <td class="auto-style21" rowspan="2">
-                <asp:Button ID="B_Comentar" runat="server" OnClick="B_Comentar_Click" Text="Comentar" ValidationGroup="AgregarComentario" CssClass="auto-style27" />
+                
+                <asp:Button ID="Btn_Comentar" runat="server" OnClick="Btn_Comentar_Click" Text="Comentar" />
                 <br />
                 <asp:Label ID="L_MensajeC" runat="server"></asp:Label>
                 <br />
