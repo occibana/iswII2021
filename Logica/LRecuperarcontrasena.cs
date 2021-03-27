@@ -44,7 +44,7 @@ namespace Logica
                     token.Tokengenerado = encriptar(JsonConvert.SerializeObject(token));//convierte en cadena JSON clase Token obj token
                     new DAOSeguridad().insertartoken(token);
                     Mailrecuperarcontrasena mail = new Mailrecuperarcontrasena();
-                    string linkacceso = "Su link de acceso es: " + "http://localhost:57403/Vew/Reactivarcuenta.aspx?" + token.Tokengenerado;
+                    string linkacceso = "Su link de acceso es: " + "https://occibanaisw.tk/Vew/Reactivarcuenta.aspx?" + token.Tokengenerado;
                     mail.enviarmail(recuperar.Correo, token.Tokengenerado, linkacceso);
                     msj = "Verifique su correo electónico para continuar con la recuperacion de contraseña";
                 }

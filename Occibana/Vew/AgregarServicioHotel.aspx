@@ -118,7 +118,7 @@
                                             <asp:TextBox ID="TB_PrecioNoche" runat="server" MaxLength="10"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RFV_TB_PrecioNoche" runat="server" ControlToValidate="TB_PrecioNoche" ErrorMessage="*" ValidationGroup="AnadirHotel"></asp:RequiredFieldValidator>
                                             <br />
-                                            <asp:RegularExpressionValidator ID="REV_TB_Precionoche" runat="server" ControlToValidate="TB_PrecioNoche" ErrorMessage="Caracteres no validos" ValidationExpression="[A-Za-z0-9 ]+" ValidationGroup="AnadirHotel"></asp:RegularExpressionValidator>
+                                            <asp:RegularExpressionValidator ID="REV_TB_Precionoche" runat="server" ControlToValidate="TB_PrecioNoche" ErrorMessage="Caracteres no validos" ValidationExpression="[0-9 ]+" ValidationGroup="AnadirHotel"></asp:RegularExpressionValidator>
                                             <br />
                                         </td>
                                     </tr>
@@ -132,7 +132,7 @@
                                             <asp:TextBox ID="TB_PrecioNocheDoble" runat="server" MaxLength="10"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RFV_PrecioNocheDoble" runat="server" ControlToValidate="TB_PrecioNocheDoble" ErrorMessage="*" ValidationGroup="AnadirHotel"></asp:RequiredFieldValidator>
                                             <br />
-                                            <asp:RegularExpressionValidator ID="REV_TB_PrecionocheDoble" runat="server" ControlToValidate="TB_PrecioNocheDoble" ErrorMessage="Caracteres no validos" ValidationExpression="[A-Za-z0-9 ]+" ValidationGroup="AnadirHotel"></asp:RegularExpressionValidator>
+                                            <asp:RegularExpressionValidator ID="REV_TB_PrecionocheDoble" runat="server" ControlToValidate="TB_PrecioNocheDoble" ErrorMessage="Caracteres no validos" ValidationExpression="[0-9 ]+" ValidationGroup="AnadirHotel"></asp:RegularExpressionValidator>
                                         </td>
                                     </tr>
                                     <tr>
@@ -145,7 +145,7 @@
                                             <asp:TextBox ID="TB_PrecioNochePremium" runat="server" MaxLength="10"></asp:TextBox>
                                             <asp:RequiredFieldValidator ID="RFV_TB_PrecioNochePremium" runat="server" ControlToValidate="TB_PrecioNochePremium" ErrorMessage="*" ValidationGroup="AnadirHotel"></asp:RequiredFieldValidator>
                                             <br />
-                                            <asp:RegularExpressionValidator ID="REV_TB_PrecionochePremium" runat="server" ControlToValidate="TB_PrecioNochePremium" ErrorMessage="Caracteres no validos" ValidationExpression="[A-Za-z0-9 ]+" ValidationGroup="AnadirHotel"></asp:RegularExpressionValidator>
+                                            <asp:RegularExpressionValidator ID="REV_TB_PrecionochePremium" runat="server" ControlToValidate="TB_PrecioNochePremium" ErrorMessage="Caracteres no validos" ValidationExpression="[0-9 ]+" ValidationGroup="AnadirHotel"></asp:RegularExpressionValidator>
                                         </td>
                                     </tr>
                                     <tr>

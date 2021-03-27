@@ -79,7 +79,7 @@
                                             <td>
                                                 <br />
                                                 Direccion de residencia<br />
-                                                <asp:TextBox ID="TB_Direccionpropietario" runat="server" MaxLength="20"></asp:TextBox>
+                                                <asp:TextBox ID="TB_Direccionpropietario" runat="server" MaxLength="30"></asp:TextBox>
                                                 <asp:RequiredFieldValidator ID="RFV_TB_Direccionpropietario" runat="server" ErrorMessage="*" ValidationGroup="compramembresia" ControlToValidate="TB_Direccionpropietario"></asp:RequiredFieldValidator>
                                                 <br />
                                                 <asp:RegularExpressionValidator ID="REV_TB_Direccionpropietario" runat="server" ControlToValidate="TB_Direccionpropietario" ErrorMessage="caracteres no validos" ValidationExpression="[A-Za-z1-9# ]+" ValidationGroup="compramembresia"></asp:RegularExpressionValidator>

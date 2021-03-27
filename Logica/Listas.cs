@@ -45,6 +45,19 @@ namespace Logica
         {
             return new DAOHabitacion().habitacionesHotel(idE,consulta);
         }
+        public List<UReserva> mostrarreservas(int disponibilidadE)
+        {
+            return new DAOReserva().mostrarreservas(disponibilidadE);
+        }
+        public List<UReserva> mostrarreservascompletadas(int disponibilidadE)
+        {
+            return new DAOReserva().mostrarreservascompletadas(disponibilidadE);
+        }
+        public List<UComentarios> obtenerComentarios(UHotel id)
+        {
+            return new DAOComentarios().obtenerComentarios(id);
+        }
+
         //Tablas-Acciones
         public void eliminarHotelTabla(UHotel id)
         {

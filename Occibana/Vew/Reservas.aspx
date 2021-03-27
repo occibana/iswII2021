@@ -54,7 +54,7 @@
                                     </Columns>
                                 </asp:GridView>
                                 </div>
-                                <asp:ObjectDataSource ID="ODS_Reservas" runat="server" SelectMethod="mostrarreservas" TypeName="DAOReserva">
+                                <asp:ObjectDataSource ID="ODS_Reservas" runat="server" SelectMethod="mostrarreservas" TypeName="Logica.Listas">
                                     <SelectParameters>
                                         <asp:SessionParameter Name="disponibilidadE" SessionField="tabla" Type="Object" />
                                     </SelectParameters>
@@ -72,7 +72,7 @@
                                         <asp:BoundField DataField="Mediopago" HeaderText="Mediopago" SortExpression="Mediopago" />
                                     </Columns>
                                 </asp:GridView>
-                                <asp:ObjectDataSource ID="ODS_ReservasPasadas" runat="server" SelectMethod="mostrarreservascompletadas" TypeName="DAOReserva">
+                                <asp:ObjectDataSource ID="ODS_ReservasPasadas" runat="server" SelectMethod="mostrarreservascompletadas" TypeName="Logica.Listas">
                                     <SelectParameters>
                                         <asp:SessionParameter Name="disponibilidadE" SessionField="tabla" Type="Int32" />
                                     </SelectParameters>
