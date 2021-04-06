@@ -73,7 +73,8 @@ namespace Data
 
 
         //verificar si ya existe un comentario
-        /*public int verificarcomentario(UComentarios infocomentario)
+        /*
+        public int verificarcomentario(UComentarios infocomentario)
         {
         int cantcomentarios;
         return cantcomentarios = new Mapeo().comentario.Where(x => (x.Id_coment == infocomentario.Id_coment) && ()).Count();

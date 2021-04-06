@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Utilitarios;
 using Data;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace Logica
 {
@@ -74,7 +75,7 @@ namespace Logica
             return url;
         }
 
-        public UPerfil subirFoto(FileUpload foto, URegistro session, string direccion, string imagen)
+        public UPerfil subirFoto(FileUpload foto, URegistro session, string direccion, string imagen, string imagenEliminar)
         {
             UPerfil datos = new UPerfil();
             if (foto.HasFile)
@@ -90,21 +91,26 @@ namespace Logica
 
                     try
                     {
-
                         //imagen
                         foto.PostedFile.SaveAs(imagen);//mapea y guarda el archivo en la direccion
                     }
                     catch
                     {
-
+                        datos.Mensaje = "*Verifique la imagen y cargue nuevamente";
                     }
-                    //direccion = "~/Vew/imgusuarios/" + direccion;
                     datos.Mensaje = "*Imagen aceptada";
                     //actualiza foto de perfil
                     URegistro nuevodat = new URegistro();
                     nuevodat.Id = session.Id;
                     nuevodat.Fotoperfil = direccion;
                     new DAOLogin().actualizarfoto(nuevodat);
+
+                    
+                    if (File.Exists(imagenEliminar))
+                    {
+                        File.Delete(imagenEliminar);
+                    }
+
                     session.Fotoperfil = nuevodat.Fotoperfil;
                     datos.Fotoperfil = nuevodat.Fotoperfil;
                     datos.Mensaje = "*Imagen cargada con exito";

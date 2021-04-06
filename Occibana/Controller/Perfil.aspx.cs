@@ -103,52 +103,21 @@ public partial class Vew_Perfil : System.Web.UI.Page
     {
         string direccion;
         string imagen;
+        string imagenEliminar;
         string nombreArchivo;
+        string nombreArchivoEliminar;
         nombreArchivo = ((URegistro)Session["usuario"]).Usuario + FU_FotoPerfil.FileName;
+        nombreArchivoEliminar = ((URegistro)Session["usuario"]).Fotoperfil;
         direccion = "~\\Vew\\imgusuarios\\"+nombreArchivo;
         imagen = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\")+nombreArchivo;
+        imagenEliminar = HttpContext.Current.Server.MapPath(nombreArchivoEliminar);
         LPerfil logica = new LPerfil();
         UPerfil datos = new UPerfil();
 
-        datos = logica.subirFoto(FU_FotoPerfil, (URegistro)Session["usuario"], direccion,imagen);
+        datos = logica.subirFoto(FU_FotoPerfil, (URegistro)Session["usuario"], direccion,imagen,imagenEliminar);
 
         L_Pcargaimagen.Text = datos.Mensaje;
         fotoperfil.ImageUrl = datos.Fotoperfil;
-
-        /*
-        //verifica si hay archivos seleccionados
-        if (FU_FotoPerfil.HasFile)
-        {
-            string direccion;
-            string ext = System.IO.Path.GetExtension(FU_FotoPerfil.FileName);//obtiene la extencion del archivo
-            ext = ext.ToLower();//minusculas
-            int tam = FU_FotoPerfil.PostedFile.ContentLength;//obtiene tamano archivo
-            //string fotoperfil;
-            if ((ext == ".jpg" || ext == ".png" || ext == ".jpeg") && (tam < 1048576))//menor a 1MB en bytes
-            {
-                direccion = "~/Vew/imgusuarios/" + ((Registro)Session["usuario"]).Usuario + FU_FotoPerfil.FileName;
-                FU_FotoPerfil.SaveAs(Server.MapPath(direccion));//mapea y guarda el archivo en la direccion
-                L_Pcargaimagen.Text = "*Imagen aceptada";
-                //actualiza foto de perfil
-                Registro nuevodat = new Registro();
-                nuevodat.Id = ((Registro)Session["usuario"]).Id;
-                nuevodat.Fotoperfil = direccion;
-                new DAOLogin().actualizarfoto(nuevodat);
-                fotoperfil.ImageUrl = ((Registro)Session["usuario"]).Fotoperfil;
-                L_Pcargaimagen.Text = "*Imagen cargada con exito";
-       
-            }
-            else
-            {
-                L_Pcargaimagen.Text = "*Imagen no esta en formato correcto o es muy pesada";
-            }
-            
-        }
-        else
-        {
-            L_Pcargaimagen.Text = "*Selecciona una imagen";
-        }
-        */
 
     }
 
