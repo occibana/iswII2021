@@ -11,7 +11,7 @@ namespace Logica
 {
     public class LLogin
     {
-        public UMAC ingreso_login(URegistro login,string session_id)
+        public UMAC ingreso_login(URegistro login)
         {
             UMAC datos = new UMAC();
             UAcceso acceso = new UAcceso();
@@ -26,7 +26,7 @@ namespace Logica
                 acceso.FechaInicio = DateTime.Now;
                 acceso.Ip = conexion.ip();
                 acceso.Mac = conexion.mac();
-                acceso.Session = session_id;
+                acceso.Session = "x";
                 acceso.Userid = datos.Registro.Id;
                 new DAOSeguridad().insertarAcceso(acceso);
                 datos.Url = "Perfil.aspx";

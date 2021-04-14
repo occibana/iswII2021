@@ -11,8 +11,10 @@ namespace ApiApplication.Seguridad
     /// </summary>
     internal static class TokenGenerator
     {
+        
         public static string GenerateTokenJwt(string username)
         {
+            
             // appsetting for Token JWT
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
@@ -38,6 +40,8 @@ namespace ApiApplication.Seguridad
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
 
             return jwtTokenString;
+            
         }
+    
     }
 }

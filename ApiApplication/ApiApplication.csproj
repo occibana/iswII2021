@@ -207,6 +207,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Seguridad\TokenGenerator.cs" />
+    <Compile Include="Seguridad\TokenValidationHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />

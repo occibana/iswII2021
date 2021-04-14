@@ -9,6 +9,7 @@ using Utilitarios;
 
 namespace ApiApplication.Controllers
 {
+    
     [Route("api/[controller]")]
     public class RegistroLoginController : ApiController
     {
@@ -21,9 +22,9 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/registroLogin/postIngresoLogin")]
-        public UMAC PostIngresoLogin(URegistro login, string session_id)
+        public UMAC PostIngresoLogin(URegistro login)
         {
-            return new LLogin().ingreso_login(login,session_id);
+            return new LLogin().ingreso_login(login);
         }
     }
 }
