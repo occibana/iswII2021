@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Web;
 using Microsoft.IdentityModel.Tokens;
 
+using SecurityToken = Microsoft.IdentityModel.Tokens.SecurityToken;
+using SecurityTokenValidationException = System.IdentityModel.Tokens.SecurityTokenValidationException;
+using SymmetricSecurityKey = Microsoft.IdentityModel.Tokens.SymmetricSecurityKey;
+
 namespace WebApiSegura.Controllers
 {
     /// <summary>

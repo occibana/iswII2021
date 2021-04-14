@@ -19,8 +19,8 @@ namespace ApiApplication.Seguridad
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
 
-            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(username.Key));
-            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
+            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(username));
+            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature, "");
 
             // create a claimsIdentity
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
