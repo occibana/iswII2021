@@ -11,6 +11,7 @@ namespace ApiApplication.Controllers
 {
     
     [Route("api/[controller]")]
+
     public class RegistroLoginController : ApiController
     {
         [HttpPost]
