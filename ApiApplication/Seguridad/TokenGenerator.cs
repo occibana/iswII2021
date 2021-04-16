@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Configuration;
-using System.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
+using Utilitarios;
+using Logica;
 
 namespace ApiApplication.Seguridad
 {
@@ -12,19 +14,21 @@ namespace ApiApplication.Seguridad
     internal static class TokenGenerator
     {
         
-        public static string GenerateTokenJwt(string username)
+        public static string GenerateTokenJwt(URegistro usuario_login)
         {
             
             // appsetting for Token JWT
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
 
-            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(username));
-            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature, "");
+            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes("generartokenlogin"));
+            var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
             // create a claimsIdentity
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
-                new Claim(ClaimTypes.Name, username)
+                new Claim(ClaimTypes.Role, usuario_login.Id.ToString()),
+                new Claim(ClaimTypes.Name, usuario_login.Usuario),
+                new Claim(ClaimTypes.Rsa, usuario_login.Contrasena)
             });
 
             // create token to the user
@@ -34,10 +38,17 @@ namespace ApiApplication.Seguridad
                 issuer: issuerToken,
                 subject: claimsIdentity,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddMinutes(username.Expiracion),
+                expires: DateTime.Now.AddMinutes(10),
                 signingCredentials: signingCredentials);
 
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
+
+            LoginToken token = new LoginToken();
+            token.Userer_id = usuario_login.Id;
+            token.FechaGenerado = DateTime.Now;
+            token.FechaVigencia = DateTime.Now.AddMinutes(15);
+            token.Token = jwtTokenString;
+            new LLogin().guardarToken(token);
 
             return jwtTokenString;
             

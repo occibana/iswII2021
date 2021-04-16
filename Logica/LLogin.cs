@@ -6,11 +6,22 @@ using System.Threading.Tasks;
 
 using Data;
 using Utilitarios;
+using Utilitarios.Entrada;
 
 namespace Logica
 {
     public class LLogin
     {
+        public async Task<URegistro> ingreso(LoginRequest login)
+        {
+            return await new DAOLogin().verificar(login);
+        }
+        
+        public async Task guardarToken(LoginToken token){
+            await new DAOSeguridad().guardarTokenLogin(token);
+        }
+        
+        /*
         public UMAC ingreso_login(URegistro login)
         {
             UMAC datos = new UMAC();
@@ -32,6 +43,6 @@ namespace Logica
                 datos.Url = "Perfil.aspx";
             }
             return datos;
-        }
+        }*/
     }
 }

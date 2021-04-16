@@ -9,9 +9,10 @@ namespace Utilitarios.Entrada
 {
     public class LoginRequest
     {
-        [Required]
+
+        [Required (ErrorMessage ="Se requiere usuario")]
         public string Usuario { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Se requiere contrasena")]
         public string Contrasena { get; set; }
     }
 }

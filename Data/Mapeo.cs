@@ -25,6 +25,7 @@ namespace Data
         public DbSet<UReserva> reserva { get; set; }
         public DbSet<UHabitacion> habitacion { get; set; }
         public DbSet<UComentarios> comentario { get; set; }
+        public DbSet<LoginToken> login_token { get; set; }
 
     }
 }

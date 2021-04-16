@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entrada\LoginRequest.cs" />
+    <Compile Include="LoginToken.cs" />
     <Compile Include="MAC.cs" />
     <Compile Include="Mailrecuperarcontrasena.cs" />
     <Compile Include="UAcceso.cs" />

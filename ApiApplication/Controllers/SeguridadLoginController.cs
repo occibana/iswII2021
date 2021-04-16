@@ -6,6 +6,9 @@ using System.Net.Http;
 using System.Web.Http;
 using Utilitarios.Entrada;
 using Logica;
+using Utilitarios;
+using System.Threading.Tasks;
+using ApiApplication.Seguridad;
 
 namespace ApiApplication.Controllers
 {
@@ -14,7 +17,7 @@ namespace ApiApplication.Controllers
     {
         [Route("login")]
         [HttpPost]
-        public IHttpActionResult login(LoginRequest login)
+        public async Task<IHttpActionResult> login(LoginRequest login)
         {
             string mensaje;
             if (!ModelState.IsValid)
@@ -31,7 +34,7 @@ namespace ApiApplication.Controllers
                 }
                 return BadRequest(error);
             }
-            UUsuario user = new LUsuario().Login(login);
+            URegistro user = await new LLogin().ingreso(login);
             if (user == null)
                 return Unauthorized();
             else
@@ -41,16 +44,15 @@ namespace ApiApplication.Controllers
             }
         }
 
-
+        /*
         [Route("Get-Users")]
         [HttpGet]
         [AllowAnonymous]
         public IHttpActionResult GetUsers()
         {
-            return Ok(new LUsuario().GetUsers());
-        }
+            return Ok(new LLogin().GetUsers());
+        }*/
     }
-}
 }
 
 

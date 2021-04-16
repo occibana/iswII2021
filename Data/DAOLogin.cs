@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Utilitarios;
+using Utilitarios.Entrada;
 
 namespace Data
 {
@@ -14,10 +15,18 @@ namespace Data
     {
         
             //verificacion login
-            public URegistro verificar(URegistro loginE)
+            public async Task<URegistro> verificar(LoginRequest loginE)
             {
                 URegistro verificacion = new URegistro();
-                verificacion = new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefault();
+                verificacion = await new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefaultAsync();
+                return verificacion;
+            }
+
+            //verificacion login - compra
+            public async Task<URegistro> verificarLogincompra(URegistro loginE)
+            {
+                URegistro verificacion = new URegistro();
+                verificacion = await new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefaultAsync();
                 return verificacion;
             }
 

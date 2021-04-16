@@ -6,22 +6,26 @@ using System.Threading.Tasks;
 
 using Utilitarios;
 using Data;
+using Utilitarios.Entrada;
 
 namespace Logica
 {
     public class LActualizarContrasena
     {
-        public UActualizarContrasena verificarsession(URegistro session)
+        public async Task<UActualizarContrasena> verificarsession(URegistro session)
         {
-            URegistro login = new URegistro();
+
+            URegistro loginR = new URegistro();
+            LoginRequest login = new LoginRequest();
             UActualizarContrasena mensaje = new UActualizarContrasena();
 
             login.Usuario = session.Usuario;
             login.Contrasena = session.Contrasena;
 
-            login = new DAOLogin().verificar(login);
 
-            if (login == null)
+            loginR = await new DAOLogin().verificar(login);
+
+            if (loginR == null)
             {
                 mensaje.URL1 = "Login.aspx";
             }
@@ -34,33 +38,34 @@ namespace Logica
 
         }
 
-        public UActualizarContrasena actualizarContrasena(URegistro datosE, string contrasenaAct, string contrasenaNueva)
+        public async Task<UActualizarContrasena> actualizarContrasena(URegistro datosE, string contrasenaAct, string contrasenaNueva)
         {
-            URegistro login = new URegistro();
+            URegistro loginR = new URegistro();
+            LoginRequest login = new LoginRequest();
             UActualizarContrasena mensaje = new UActualizarContrasena();
 
-            login.Usuario = datosE.Usuario;
-            login.Contrasena = contrasenaAct;
-            login.Correo = datosE.Correo;
+            loginR.Usuario = datosE.Usuario;
+            loginR.Contrasena = contrasenaAct;
+            loginR.Correo = datosE.Correo;
 
-            login = new DAOLogin().verificar(login);
+            loginR = await new DAOLogin().verificar(login);
 
-            if (login == null)
+            if (loginR == null)
             {
                 mensaje.Mensaje = "Verifica tus datos.\n La contraseña no coinside con tu usuario";
             }
             else
             {
-                login.Contrasena = contrasenaNueva;
+                loginR.Contrasena = contrasenaNueva;
 
-                if (login.Contrasena.Length < 5)
+                if (loginR.Contrasena.Length < 5)
                 {
                     mensaje.Mensaje = "Su contraseña debe ser mayor a 5 caracteres.";
                 }
                 else
                 {
-                    new DAOLogin().actualizarcontrasena(login);
-                    new Mail().mailactualizarcontrasena(login);
+                    new DAOLogin().actualizarcontrasena(loginR);
+                    new Mail().mailactualizarcontrasena(loginR);
                     mensaje.Mensaje = "Contraseña actualizada";
                 }
             }

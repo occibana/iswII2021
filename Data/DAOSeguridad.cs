@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 
 using Utilitarios;
@@ -119,7 +120,18 @@ namespace Data
         {
             return new Mapeo().acceso.Where(x => x.Userid == usuarioE).ToList();
         }
-        
+
+        //guardar token usuario - API
+       
+        public async Task guardarTokenLogin(LoginToken token)
+        {
+            using (var db = new Mapeo())
+            {
+                db.login_token.Add(token);
+                db.SaveChanges();
+            }
+        }
+
     }
 }
     

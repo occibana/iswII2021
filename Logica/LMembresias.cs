@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using Utilitarios;
 using Data;
 using System.Web.UI;
+using Utilitarios.Entrada;
 
 namespace Logica
 {
@@ -64,7 +65,7 @@ namespace Logica
 
             if ((session.Usuario).Equals(usuario.Usuario))
             {
-                var verificacion = new DAOLogin().verificar(usuario);
+                var verificacion = new DAOLogin().verificarLogincompra(usuario);
                 if (verificacion == null)
                 {
                     datos.Error = "Verifique que su usuario y su contraseña sean los correctos";
