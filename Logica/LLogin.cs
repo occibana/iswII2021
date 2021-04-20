@@ -12,15 +12,22 @@ namespace Logica
 {
     public class LLogin
     {
-        public async Task<URegistro> ingreso(LoginRequest login)
+        public async Task<URegistro> ingresoLogin(LoginRequest login)
         {
-            return await new DAOLogin().verificar(login);
+            return await new DAOLogin().verificarLogin(login);
         }
         
         public async Task guardarToken(LoginToken token){
             await new DAOSeguridad().guardarTokenLogin(token);
         }
-        
+
+        public async Task<URegistro> ingreso(URegistro login)
+        {
+            return await new DAOLogin().verificar(login);
+        }
+
+
+
         /*
         public UMAC ingreso_login(URegistro login)
         {

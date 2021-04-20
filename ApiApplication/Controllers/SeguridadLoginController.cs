@@ -34,7 +34,8 @@ namespace ApiApplication.Controllers
                 }
                 return BadRequest(error);
             }
-            URegistro user = await new LLogin().ingreso(login);
+            //URegistro user = await new LLogin().ingreso(login);
+            URegistro user = await new LLogin().ingresoLogin(login);
             if (user == null)
                 return Unauthorized();
             else

@@ -15,15 +15,22 @@ namespace Data
     {
         
             //verificacion login
-            public async Task<URegistro> verificar(LoginRequest loginE)
+            public async Task<URegistro> verificar(URegistro loginE)
             {
                 URegistro verificacion = new URegistro();
                 verificacion = await new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefaultAsync();
                 return verificacion;
             }
 
-            //verificacion login - compra
-            public async Task<URegistro> verificarLogincompra(URegistro loginE)
+            public async Task<URegistro> verificarLogin(LoginRequest loginE)
+            {
+                URegistro verificacion = new URegistro();
+                verificacion = await new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefaultAsync();
+                return verificacion;
+            }
+
+        //verificacion login - compra
+        public async Task<URegistro> verificarLogincompra(URegistro loginE)
             {
                 URegistro verificacion = new URegistro();
                 verificacion = await new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefaultAsync();
@@ -99,6 +106,13 @@ namespace Data
                     db.SaveChanges();
                 }
             }
+
+        public async Task<URegistro> mostrarDatos(URegistro datoE)
+        {
+            URegistro datosUsuario = new URegistro();
+            datosUsuario = await new Mapeo().usuario.Where(x => x.Usuario.Equals(datoE.Usuario)).FirstOrDefaultAsync();
+            return datosUsuario;
+        }
 
         
     }

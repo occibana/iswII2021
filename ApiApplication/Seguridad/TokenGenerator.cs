@@ -26,9 +26,9 @@ namespace ApiApplication.Seguridad
 
             // create a claimsIdentity
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
-                new Claim(ClaimTypes.Role, usuario_login.Id.ToString()),
-                new Claim(ClaimTypes.Name, usuario_login.Usuario),
-                new Claim(ClaimTypes.Rsa, usuario_login.Contrasena)
+                //new Claim(ClaimTypes.Role, usuario_login.Id.ToString()),
+                new Claim(ClaimTypes.Name, usuario_login.Usuario)
+                //new Claim(ClaimTypes.Rsa, usuario_login.Contrasena)
             });
 
             // create token to the user

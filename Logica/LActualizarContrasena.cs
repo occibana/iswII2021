@@ -23,7 +23,7 @@ namespace Logica
             login.Contrasena = session.Contrasena;
 
 
-            loginR = await new DAOLogin().verificar(login);
+            loginR = await new DAOLogin().verificar(loginR);
 
             if (loginR == null)
             {
@@ -48,7 +48,7 @@ namespace Logica
             loginR.Contrasena = contrasenaAct;
             loginR.Correo = datosE.Correo;
 
-            loginR = await new DAOLogin().verificar(login);
+            loginR = await new DAOLogin().verificar(loginR);
 
             if (loginR == null)
             {

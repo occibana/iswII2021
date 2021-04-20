@@ -13,18 +13,19 @@ namespace Logica
 {
     public class LPerfil
     {
-        public UPerfil cargardatos(URegistro datosSession)
+        public async Task<UPerfil> cargardatos(URegistro datosSession)
         {
             UPerfil perfil = new UPerfil();
             perfil.Datos = new URegistro();
-            perfil.Datos.Nombre = datosSession.Nombre;
-            perfil.Datos.Correo = datosSession.Correo;
-
-            perfil.Datos.Telefono = datosSession.Telefono;
-            perfil.Datos.Usuario = datosSession.Usuario;
-            perfil.Datos.Fotoperfil = datosSession.Fotoperfil;
-            perfil.Datos.Idestado = datosSession.Idestado;
-            perfil.Datos.Id = datosSession.Id; 
+            URegistro datos = await new DAOLogin().mostrarDatos(datosSession);
+            perfil.Datos.Nombre = datos.Nombre;
+            perfil.Datos.Correo = datos.Correo;
+            perfil.Datos.Apellido = datos.Apellido;
+            perfil.Datos.Telefono = datos.Telefono;
+            perfil.Datos.Usuario = datos.Usuario;
+            perfil.Datos.Fotoperfil = datos.Fotoperfil;
+            perfil.Datos.Idestado = datos.Idestado;
+            perfil.Datos.Id = datos.Id; 
 
             if (perfil.Datos.Fotoperfil == null)
             {
@@ -36,7 +37,7 @@ namespace Logica
                 var verificar = new DAOSeguridad().verificarvencimientomembresia(perfil.Datos.Id);
                 if (verificar != null)
                 {
-                    perfil.Datos.Id =datosSession.Id;
+                    perfil.Datos.Id =datos.Id;
                     perfil.Datos.Idestado = 0;
                     new DAOSeguridad().actualizarmembresia(perfil.Datos);
                     perfil.URL1 = "Perfil.aspx";
@@ -68,9 +69,10 @@ namespace Logica
             }
             return perfil;
         }
-        public string cerrarsession(URegistro sessionId)
+        public async Task<string> cerrarsession(URegistro sessionId)
         {
-            new DAOSeguridad().cerrarAcceso(sessionId.Id);
+            URegistro datos = await new DAOLogin().mostrarDatos(sessionId);
+            new DAOSeguridad().cerrarAcceso(datos.Id);
             string url = "Login.aspx";
             return url;
         }
