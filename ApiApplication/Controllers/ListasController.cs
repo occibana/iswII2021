@@ -12,6 +12,13 @@ namespace ApiApplication.Controllers
     [Route("api/[controller]")]
     public class ListasController : ApiController
     {
+        /// <summary>
+        /// Servicio para obtener el listado de zonas 
+        /// </summary>       
+        /// <returns>Listado de zonas</returns>
+        /// <Autor>Andres Bernal, Jonathan Cardenas</Autor>
+        /// <Fecha>2021/04/12</Fecha>
+        /// <UltimaActualizacion>2021/04/20 - Carlos Rodríguez - Creación del servicio</UltimaActualizacion>
         [HttpGet]
         [Route("api/listas/getListasZonas")]
         public List<UHotelZona> GetLisasZonas()
