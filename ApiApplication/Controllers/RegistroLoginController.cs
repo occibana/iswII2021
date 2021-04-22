@@ -18,6 +18,12 @@ namespace ApiApplication.Controllers
 
     public class RegistroLoginController : ApiController
     {
+
+        /// <summary>
+        ///  Servicio para regitrar un usuario
+        /// </summary>
+        /// <returns>regitrar un usuario</returns>
+
         [HttpPost]
         [Route("api/registroLogin/postRegistroUsuario")]
         public URegistroMensaje PostRegistroUsuario(URegistro registro)
@@ -31,6 +37,14 @@ namespace ApiApplication.Controllers
         {
             return new LLogin().ingreso_login(login);
         }*/
+
+
+        /// <summary>
+        ///  Servicio para solicitar ingreso al login
+        /// </summary>
+        /// <returns>
+        /// ingreso al login - Token
+        /// </returns>
 
         [HttpPost]
         [Route("api/registroLogin/postIngresoLogin")]
@@ -60,12 +74,26 @@ namespace ApiApplication.Controllers
             }
         }
 
+        /// <summary>
+        ///  Servicio para cargar datos peronales en perfil
+        /// </summary>
+        /// <returns>
+        /// datos peronales en perfil
+        /// </returns>
+
         [HttpPost]
         [Route("api/registroLogin/postCargarDatosPerfil")]
         public async Task<UPerfil> postCargarDatosPerfil(URegistro dato)
         {
             return await new LPerfil().cargardatos(dato);
         }
+
+        /// <summary>
+        ///  Servicio para actualizar contraseña
+        /// </summary>
+        /// <returns>
+        /// actualizacion contraseña
+        /// </returns>
 
         [HttpPut]
         [Route("api/registroLogin/putActualizarContrasena")]
@@ -82,6 +110,10 @@ namespace ApiApplication.Controllers
             var datos = actualizarContra;
             return Ok(datos);
         }
+
+        /// <summary>
+        ///  Servicio para cerrar session
+        /// </summary>
 
         [HttpPost]
         [Route("api/registroLogin/postCerrarSesion")]

@@ -15,6 +15,13 @@ namespace ApiApplication.Controllers
     [RoutePrefix("api/admin")]
     public class SeguridadLoginController : ApiController
     {
+        /// <summary>
+        ///  Servicio para ingreso login - seguridad
+        /// </summary>
+        /// <returns>
+        /// token
+        /// </returns>
+
         [Route("login")]
         [HttpPost]
         public async Task<IHttpActionResult> login(LoginRequest login)
