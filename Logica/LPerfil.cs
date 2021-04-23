@@ -71,10 +71,19 @@ namespace Logica
         }
         public async Task<string> cerrarsession(URegistro sessionId)
         {
-            URegistro datos = await new DAOLogin().mostrarDatos(sessionId);
-            new DAOSeguridad().cerrarAcceso(datos.Id);
-            string url = "Login.aspx";
-            return url;
+            try
+            {
+                URegistro datos = await new DAOLogin().mostrarDatos(sessionId);
+                new DAOSeguridad().cerrarAcceso(datos.Id);
+                string url = "Login.aspx";
+                return url;
+            }
+            catch
+            {
+                string errorMjs = "Usuario Inexistente";
+                return errorMjs;
+            }
+           
         }
 
         public UPerfil subirFoto(FileUpload foto, URegistro session, string direccion, string imagen, string imagenEliminar)

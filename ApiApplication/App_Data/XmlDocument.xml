@@ -571,9 +571,9 @@
             actualizacion contraseña
             </returns>
         </member>
-        <member name="M:ApiApplication.Controllers.RegistroLoginController.postCerrarSesion(Utilitarios.URegistro)">
+        <member name="M:ApiApplication.Controllers.RegistroLoginController.postCerrarSesion(Newtonsoft.Json.Linq.JObject)">
             <summary>
-             Servicio para cerrar session
+             Servicio para cerrar session - recibe usuario como parametro
             </summary>
         </member>
         <member name="M:ApiApplication.Controllers.SeguridadLoginController.login(Utilitarios.Entrada.LoginRequest)">

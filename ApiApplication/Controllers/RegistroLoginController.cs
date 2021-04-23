@@ -112,14 +112,16 @@ namespace ApiApplication.Controllers
         }
 
         /// <summary>
-        ///  Servicio para cerrar session
+        ///  Servicio para cerrar session - recibe usuario como parametro
         /// </summary>
 
         [HttpPost]
         [Route("api/registroLogin/postCerrarSesion")]
-        public async Task<string> postCerrarSesion(URegistro datoUsuario)
+        public async Task<string> postCerrarSesion([FromBody] JObject datoUsuario)
         {
-            return await new LPerfil().cerrarsession(datoUsuario);
+            URegistro datos = new URegistro();
+            datos.Usuario = datoUsuario["usuario"].ToString();
+            return await new LPerfil().cerrarsession(datos);
         }
 
     }

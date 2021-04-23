@@ -22,8 +22,10 @@ namespace ApiApplication.Controllers
         /// token
         /// </returns>
 
+        [Authorize]
         [Route("login")]
         [HttpPost]
+       
         public async Task<IHttpActionResult> login(LoginRequest login)
         {
             string mensaje;
