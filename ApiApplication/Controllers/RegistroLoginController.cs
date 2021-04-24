@@ -10,10 +10,15 @@ using Logica;
 using Newtonsoft.Json.Linq;
 using Utilitarios;
 using Utilitarios.Entrada;
+//cors
+using System.Web.Http.Cors;
 
 namespace ApiApplication.Controllers
 {
-    
+
+    //[EnableCors(origins:"*", headers: "*", methods:"*")]
+    [EnableCors("*", "*", "*")]
+
     [Route("api/[controller]")]
 
     public class RegistroLoginController : ApiController
