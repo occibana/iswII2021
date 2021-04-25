@@ -20,11 +20,9 @@ namespace ApiApplication.Controllers
     public class ComentarCalificarController : ApiController
     {
         /// <summary>
-        ///  Servicio para cargar datos peronales en perfil
+        ///  Servicio para comentar un servicio de hotel
         /// </summary>
-        /// <returns>
-        /// datos peronales en perfil
-        /// </returns>
+
 
         [HttpPost]
         [Route("api/comentarCalificar/postComentar")]
