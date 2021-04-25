@@ -31,7 +31,7 @@ namespace Logica
             return datos;
         }
 
-        public UActualizarDatos actualizarDatos(URegistro datosRegistro, URegistro datosSession)
+        public async Task<UActualizarDatos> actualizarDatos(URegistro datosRegistro, URegistro datosSession)
         {
             UActualizarDatos datos = new UActualizarDatos();
             datos.Actnombre = datosRegistro.Nombre;
@@ -39,7 +39,7 @@ namespace Logica
             datos.Actusuario = datosRegistro.Usuario;
             datos.Acttelefono = datosRegistro.Telefono;
             datos.Actcorreo = datosRegistro.Correo;
-            URegistro actRegistro = new DAOLogin().verificaruser(datosRegistro);
+            URegistro actRegistro = await new DAOLogin().verificaruser(datosRegistro);
             if ((actRegistro != null) && (actRegistro.Usuario != String.Empty))//si tb tiene algo
             {
                 datos.Mensaje = "Utiliza otro usuario, este ya existe o esta registrado";

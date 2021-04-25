@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Utilitarios;
 
 namespace Data
@@ -216,9 +216,9 @@ namespace Data
             }
         }
         //select info hotel panel hotel
-        public UHotel infohotel(UHotel hotelE)
+        public async Task<UHotel> infohotel(UHotel hotelE)
         {
-            return new Mapeo().hotel.Where(x => x.Idhotel == hotelE.Idhotel).FirstOrDefault();
+            return await new Mapeo().hotel.Where(x => x.Idhotel == hotelE.Idhotel).FirstOrDefaultAsync();
         }
         //select zona
         public UHotelZona zona(UHotel hotelE)

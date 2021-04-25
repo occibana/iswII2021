@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Utilitarios;
 
 namespace Data
@@ -130,7 +130,7 @@ namespace Data
         //select info habitacion
         public UHabitacion infoHabitacion(int habitacionE)
         {
-            return new Mapeo().habitacion.Where(x => (x.Id == habitacionE)).FirstOrDefault();
+            return new Mapeo().habitacion.Where(x =>( x.Id == habitacionE)).FirstOrDefault();
         }
 
 

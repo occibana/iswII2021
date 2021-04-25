@@ -47,10 +47,10 @@ namespace Data
                 }
             }
             //verifica usuario no repetido
-            public URegistro verificaruser(URegistro registroE)
+            public async Task<URegistro> verificaruser(URegistro registroE)
             {
 
-                return new Mapeo().usuario.Where(x => x.Usuario.ToUpper().Equals(registroE.Usuario.ToUpper()) || x.Correo.ToUpper().Equals(registroE.Correo.ToUpper())).FirstOrDefault();
+                return await new Mapeo().usuario.Where(x => x.Usuario.ToUpper().Equals(registroE.Usuario.ToUpper()) || x.Correo.ToUpper().Equals(registroE.Correo.ToUpper())).FirstOrDefaultAsync();
             }
             //actualiza foto perfil
             public void actualizarfoto(URegistro fotoE)

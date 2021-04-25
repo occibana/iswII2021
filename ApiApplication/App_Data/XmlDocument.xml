@@ -481,6 +481,14 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:ApiApplication.Controllers.ComentarCalificarController.postComentar(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para cargar datos peronales en perfil
+            </summary>
+            <returns>
+            datos peronales en perfil
+            </returns>
+        </member>
         <member name="M:ApiApplication.Controllers.ListasController.GetLisasZonas">
             <summary>
              Servicio para obtener el listado de zonas municipio Cundinamarca
@@ -541,6 +549,48 @@
             </summary>
             <returns>Eliminar un hotel</returns>
         </member>
+        <member name="M:ApiApplication.Controllers.PanelHotelController.postInformacionDelHotel(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para cargar información hotel seleccionado
+            </summary>
+            <returns>
+            Informacion del hotel
+            </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.PanelHotelController.postInformacionHabitacion(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para cargar información de la habitacion seleccionada en un hotel
+            </summary>
+            <returns>
+            Informacion dela habitacion
+            </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.PerfilController.postCargarDatosPerfil(Utilitarios.URegistro)">
+            <summary>
+             Servicio para cargar datos peronales en perfil
+            </summary>
+            <returns>
+            datos peronales en perfil
+            </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.PerfilController.putActualizarContrasena(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para actualizar contraseña
+            </summary>
+            <returns>
+            actualizacion contraseña
+            </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.PerfilController.postCerrarSesion(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para cerrar session - recibe usuario como parametro
+            </summary>
+        </member>
+        <member name="M:ApiApplication.Controllers.PerfilController.postActualizarDatos(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para Actualizar datos personales
+            </summary>
+        </member>
         <member name="M:ApiApplication.Controllers.RegistroLoginController.PostRegistroUsuario(Utilitarios.URegistro)">
             <summary>
              Servicio para regitrar un usuario
@@ -554,27 +604,6 @@
             <returns>
             ingreso al login - Token
             </returns>
-        </member>
-        <member name="M:ApiApplication.Controllers.RegistroLoginController.postCargarDatosPerfil(Utilitarios.URegistro)">
-            <summary>
-             Servicio para cargar datos peronales en perfil
-            </summary>
-            <returns>
-            datos peronales en perfil
-            </returns>
-        </member>
-        <member name="M:ApiApplication.Controllers.RegistroLoginController.putActualizarContrasena(Newtonsoft.Json.Linq.JObject)">
-            <summary>
-             Servicio para actualizar contraseña
-            </summary>
-            <returns>
-            actualizacion contraseña
-            </returns>
-        </member>
-        <member name="M:ApiApplication.Controllers.RegistroLoginController.postCerrarSesion(Newtonsoft.Json.Linq.JObject)">
-            <summary>
-             Servicio para cerrar session - recibe usuario como parametro
-            </summary>
         </member>
         <member name="M:ApiApplication.Controllers.SeguridadLoginController.login(Utilitarios.Entrada.LoginRequest)">
             <summary>

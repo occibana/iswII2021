@@ -11,14 +11,14 @@ namespace Logica
 {
     public class LHabitacion
     {
-        public UHabitacion agregarHabitacion(int idtipo, UHabitacion habitacion)
+        public async Task<UHabitacion> agregarHabitacion(int idtipo, UHabitacion habitacion)
         {
             UHabitacion mensaje = new UHabitacion();
             if (habitacion.Tipo != "--Seleccionar--")
             {
                 UHotel infohotel = new UHotel();
                 infohotel.Idhotel = habitacion.Idhotel;
-                infohotel = new DAOhotel().infohotel(infohotel);
+                infohotel = await new DAOhotel().infohotel(infohotel);
                 if (idtipo == 1)//basica
                 {
                     habitacion.Precio = infohotel.Precionoche;

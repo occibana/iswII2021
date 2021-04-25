@@ -11,9 +11,10 @@ namespace Logica
 {
     public class LPanelHotel
     {
-        public UHotel informacion_del_hotel(UHotel hotel)
+        public async Task<UHotel> informacion_del_hotel(UHotel hotel)
         {
-            hotel = new DAOhotel().infohotel(hotel);
+            
+            hotel = await new DAOhotel().infohotel(hotel);
             hotel.Zona = (new DAOhotel().zona(hotel)).Nombre;
             hotel.Municipio = (new DAOhotel().municipio(hotel)).Nombre;
             return hotel;

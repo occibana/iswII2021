@@ -13,13 +13,13 @@ namespace Logica
 {
     public class LComentariosHotel
     {
-        public UHotel info_hotel(UHotel session)
+        public async Task<UHotel> info_hotel(UHotel session)
         {
             UHotel hotel = new UHotel();
             if (session != null)
             {
                 hotel.Idhotel = session.Idhotel;
-                hotel = new DAOhotel().infohotel(hotel);
+                hotel = await new DAOhotel().infohotel(hotel);
                 return hotel;
             }
             else

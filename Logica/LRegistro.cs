@@ -11,9 +11,9 @@ namespace Logica
 {
     public class LRegistro
     {
-        public URegistroMensaje registro(URegistro registro)
+        public async Task<URegistroMensaje> registro(URegistro registro)
         {
-            URegistro pedidos = new DAOLogin().verificaruser(registro);
+            URegistro pedidos = await new DAOLogin().verificaruser(registro);
             URegistroMensaje msj = new URegistroMensaje();
             if (pedidos == null)
             {

@@ -11,7 +11,7 @@ namespace Logica
 {
     public class LReserva
     {
-        public UDatosUsuario pageload_ingreso_reserva(UHotel hotel_id, UHabitacion infoHabitacion, URegistro infousuario)
+        public async Task<UDatosUsuario> pageload_ingreso_reserva(UHotel hotel_id, UHabitacion infoHabitacion, URegistro infousuario)
         {
             //deshabilitarbotones();
             UDatosUsuario datosUsuario = new UDatosUsuario();
@@ -23,7 +23,7 @@ namespace Logica
             {   
                 datosUsuario.Hotel.Idhotel = hotel_id.Idhotel;
 
-                datosUsuario.Hotel = new DAOhotel().infohotel(datosUsuario.Hotel);
+                datosUsuario.Hotel = await new DAOhotel().infohotel(datosUsuario.Hotel);
                 datosUsuario.Hotel.Nombre = datosUsuario.Hotel.Nombre.ToUpper();
                 //L_NombreHotel.Text
                 if (infoHabitacion.Tipo.Equals("Básica"))
@@ -141,10 +141,10 @@ namespace Logica
         }
 
         //Confirmar reserva
-        public UHotel confirmarReserva(UHotel infoHotel, UReserva infoReserva)
+        public async Task<UHotel> confirmarReserva(UHotel infoHotel, UReserva infoReserva)
         {
             UHotel hotel = new UHotel();
-            hotel = new DAOhotel().infohotel(infoHotel);
+            hotel = await new DAOhotel().infohotel(infoHotel);
 
             var fechasreservadas = new DAOReserva().fechasdisponibles(infoReserva);
             int cantReservas = new DAOReserva().verificarreserva(infoReserva);
