@@ -11,27 +11,7 @@ namespace Logica
 {
     public class LFiltro
     {
-        public void filtro_general_inicial()
-        {
-            UFiltro consulta = new UFiltro();
-            consulta.nombrehotel = null;
-            new DAOhotel().hotelesregistrados(consulta);
-        }
 
-        public string filtro_general_nombre(UFiltro busqueda)
-        {
-            if (busqueda.nombrehotel == null || busqueda.nombrehotel == String.Empty)
-            {
-                return null;
-                //busqueda.nombrehotel = null;
-            }
-            else
-            {
-                
-                return (busqueda.nombrehotel).ToUpper();
-                //busqueda.nombrehotel = (TB_Busquedageneral.Text).ToUpper();
-            }
-        }
 
         public UFiltro filtro_general(string preciomin, string preciomax, string maxpersonas, string DateAntesDe, string DateDespuesDe, string Calificacion, string Zona, string Municipio, string Tipo)
         {

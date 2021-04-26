@@ -146,5 +146,38 @@ namespace ApiApplication.Controllers
             int idTipo = int.Parse(datoUsuario["usuario"].ToString());
             return await new LHabitacion().agregarHabitacion(idTipo,habitacion);
         }
+
+        /// <summary>
+        ///  Servicio para comprar membresias
+        /// </summary>
+        /// <returns>
+        /// 
+        /// </returns>
+
+        [HttpPost]
+        [Route("api/perfil/postComprarMembresias")]
+        public async Task<UMembresias> postComprarMembresias([FromBody] JObject dato)
+        {
+            UMembresia datoscompra = new UMembresia();
+            URegistro usuario = new URegistro();
+            URegistro usuarioSession = new URegistro();
+
+            datoscompra.Cedulapropietario = dato["Cedula"].ToString();
+            datoscompra.Codigoseguridad = dato["CodigoDeSeguridad"].ToString();
+            datoscompra.Direccionpropietario = dato["DireccionPropietario"].ToString();
+            datoscompra.Nombrepropietario = dato["NombreDelPropietario"].ToString();
+            datoscompra.Numerotarjeta = dato["NumeroTarjeta"].ToString();
+            datoscompra.Fecha_compra = DateTime.Now;
+            datoscompra.Fecha_vencimiento = DateTime.Now.AddYears(1);
+            usuario.Usuario = dato["Usuario"].ToString();
+            usuario.Contrasena = dato["Contrasena"].ToString();
+            usuario.Id = int.Parse(dato["Id"].ToString());
+            usuario.Correo = dato["Correo"].ToString();
+
+            usuarioSession.Usuario = dato["UsuarioSession"].ToString();
+            usuarioSession.Id = int.Parse(dato["IdUsuarioSession"].ToString());
+
+            return await new LMembresias().comprar(datoscompra,usuario,usuarioSession);
+        }
     }
 }

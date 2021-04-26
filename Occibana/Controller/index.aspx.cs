@@ -10,12 +10,6 @@ using Logica;
 
 public partial class Vew_index : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
-        LFiltro filtro = new LFiltro();
-        filtro.filtro_general_inicial();
-        
-    }
 
     protected void DL_Listaprincipalhoteles_ItemCommand(object source, DataListCommandEventArgs e)
     {

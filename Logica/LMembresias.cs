@@ -56,7 +56,7 @@ namespace Logica
             return datos;
         }
 
-        public UMembresias comprar(UMembresia datoscompra, URegistro usuario, URegistro session)
+        public async Task<UMembresias> comprar(UMembresia datoscompra, URegistro usuario, URegistro session)
         {
             UMembresias datos = new UMembresias();
             datoscompra.Cedulapropietario = encriptar(datoscompra.Cedulapropietario);
@@ -65,7 +65,7 @@ namespace Logica
 
             if ((session.Usuario).Equals(usuario.Usuario))
             {
-                var verificacion = new DAOLogin().verificarLogincompra(usuario);
+                var verificacion = await new DAOLogin().verificarLogincompra(usuario);
                 if (verificacion == null)
                 {
                     datos.Error = "Verifique que su usuario y su contraseña sean los correctos";
@@ -103,7 +103,7 @@ namespace Logica
         }
 
         //encripta numero tarjeta
-        private string encriptar(string input)
+        private String encriptar(string input)
         {
             SHA256CryptoServiceProvider provider = new SHA256CryptoServiceProvider();
             byte[] inputBytes = Encoding.UTF8.GetBytes(input);
