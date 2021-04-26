@@ -38,5 +38,29 @@ namespace ApiApplication.Controllers
 
             return new LComentariosHotel().comentar(session,comentario,hotelsession);
         }
+
+
+        /// <summary>
+        ///  Servicio para calificar un servicio de hotel
+        /// </summary>
+
+
+        [HttpPost]
+        [Route("api/comentarCalificar/postCalificar")]
+        public async Task<UComentario_CalificacionDatos> postCalificar([FromBody] JObject dato)
+        {
+            URegistro sessionUsuario = new URegistro();
+            UReserva infoReserva = new UReserva();
+            UHotel hotelsession = new UHotel();
+            UComentarios comentario = new UComentarios();
+
+
+            sessionUsuario.Id = int.Parse(dato["IdSession"].ToString()); 
+            infoReserva.Id = int.Parse(dato["IdReserva"].ToString());
+            hotelsession.Idhotel = int.Parse(dato["IdHotelSession"].ToString());
+            int calificacion = int.Parse(dato["Calificacion"].ToString());
+
+            return await new LComentariosHotel().calificar(sessionUsuario, hotelsession, infoReserva, calificacion);
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace ApiApplication.Controllers
         /// </returns>
 
         [HttpPost]
-        [Route("api/registroLogin/postCargarDatosPerfil")]
+        [Route("api/perfil/postCargarDatosPerfil")]
         public async Task<UPerfil> postCargarDatosPerfil(URegistro dato)
         {
             return await new LPerfil().cargardatos(dato);
@@ -42,7 +42,7 @@ namespace ApiApplication.Controllers
         /// </returns>
 
         [HttpPut]
-        [Route("api/registroLogin/putActualizarContrasena")]
+        [Route("api/perfil/putActualizarContrasena")]
         public async Task<IHttpActionResult> putActualizarContrasena([FromBody] JObject contrasena)
         {
             URegistro registro = new URegistro();
@@ -62,7 +62,7 @@ namespace ApiApplication.Controllers
         /// </summary>
 
         [HttpPost]
-        [Route("api/registroLogin/postCerrarSesion")]
+        [Route("api/perfil/postCerrarSesion")]
         public async Task<string> postCerrarSesion([FromBody] JObject datoUsuario)
         {
             URegistro datos = new URegistro();
@@ -75,7 +75,7 @@ namespace ApiApplication.Controllers
         /// </summary>
 
         [HttpPost]
-        [Route("api/registroLogin/postActualizarDatos")]
+        [Route("api/perfil/postActualizarDatos")]
         public async Task<UActualizarDatos> postActualizarDatos([FromBody] JObject datoUsuario)
         {
             URegistro datosRegistro = new URegistro();
@@ -131,5 +131,20 @@ namespace ApiApplication.Controllers
             string Imagen3 = datosHotel["Imagen3G"].ToString();
             return await new LAgregarServicioHotel().insertHotel(Imagen1,Imagen2,Imagen3, direccionImagen1, direccionImagen2, direccionImagen3, direccionImagen1G, direccionImagen2G, direccionImagen3G,hotel);
         }*/
+
+        /// <summary>
+        ///  Servicio para agregar habitacion
+        /// </summary>
+
+        [HttpPost]
+        [Route("api/perfil/postAgregarhabitacion")]
+        public async Task<UHabitacion> postAgregarhabitacion([FromBody] JObject datoUsuario)
+        {
+            UHabitacion habitacion = new UHabitacion();
+            habitacion.Tipo = datoUsuario["TipoHabitacion"].ToString();
+            habitacion.Idhotel = int.Parse(datoUsuario["IdHotel"].ToString());
+            int idTipo = int.Parse(datoUsuario["usuario"].ToString());
+            return await new LHabitacion().agregarHabitacion(idTipo,habitacion);
+        }
     }
 }

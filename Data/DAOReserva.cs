@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Utilitarios;
 
 namespace Data
@@ -81,9 +81,9 @@ namespace Data
 
         //select reserva
         //select fechas disponibles
-        public UReserva inforeserva(UReserva reserva)
+        public async Task<UReserva> inforeserva(UReserva reserva)
         {
-            return new Mapeo().reserva.Where(x => (x.Id == reserva.Id)).FirstOrDefault();
+            return await new Mapeo().reserva.Where(x => (x.Id == reserva.Id)).FirstOrDefaultAsync();
         }
 
         //eliminar reserva 

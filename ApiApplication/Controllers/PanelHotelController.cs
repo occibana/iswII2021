@@ -27,7 +27,7 @@ namespace ApiApplication.Controllers
         /// </returns>
 
         [HttpPost]
-        [Route("api/registroLogin/postInformacionDelHotel")]
+        [Route("api/panelHotel/postInformacionDelHotel")]
         public async Task<UHotel> postInformacionDelHotel([FromBody] JObject hotel)
         {
             UHotel hotelinfo = new UHotel();
@@ -43,7 +43,7 @@ namespace ApiApplication.Controllers
         /// </returns>
 
         [HttpPost]
-        [Route("api/registroLogin/postInformacionDelHotel")]
+        [Route("api/panelHotel/postInformacionDelHotel")]
         public UHabitacion postInformacionHabitacion([FromBody] JObject habitacion)
         {
             UHabitacion habitacionInfo = new UHabitacion();

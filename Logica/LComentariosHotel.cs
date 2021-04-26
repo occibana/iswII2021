@@ -61,76 +61,76 @@ namespace Logica
             return datos;
         }
 
-        public UComentario_CalificacionDatos calificar(URegistro sessionUsuario, UHotel hotelSession, UReserva inforeserva, RadioButton[] arrayRadioButton)
+        public async Task<UComentario_CalificacionDatos> calificar(URegistro sessionUsuario, UHotel hotelSession, UReserva inforeserva, int calificacion)
         {
             UComentario_CalificacionDatos mensaje = new UComentario_CalificacionDatos();
             DateTime fechaparacalificar;
 
             if (inforeserva != null)
             {
-                inforeserva = new DAOReserva().inforeserva(inforeserva);
+                inforeserva = await new DAOReserva().inforeserva(inforeserva);
                 try
                 {
 
                 
-                fechaparacalificar = inforeserva.Fecha_salida;
-                if (DateTime.Now >= fechaparacalificar.AddDays(1))
-                {
-                    if (inforeserva.Calificacion == null)
+                    fechaparacalificar = inforeserva.Fecha_salida;
+                    if (DateTime.Now >= fechaparacalificar.AddDays(1))
                     {
+                        if (inforeserva.Calificacion == null)
+                        {
 
-                        if (arrayRadioButton[0].Checked)
-                        {
-                            inforeserva.Calificacion = 0;
-                        }
-                        else if (arrayRadioButton[1].Checked)
-                        {
-                            inforeserva.Calificacion = 1;
-                        }
-                        else if (arrayRadioButton[2].Checked)
-                        {
-                            inforeserva.Calificacion = 2;
-                        }
-                        else if (arrayRadioButton[3].Checked)
-                        {
-                            inforeserva.Calificacion = 3;
-                        }
-                        else if (arrayRadioButton[4].Checked)
-                        {
-                            inforeserva.Calificacion = 4;
+                            if (calificacion == 0)
+                            {
+                                inforeserva.Calificacion = 0;
+                            }
+                            else if (calificacion == 1)
+                            {
+                                inforeserva.Calificacion = 1;
+                            }
+                            else if (calificacion == 2)
+                            {
+                                inforeserva.Calificacion = 2;
+                            }
+                            else if (calificacion == 3)
+                            {
+                                inforeserva.Calificacion = 3;
+                            }
+                            else if (calificacion == 4)
+                            {
+                                inforeserva.Calificacion = 4;
+
+                            }
+                            else if (calificacion == 5)
+                            {
+                                inforeserva.Calificacion = 5;
+                            }
+
+                            if (inforeserva.Calificacion != null)
+                            {
+                                new DAOReserva().actualizarcalificacion(inforeserva);
+                                mensaje.Mensaje = "Calificacion realizada con exito";
+                                new DAOReserva().cantidaddereservasconcalificacion(inforeserva);
+                                var promediocalificacion = new DAOReserva().cantidaddereservasconcalificacion(inforeserva);
+                                UHotel hotel = new UHotel();
+                                hotel.Idhotel = int.Parse((inforeserva.Idhotel).ToString());
+                                hotel.Promediocalificacion = promediocalificacion;
+                                new DAOhotel().actualizarcalificacion(hotel);
+                            }
+                            else
+                            {
+                                mensaje.Mensaje = "Seleccione una opcion a calificar";
+                            }
 
                         }
-                        else if (arrayRadioButton[5].Checked)
+                        else if (inforeserva.Calificacion != null)
                         {
-                            inforeserva.Calificacion = 5;
+                            mensaje.Mensaje = "Este servicio ha sido calificado antes";
                         }
-
-                        if (inforeserva.Calificacion != null)
-                        {
-                            new DAOReserva().actualizarcalificacion(inforeserva);
-                            mensaje.Mensaje = "Calificacion realizada con exito";
-                            new DAOReserva().cantidaddereservasconcalificacion(inforeserva);
-                            var promediocalificacion = new DAOReserva().cantidaddereservasconcalificacion(inforeserva);
-                            UHotel hotel = new UHotel();
-                            hotel.Idhotel = int.Parse((inforeserva.Idhotel).ToString());
-                            hotel.Promediocalificacion = promediocalificacion;
-                            new DAOhotel().actualizarcalificacion(hotel);
-                        }
-                        else
-                        {
-                            mensaje.Mensaje = "Seleccione una opcion a calificar";
-                        }
-
                     }
-                    else if (inforeserva.Calificacion != null)
+                    else
                     {
-                        mensaje.Mensaje = "Este servicio ha sido calificado antes";
+                        mensaje.Mensaje = "No es posible realizar aun esta calificación";
                     }
-                }
-                else
-                {
-                    mensaje.Mensaje = "No es posible realizar aun esta calificación";
-                }
                 }
                 catch
                 {
