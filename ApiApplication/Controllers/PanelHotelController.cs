@@ -51,6 +51,43 @@ namespace ApiApplication.Controllers
             return new LPanelHotel().informacion_de_habitacion(habitacionInfo);
         }
 
+        /// <summary>
+        ///  Servicio para buscar disponibilidad en el hospedaje
+        /// </summary>
+        /// <returns>
+        /// 
+        /// </returns>
+
+        [HttpPost]
+        [Route("api/panelHotel/postBuscarDisponibilidadHotel")]
+        public UDatosUsuario postBuscarDisponibilidadHotel([FromBody] JObject hotel)
+        {
+            UReserva reserva = new UReserva();
+            reserva.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
+            reserva.Fecha_salida = DateTime.Parse(hotel["FechaLlegada"].ToString());
+            reserva.Fecha_llegada = DateTime.Parse(hotel["FechaSalida"].ToString());
+            DateTime fechaMaxima = reserva.Fecha_llegada.AddDays(30);
+            reserva.Numpersona = int.Parse(hotel["NumeroDePersonas"].ToString());
+            reserva.Id_habitacion = int.Parse(hotel["HabitacionIdSession"].ToString());
+
+            return new LReserva().buscarDisponibilidad(reserva, fechaMaxima); 
+        }
+
+        /// <summary>
+        ///  Servicio para reservar hospedaje
+        /// </summary>
+        /// <returns>
+        /// Informacion del hotel
+        /// </returns>
+
+        [HttpPost]
+        [Route("api/panelHotel/postReservarHospedaje")]
+        public async Task<UHotel> postReservarHospedaje([FromBody] JObject hotel)
+        {
+            UHotel hotelinfo = new UHotel();
+            hotelinfo.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
+            return await new LPanelHotel().informacion_del_hotel(hotelinfo);
+        }
 
     }
 }

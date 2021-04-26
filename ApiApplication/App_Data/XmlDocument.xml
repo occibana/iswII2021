@@ -483,11 +483,13 @@
         </member>
         <member name="M:ApiApplication.Controllers.ComentarCalificarController.postComentar(Newtonsoft.Json.Linq.JObject)">
             <summary>
-             Servicio para cargar datos peronales en perfil
+             Servicio para comentar un servicio de hotel
             </summary>
-            <returns>
-            datos peronales en perfil
-            </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.ComentarCalificarController.postCalificar(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para calificar un servicio de hotel
+            </summary>
         </member>
         <member name="M:ApiApplication.Controllers.ListasController.GetLisasZonas">
             <summary>
@@ -590,6 +592,19 @@
             <summary>
              Servicio para Actualizar datos personales
             </summary>
+        </member>
+        <member name="M:ApiApplication.Controllers.PerfilController.postAgregarhabitacion(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para agregar habitacion
+            </summary>
+        </member>
+        <member name="M:ApiApplication.Controllers.PerfilController.postComprarMembresias(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para comprar membresias
+            </summary>
+            <returns>
+            
+            </returns>
         </member>
         <member name="M:ApiApplication.Controllers.RegistroLoginController.PostRegistroUsuario(Utilitarios.URegistro)">
             <summary>

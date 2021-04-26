@@ -11,7 +11,7 @@ namespace Logica
 {
     public class LMisReservas
     {
-        public UMisReservas accionCalificarComentar(int idreserva, string accion)
+        public async Task<UMisReservas> accionCalificarComentar(int idreserva, string accion)
         {
             UMisReservas mensaje = new UMisReservas();
             if (accion == "calificarreserva")
@@ -19,7 +19,7 @@ namespace Logica
                 
                 UReserva inforeserva = new UReserva();
                 inforeserva.Id = idreserva;
-                inforeserva = new DAOReserva().inforeserva(inforeserva);
+                inforeserva = await new DAOReserva().inforeserva(inforeserva);
                 UHotel hotelinfo = new UHotel();
                 hotelinfo.Idhotel = int.Parse((inforeserva.Idhotel).ToString());
                 mensaje.Infohotel = hotelinfo;
@@ -31,7 +31,7 @@ namespace Logica
             {
                 UReserva inforeserva = new UReserva();
                 inforeserva.Id = idreserva;
-                inforeserva = new DAOReserva().inforeserva(inforeserva);
+                inforeserva = await new DAOReserva().inforeserva(inforeserva);
                 if (inforeserva.Fecha_salida <= DateTime.Now)
                 {
                     mensaje.Mensaje = "No es posible eliminar una reserva ya realizada";
