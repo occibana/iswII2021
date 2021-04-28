@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Configuration;
-using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
-using Utilitarios;
 using Logica;
+using Microsoft.IdentityModel.Tokens;
+using Utilitarios;
 
-namespace ApiApplication.Seguridad
+namespace WebApiSegura.Security
 {
     /// <summary>
     /// JWT Token generator class using "secret-key"
@@ -13,46 +13,41 @@ namespace ApiApplication.Seguridad
     /// </summary>
     internal static class TokenGenerator
     {
-        
-        public static string GenerateTokenJwt(URegistro usuario_login)
+        public static string GenerateTokenJwt(URegistro user)
         {
-            
-            // appsetting for Token JWT
+            //TODO: appsetting for Demo JWT - protect correctly this settings
+
             var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
             var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
+            var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
 
-            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes("generartokenlogin"));
+            var securityKey = new SymmetricSecurityKey(System.Text.Encoding.Default.GetBytes(secretKey));
             var signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256Signature);
 
-            // create a claimsIdentity
+            // create a claimsIdentity 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
-                //new Claim(ClaimTypes.Role, usuario_login.Id.ToString()),
-                new Claim(ClaimTypes.Name, usuario_login.Usuario)
-                //new Claim(ClaimTypes.Rsa, usuario_login.Contrasena)
+                new Claim(ClaimTypes.Name, user.Usuario)
+               
             });
 
-            // create token to the user
+            // create token to the user 
             var tokenHandler = new System.IdentityModel.Tokens.Jwt.JwtSecurityTokenHandler();
             var jwtSecurityToken = tokenHandler.CreateJwtSecurityToken(
                 audience: audienceToken,
                 issuer: issuerToken,
                 subject: claimsIdentity,
                 notBefore: DateTime.Now,
-                expires: DateTime.Now.AddMinutes(10),
+                expires: DateTime.Now.AddMinutes(15),
                 signingCredentials: signingCredentials);
 
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
 
             LoginToken token = new LoginToken();
-            token.Userer_id = usuario_login.Id;
             token.FechaGenerado = DateTime.Now;
             token.FechaVigencia = DateTime.Now.AddMinutes(15);
             token.Token = jwtTokenString;
             new LLogin().guardarToken(token);
-
             return jwtTokenString;
-            
         }
-    
     }
 }

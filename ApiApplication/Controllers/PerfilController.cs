@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 //cors
 using System.Web.Http.Cors;
@@ -26,7 +27,7 @@ namespace ApiApplication.Controllers
         /// <returns>
         /// datos peronales en perfil
         /// </returns>
-
+        [Authorize]
         [HttpPost]
         [Route("api/perfil/postCargarDatosPerfil")]
         public async Task<UPerfil> postCargarDatosPerfil(URegistro dato)
@@ -179,5 +180,33 @@ namespace ApiApplication.Controllers
 
             return await new LMembresias().comprar(datoscompra,usuario,usuarioSession);
         }
+
+        /// <summary>
+        /// Servicio para cargar imagen de perfil.
+        /// </summary> 
+        /// <returns>Mensaje de aviso de subido o error</returns>
+        /// <Autor>Jonathan Cardenas</Autor>
+        /// <Fecha>2021/04/26</Fecha>
+        /// <UltimaActualizacion>2021/04/26 - Jonathan Cardenas - Creación del servicio</UltimaActualizacion>
+
+        [HttpPost]
+        [Route("api/perfil/postSubirFoto")]
+        public async Task<UPerfil> postSubirFoto([FromBody] JObject foto)
+        {
+            UPerfil perfil = new UPerfil();
+            URegistro usuario = new URegistro();
+            //byte[] fotoPerfil = byte[].Parse(foto["imagen"].ToString());
+            usuario.Nombre = foto["nombreUsuario"].ToString();
+            perfil = await new LPerfil().cargardatos(usuario);
+            usuario.Id = perfil.Datos.Id;
+            string nombreArchivo = usuario.Nombre + DateTime.Now;
+            string direccion = "~\\Vew\\imgusuarios\\" + nombreArchivo ;
+            string imagen = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\") + nombreArchivo;
+            string imagenEliminar = perfil.Datos.Fotoperfil;
+            imagenEliminar = HttpContext.Current.Server.MapPath(imagenEliminar);
+
+            return await new LPerfil().subirFoto(fotoPerfil, usuario,direccion,imagen,imagenEliminar);
+        }
+
     }
 }

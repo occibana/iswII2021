@@ -6,16 +6,23 @@ using System.Net.Http;
 using System.Web.Http;
 using Utilitarios;
 using Logica;
+using System.Web.Http.Cors;
 
 namespace ApiApplication.Controllers
 {
+    [EnableCors("*", "*", "*")]
     [Route("api/[controller]")]
     public class ListasController : ApiController
-    { 
+    {
         /// <summary>
         ///  Servicio para obtener el listado de zonas municipio Cundinamarca
         /// </summary>
+        /// <param name="idzona">IdZona</param>
+        /// <param name="Nombre">Nombre</param>
         /// <returns>Listado de zonas</returns>
+        /// <Autor>Jonathan Cardenas</Autor>
+        /// <Fecha>2021/04/26</Fecha>
+        /// <UltimaActualizacion>2021/04/26 - Jonathan Cardenas - Creación del servicio</UltimaActualizacion>
         [HttpGet]
         [Route("api/listas/getListasZonas")]
         public List<UHotelZona> GetLisasZonas()
@@ -26,6 +33,8 @@ namespace ApiApplication.Controllers
         /// <summary>
         ///  Servicio para obtener el listado de municipios de Cundinamarca
         /// </summary>
+        /// <param name="idMunicipio">IdZona</param>
+        /// <param name="Nombre">Nombreeeee</param>
         /// <returns>Listado de municipios</returns>
 
         [HttpGet]

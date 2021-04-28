@@ -158,7 +158,7 @@ namespace Data
 
                     if (consulta.nombrehotel != null)
                     {
-                        elementos = elementos.Where(x => x.Nombre.ToUpper().Equals(consulta.nombrehotel)).ToList();
+                        elementos = elementos.Where(x => x.Nombre.ToUpper().Equals(consulta.nombrehotel.ToUpper())).ToList();
                     }
                     if (consulta.preciomin != null && consulta.preciomax != null)
                     {

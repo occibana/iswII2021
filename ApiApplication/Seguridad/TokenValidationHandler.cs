@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.IdentityModel.Tokens;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
+
 using Microsoft.IdentityModel.Tokens;
+using Utilitarios;
 
-using SecurityToken = Microsoft.IdentityModel.Tokens.SecurityToken;
-using SecurityTokenValidationException = System.IdentityModel.Tokens.SecurityTokenValidationException;
-using SymmetricSecurityKey = Microsoft.IdentityModel.Tokens.SymmetricSecurityKey;
-
-namespace WebApiSegura.Controllers
+namespace WebApiSegura.Security
 {
     /// <summary>
     /// Token validator for Authorization Request using a DelegatingHandler
@@ -48,6 +45,8 @@ namespace WebApiSegura.Controllers
 
             try
             {
+                //UAplicacion configuracion = new LSecurity().ObtenerConfiguracion(token);
+
                 var secretKey = ConfigurationManager.AppSettings["JWT_SECRET_KEY"];
                 var audienceToken = ConfigurationManager.AppSettings["JWT_AUDIENCE_TOKEN"];
                 var issuerToken = ConfigurationManager.AppSettings["JWT_ISSUER_TOKEN"];
@@ -87,7 +86,7 @@ namespace WebApiSegura.Controllers
         {
             if (expires != null)
             {
-                if (DateTime.UtcNow < expires) return true;
+                if (DateTime.Now < expires) return true;
             }
             return false;
         }

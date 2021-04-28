@@ -8,10 +8,13 @@ using Utilitarios.Entrada;
 using Logica;
 using Utilitarios;
 using System.Threading.Tasks;
-using ApiApplication.Seguridad;
+
+using System.Web.Http.Cors;
+using WebApiSegura.Security;
 
 namespace ApiApplication.Controllers
 {
+    [EnableCors("*", "*", "*")]
     [RoutePrefix("api/admin")]
     public class SeguridadLoginController : ApiController
     {
@@ -22,7 +25,7 @@ namespace ApiApplication.Controllers
         /// token
         /// </returns>
 
-        [Authorize]
+       
         [Route("login")]
         [HttpPost]
        
