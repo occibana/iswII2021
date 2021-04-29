@@ -26,8 +26,9 @@ namespace WebApiSegura.Security
 
             // create a claimsIdentity 
             ClaimsIdentity claimsIdentity = new ClaimsIdentity(new[] {
-                new Claim(ClaimTypes.Name, user.Usuario)
-               
+                new Claim(ClaimTypes.Name, user.Usuario),
+                new Claim(ClaimTypes.Role, user.Idestado.ToString())
+
             });
 
             // create token to the user 

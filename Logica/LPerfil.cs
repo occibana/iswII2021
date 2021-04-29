@@ -8,16 +8,17 @@ using Utilitarios;
 using Data;
 using System.Web.UI.WebControls;
 using System.IO;
+using System.Web;
 
 namespace Logica
 {
     public class LPerfil
     {
-        public async Task<UPerfil> cargardatos(URegistro datosSession)
+        public UPerfil cargardatos(URegistro datosSession)
         {
             UPerfil perfil = new UPerfil();
             perfil.Datos = new URegistro();
-            URegistro datos = await new DAOLogin().mostrarDatos(datosSession);
+            URegistro datos = new DAOLogin().mostrarDatos(datosSession);
             perfil.Datos.Nombre = datos.Nombre;
             perfil.Datos.Correo = datos.Correo;
             perfil.Datos.Apellido = datos.Apellido;
@@ -69,11 +70,11 @@ namespace Logica
             }
             return perfil;
         }
-        public async Task<string> cerrarsession(URegistro sessionId)
+        public string cerrarsession(URegistro sessionId)
         {
             try
             {
-                URegistro datos = await new DAOLogin().mostrarDatos(sessionId);
+                URegistro datos = new DAOLogin().mostrarDatos(sessionId);
                 new DAOSeguridad().cerrarAcceso(datos.Id);
                 string url = "Login.aspx";
                 return url;
@@ -141,45 +142,49 @@ namespace Logica
         //}
 
 
-        public UPerfil subirFoto(byte[] foto, URegistro session, string direccion, string imagen, string imagenEliminar)
+        public UPerfil subirFoto(byte[] foto, URegistro session, string direccion, string ext, string imagenEliminar)
         {
             UPerfil datos = new UPerfil();
-            if (foto.HasFile)
+            if (foto != null)
             {
-                string ext = System.IO.Path.GetExtension(foto.FileName);//obtiene la extencion del archivo
-                ext = ext.ToLower();//minusculas
+                
+                ext = ext.ToLower();//Extension de la imagen y minusculas
 
-                int tam = foto.PostedFile.ContentLength;//obtiene tamano archivo
+                //int tam = foto.PostedFile.ContentLength;//obtiene tamano archivo
                                                         //string fotoperfil;
 
-                if ((ext == ".jpg" || ext == ".png" || ext == ".jpeg") && (tam < 1048576))//menor a 1MB en bytes
+                if ((ext == ".jpg" || ext == ".png" || ext == ".jpeg"))//menor a 1MB en bytes  (tam < 1048576)
                 {
 
                     try
                     {
                         //imagen
-                        foto.PostedFile.SaveAs(imagen);//mapea y guarda el archivo en la direccion
+                        string direc = HttpContext.Current.Server.MapPath(direccion);
+                        FileStream fileStream = new FileStream(direc, FileMode.Create, FileAccess.ReadWrite);
+                        fileStream.Write(foto, 0, foto.Length);//mapea y guarda el archivo en la direccion
+                        fileStream.Close();
+                        datos.Mensaje = "*Imagen aceptada";
+                        //actualiza foto de perfil
+                        URegistro nuevodat = new URegistro();
+                        nuevodat.Id = session.Id;
+                        nuevodat.Fotoperfil = direccion;
+                        new DAOLogin().actualizarfoto(nuevodat);
+
+
+                        if (File.Exists(imagenEliminar))
+                        {
+                            File.Delete(imagenEliminar);
+                        }
+
+                        session.Fotoperfil = nuevodat.Fotoperfil;
+                        datos.Fotoperfil = nuevodat.Fotoperfil;
+                        datos.Mensaje = "*Imagen cargada con exito";
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         datos.Mensaje = "*Verifique la imagen y cargue nuevamente";
                     }
-                    datos.Mensaje = "*Imagen aceptada";
-                    //actualiza foto de perfil
-                    URegistro nuevodat = new URegistro();
-                    nuevodat.Id = session.Id;
-                    nuevodat.Fotoperfil = direccion;
-                    new DAOLogin().actualizarfoto(nuevodat);
-
-
-                    if (File.Exists(imagenEliminar))
-                    {
-                        File.Delete(imagenEliminar);
-                    }
-
-                    session.Fotoperfil = nuevodat.Fotoperfil;
-                    datos.Fotoperfil = nuevodat.Fotoperfil;
-                    datos.Mensaje = "*Imagen cargada con exito";
+                    
                 }
                 else
                 {

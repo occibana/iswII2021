@@ -107,10 +107,10 @@ namespace Data
                 }
             }
 
-        public async Task<URegistro> mostrarDatos(URegistro datoE)
+        public URegistro mostrarDatos(URegistro datoE)
         {
             URegistro datosUsuario = new URegistro();
-            datosUsuario = await new Mapeo().usuario.Where(x => x.Usuario.Equals(datoE.Usuario)).FirstOrDefaultAsync();
+            datosUsuario = new Mapeo().usuario.Where(x => x.Usuario.Equals(datoE.Usuario)).FirstOrDefault();
             return datosUsuario;
         }
 

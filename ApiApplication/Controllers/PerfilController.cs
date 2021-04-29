@@ -30,9 +30,9 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/perfil/postCargarDatosPerfil")]
-        public async Task<UPerfil> postCargarDatosPerfil(URegistro dato)
+        public UPerfil postCargarDatosPerfil(URegistro dato)
         {
-            return await new LPerfil().cargardatos(dato);
+            return new LPerfil().cargardatos(dato);
         }
 
         /// <summary>
@@ -64,11 +64,11 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/perfil/postCerrarSesion")]
-        public async Task<string> postCerrarSesion([FromBody] JObject datoUsuario)
+        public string postCerrarSesion([FromBody] JObject datoUsuario)
         {
             URegistro datos = new URegistro();
             datos.Usuario = datoUsuario["usuario"].ToString();
-            return await new LPerfil().cerrarsession(datos);
+            return new LPerfil().cerrarsession(datos);
         }
 
         /// <summary>
@@ -191,21 +191,32 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/perfil/postSubirFoto")]
-        public async Task<UPerfil> postSubirFoto([FromBody] JObject foto)
+        public UPerfil postSubirFoto([FromBody] JObject foto)
         {
             UPerfil perfil = new UPerfil();
             URegistro usuario = new URegistro();
             //byte[] fotoPerfil = byte[].Parse(foto["imagen"].ToString());
-            usuario.Nombre = foto["nombreUsuario"].ToString();
-            perfil = await new LPerfil().cargardatos(usuario);
+
+            JToken imagenPerfil = foto["imagen"];
+            List<byte> listadebytes = new List<byte>();
+            foreach (JToken bite in imagenPerfil)
+            {
+                listadebytes.Add(byte.Parse(bite.ToString()));
+            }
+            byte[] fotoPerfil = listadebytes.ToArray();
+
+            usuario.Usuario = foto["usuario"].ToString();
+            perfil = new LPerfil().cargardatos(usuario);
             usuario.Id = perfil.Datos.Id;
-            string nombreArchivo = usuario.Nombre + DateTime.Now;
-            string direccion = "~\\Vew\\imgusuarios\\" + nombreArchivo ;
-            string imagen = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\") + nombreArchivo;
+            string nombreArchivo = usuario.Usuario + "Perfil";
+           
+            //string imagen = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\") + nombreArchivo;
+            string ext = foto["extension"].ToString();
+            string direccion = "~\\Vew\\imgusuarios\\" + nombreArchivo + ext;
             string imagenEliminar = perfil.Datos.Fotoperfil;
             imagenEliminar = HttpContext.Current.Server.MapPath(imagenEliminar);
 
-            return await new LPerfil().subirFoto(fotoPerfil, usuario,direccion,imagen,imagenEliminar);
+            return  new LPerfil().subirFoto(fotoPerfil, usuario,direccion,ext,imagenEliminar);
         }
 
     }
