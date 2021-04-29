@@ -22,10 +22,12 @@ namespace Data
                 return verificacion;
             }
 
-            public async Task<URegistro> verificarLogin(LoginRequest loginE)
+            public async Task<URegistro> verificarLogin(LoginRequest loginE, UAcceso acceso)
             {
                 URegistro verificacion = new URegistro();
                 verificacion = await new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefaultAsync();
+                acceso.Userid = verificacion.Id;
+                new DAOSeguridad().insertarAcceso(acceso);
                 return verificacion;
             }
 

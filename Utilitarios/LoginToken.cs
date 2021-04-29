@@ -13,7 +13,7 @@ namespace Utilitarios
     public class LoginToken
     {
         private int id;
-        private int userer_id;
+        private int user_id;
         private DateTime fechaGenerado;
         private DateTime fechaVigencia;
         private String token;
@@ -22,7 +22,7 @@ namespace Utilitarios
         [Column("id")]
         public int Id { get => id; set => id = value; }
         [Column("user_id")]
-        public int Userer_id { get => userer_id; set => userer_id = value; }
+        public int User_id { get => user_id; set => user_id = value; }
         [Column("fecha_generado")]
         public DateTime FechaGenerado { get => fechaGenerado; set => fechaGenerado = value; }
         [Column("fecha_vigencia")]

@@ -58,6 +58,7 @@ namespace Data
                 db.acceso.Add(acceso);
                 db.SaveChanges();
             }
+
         }
         //capturar momento de des-logeo
         public void cerrarAcceso(int userid)
@@ -74,7 +75,18 @@ namespace Data
                 db.SaveChanges();
             }
         }
-        
+
+        //berra token de autenticacion del login - API
+        public void borrarTokenLogin(URegistro idUsuario)
+        {
+            using (var db = new Mapeo())
+            {
+                LoginToken usuario = db.login_token.Where(x => x.User_id == idUsuario.Id).First();   
+                db.login_token.Remove(usuario);
+                db.SaveChanges();
+            }
+        }
+
         //guardar datos de compra
         public void insertarCompra(UMembresia datos)
         {

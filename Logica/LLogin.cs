@@ -14,7 +14,17 @@ namespace Logica
     {
         public async Task<URegistro> ingresoLogin(LoginRequest login)
         {
-            return await new DAOLogin().verificarLogin(login);
+            UMAC datos = new UMAC();
+            UAcceso acceso = new UAcceso();
+            MAC conexion = new MAC();
+            acceso.FechaInicio = DateTime.Now;
+            acceso.Ip = conexion.ip();
+            acceso.Mac = conexion.mac();
+            acceso.Session = "fgcypsr1u0ya0t5qd3o2runw";
+            
+            
+
+            return await new DAOLogin().verificarLogin(login,acceso);
         }
         
         public async Task guardarToken(LoginToken token){

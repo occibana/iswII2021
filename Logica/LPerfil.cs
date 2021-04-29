@@ -76,6 +76,8 @@ namespace Logica
             {
                 URegistro datos = new DAOLogin().mostrarDatos(sessionId);
                 new DAOSeguridad().cerrarAcceso(datos.Id);
+                new DAOSeguridad().borrarTokenLogin(datos);
+
                 string url = "Login.aspx";
                 return url;
             }

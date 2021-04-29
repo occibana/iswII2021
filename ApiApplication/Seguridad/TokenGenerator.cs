@@ -46,6 +46,7 @@ namespace WebApiSegura.Security
             LoginToken token = new LoginToken();
             token.FechaGenerado = DateTime.Now;
             token.FechaVigencia = DateTime.Now.AddMinutes(15);
+            token.User_id = user.Id;
             token.Token = jwtTokenString;
             new LLogin().guardarToken(token);
             return jwtTokenString;
