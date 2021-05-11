@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 
 using System.Web.Http.Cors;
 using WebApiSegura.Security;
+using Newtonsoft.Json.Linq;
+
 
 namespace ApiApplication.Controllers
 {
@@ -25,10 +27,9 @@ namespace ApiApplication.Controllers
         /// token
         /// </returns>
 
-       
         [Route("login")]
         [HttpPost]
-       
+
         public async Task<IHttpActionResult> login(LoginRequest login)
         {
             string mensaje;
@@ -42,7 +43,6 @@ namespace ApiApplication.Controllers
                     {
                         error += $" {item.ErrorMessage}";
                     }
-
                 }
                 return BadRequest(error);
             }
@@ -56,6 +56,47 @@ namespace ApiApplication.Controllers
                 return Ok(token);
             }
         }
+
+        /// <summary>
+        ///  Servicio para enviar el correo con el codigo de recuperacion
+        ///  de contraseña
+        /// </summary>
+        /// <returns>
+        /// token
+        /// </returns>
+        [HttpPost]
+        [Route("postCorreoRecuperacion")]
+        [Authorize]
+        public string postCorreoRecuperacion(URegistro usuario)
+        {
+            return new LRecuperarcontrasena().enviar_token(usuario);
+        }
+
+        /// <summary>
+        ///  Servicio que valida el codigo de recuperacion de contraseña
+        ///  y actuzaliza la contraseña con la nueva contreseña
+        /// </summary>
+        /// <returns>
+        /// token
+        /// </returns>
+
+        [HttpPut]
+        [Route("putReactivarCuenta")]
+        [Authorize]
+        public URegistro putContrasenaRecuperada([FromBody] JObject recuperacion)
+        {
+            URegistro datos = new URegistro();
+            UPerfil perfil = new UPerfil();
+            datos.Usuario = recuperacion["usuario"].ToString();
+            datos.Contrasena = recuperacion["contrasena"].ToString();
+            string codigo =recuperacion["codigo"].ToString();
+            perfil = new LPerfil().cargardatos(datos);
+            datos.Id = perfil.Datos.Id;
+
+            return new LReactivarCuenta().recuperarContrasena(codigo, datos);
+
+        }
+
 
         /*
         [Route("Get-Users")]

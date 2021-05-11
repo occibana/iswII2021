@@ -16,7 +16,7 @@ namespace ApiApplication.Controllers
     [EnableCors("*", "*", "*")]
 
     [Route("api/[controller]")]
-
+    [Authorize]
     public class ComentarCalificarController : ApiController
     {
         /// <summary>

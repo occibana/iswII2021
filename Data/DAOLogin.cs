@@ -26,10 +26,22 @@ namespace Data
             {
                 URegistro verificacion = new URegistro();
                 verificacion = await new Mapeo().usuario.Where(x => x.Usuario.Equals(loginE.Usuario) && x.Contrasena.Equals(loginE.Contrasena)).FirstOrDefaultAsync();
+
+                if (verificacion != null)
+            {
                 acceso.Userid = verificacion.Id;
                 new DAOSeguridad().insertarAcceso(acceso);
-                return verificacion;
+                
             }
+            //else
+            //{
+            //    URegistro mensaje = new URegistro();
+            //    mensaje.Mensaje = "Datos incorrectos, verifique su usuario y contraseña";
+            //    return mensaje;
+            //}
+            return verificacion;
+
+        }
 
         //verificacion login - compra
         public async Task<URegistro> verificarLogincompra(URegistro loginE)
@@ -93,7 +105,9 @@ namespace Data
             //verificacion usuario para token_segiruridad
             public URegistro verificarusuarioparatoken(URegistro usuarioE)
             {
-                return new Mapeo().usuario.Where(x => x.Usuario.ToUpper().Equals(usuarioE.Usuario.ToUpper()) && x.Correo.Equals(usuarioE.Correo)).FirstOrDefault();
+                URegistro verificacion = new URegistro();
+            verificacion = new Mapeo().usuario.Where(x => x.Usuario.ToUpper().Equals(usuarioE.Usuario.ToUpper()) && x.Correo.Equals(usuarioE.Correo)).FirstOrDefault();
+                return verificacion;
             }
 
             //actualiza contraseña

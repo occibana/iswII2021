@@ -21,7 +21,7 @@ namespace Utilitarios
             mail.From = new MailAddress("occibana@gmail.com", "Recuperacion contrasena");//correo que envia, diplay name 
             SmtpSever.Host = "smtp.gmail.com";//servidor gmail
             mail.Subject = "Recupere su contraseña";//asunto
-            mail.Body = "Su contraseña ha sido aprobada para recuperacion, utilice este link para recuperar su contraseña ahoramismo.\n" +
+            mail.Body = "Usted a solicitado un recuperacion de contraseña, utilice este codigo para recuperar su contraseña ahoramismo.\n" +
                 "Cuenta con una (1) hora para hacer valida la recuperacion.\n" + linkacceso;
             mail.To.Add(correodestino);//destino del correo
             mail.IsBodyHtml = true;

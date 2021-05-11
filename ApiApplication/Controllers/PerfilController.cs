@@ -18,7 +18,7 @@ namespace ApiApplication.Controllers
     [EnableCors("*", "*", "*")]
 
     [Route("api/[controller]")]
-
+    [Authorize]
     public class PerfilController : ApiController
     {
         /// <summary>
@@ -96,44 +96,6 @@ namespace ApiApplication.Controllers
         }
 
         /// <summary>
-        ///  Servicio para agregar un servicio de hotel
-        /// </summary>
-        /*
-        [HttpPost]
-        [Route("api/registroLogin/postAgregarServicioHotel")]
-        public async Task<string> postAgregarServicioHotel([FromBody] JObject datosHotel)
-        {
-            UHotel hotel = new UHotel();
-            
-            hotel.Nombre = datosHotel["Nombre"].ToString();
-            hotel.Municipio = datosHotel["Municipio"].ToString();
-            hotel.Idmunicipio = int.Parse(datosHotel["IdMunicipio"].ToString());
-            hotel.Numhabitacion = int.Parse(datosHotel["NumeroDeHabitaciones"].ToString());
-            hotel.Precionoche = int.Parse(datosHotel["PrecioNocheBasica"].ToString());
-            hotel.PrecioNocheDoble = int.Parse(datosHotel["PrecioNocheDoble"].ToString());
-            hotel.PrecioNochePremium = int.Parse(datosHotel["PrecioNochePremium"].ToString());
-            hotel.Descripcion = datosHotel["Descripcion"].ToString();;
-            hotel.Condicion = datosHotel["Condicion"].ToString();
-            hotel.Checkin = datosHotel["CheckIn"].ToString();
-            hotel.Checkout = datosHotel["CheckOut"].ToString();
-            hotel.Usuarioencargado = datosHotel["UsuarioEncargado"].ToString();
-            hotel.Idusuario = int.Parse(datosHotel["IdUsuario"].ToString());
-            hotel.Idzona = int.Parse(datosHotel["IdZona"].ToString());
-            hotel.Condicionesbioseguridad = datosHotel["CondicionesBioseguridad"].ToString(); 
-            hotel.Direccion = datosHotel["Direccion"].ToString();
-            string direccionImagen1= datosHotel["DireccionImagen1"].ToString();
-            string direccionImagen2 = datosHotel["DireccionImagen2"].ToString();
-            string direccionImagen3 = datosHotel["DireccionImagen3"].ToString();
-            string direccionImagen1G = datosHotel["DireccionImagen1G"].ToString();
-            string direccionImagen2G = datosHotel["DireccionImagen2G"].ToString();
-            string direccionImagen3G = datosHotel["DireccionImagen3G"].ToString();
-            string Imagen1 = datosHotel["Imagen1"].ToString();
-            string Imagen2 = datosHotel["Imagen2"].ToString();
-            string Imagen3 = datosHotel["Imagen3G"].ToString();
-            return await new LAgregarServicioHotel().insertHotel(Imagen1,Imagen2,Imagen3, direccionImagen1, direccionImagen2, direccionImagen3, direccionImagen1G, direccionImagen2G, direccionImagen3G,hotel);
-        }*/
-
-        /// <summary>
         ///  Servicio para agregar habitacion
         /// </summary>
 
@@ -195,7 +157,6 @@ namespace ApiApplication.Controllers
         {
             UPerfil perfil = new UPerfil();
             URegistro usuario = new URegistro();
-            //byte[] fotoPerfil = byte[].Parse(foto["imagen"].ToString());
 
             JToken imagenPerfil = foto["imagen"];
             List<byte> listadebytes = new List<byte>();
@@ -218,6 +179,8 @@ namespace ApiApplication.Controllers
 
             return  new LPerfil().subirFoto(fotoPerfil, usuario,direccion,ext,imagenEliminar);
         }
+
+
 
     }
 }
