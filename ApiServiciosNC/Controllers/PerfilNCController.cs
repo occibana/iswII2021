@@ -1,50 +1,38 @@
-﻿using Logica;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http;
-//cors
-using System.Web.Http.Cors;
+using DataNC;
+using LogicaNC;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
 using Utilitarios;
 
-namespace ApiApplication.Controllers
+namespace ApiServiciosNC.Controllers
 {
-    //[EnableCors(origins:"*", headers: "*", methods:"*")]
-    [EnableCors("*", "*", "*")]
-
     [Route("api/[controller]")]
-    [Authorize]
-    public class PerfilController : ApiController
+    [ApiController]
+    public class PerfilNCController : ControllerBase
     {
-        /// <summary>
-        ///  Servicio para cargar datos peronales en perfil
-        /// </summary>
-        /// <returns>
-        /// datos peronales en perfil
-        /// </returns>
-        [Authorize]
-        [HttpPost]
-        [Route("api/perfil/postCargarDatosPerfil")]
-        public UPerfil postCargarDatosPerfil(URegistro dato)
+        private readonly Mapeo _context;
+
+        public PerfilNCController(Mapeo context)
         {
-            return new LPerfil().cargardatos(dato);
+            _context = context;
         }
 
-        /// <summary>
-        ///  Servicio para actualizar contraseña
-        /// </summary>
-        /// <returns>
-        /// actualizacion contraseña
-        /// </returns>
+        [Authorize]
+        [HttpPost]
+        [Route("api/perfilNC/postCargarDatosPerfil")]
+        public UPerfil postCargarDatosPerfil(URegistro dato)
+        {
+            return new LPerfil(_context).cargardatos(dato);
+        }
 
         [HttpPut]
-        [Route("api/perfil/putActualizarContrasena")]
-        public async Task<IHttpActionResult> putActualizarContrasena([FromBody] JObject contrasena)
+        [Route("api/perfilNC/putActualizarContrasena")]
+        public async Task<ActionResult> putActualizarContrasena([FromBody] JObject contrasena)
         {
             URegistro registro = new URegistro();
             //registro.Id = int.Parse(contrasena["Id"].ToString());
@@ -53,74 +41,53 @@ namespace ApiApplication.Controllers
             string contraAct = contrasena["contrasenaAct"].ToString();
             string contraNueva = contrasena["contrasenaNueva"].ToString();
 
-            UActualizarContrasena actualizarContra = await new LActualizarContrasena().actualizarContrasena(registro, contraAct, contraNueva);
+            UActualizarContrasena actualizarContra = await new LActualizarContrasena(_context).actualizarContrasena(registro, contraAct, contraNueva);
             var datos = actualizarContra;
             return Ok(datos);
         }
 
-        /// <summary>
-        ///  Servicio para cerrar session - recibe usuario como parametro
-        /// </summary>
-
         [HttpPost]
-        [Route("api/perfil/postCerrarSesion")]
+        [Route("api/perfilNC/postCerrarSesion")]
         public string postCerrarSesion([FromBody] JObject datoUsuario)
         {
             URegistro datos = new URegistro();
             datos.Usuario = datoUsuario["usuario"].ToString();
-            return new LPerfil().cerrarsession(datos);
+            return new LPerfil(_context).cerrarsession(datos);
         }
 
-        /// <summary>
-        ///  Servicio para Actualizar datos personales
-        /// </summary>
-
         [HttpPost]
-        [Route("api/perfil/postActualizarDatos")]
+        [Route("api/perfilNC/postActualizarDatos")]
         public async Task<UActualizarDatos> postActualizarDatos([FromBody] JObject datoUsuario)
         {
             URegistro datosRegistro = new URegistro();
             URegistro datosSession = new URegistro();
-            UPerfil perfil = new UPerfil();
             datosRegistro.Nombre = datoUsuario["NombreRegistro"].ToString();
             datosRegistro.Apellido = datoUsuario["ApellidoRegistro"].ToString();
             datosRegistro.Usuario = datoUsuario["UsuarioRegistro"].ToString();
             datosRegistro.Telefono = datoUsuario["TelefonoRegistro"].ToString();
             datosRegistro.Correo = datoUsuario["CorreoRegistro"].ToString();
-
             datosSession.Nombre = datoUsuario["NombreSession"].ToString();
             datosSession.Apellido = datoUsuario["ApellidoSession"].ToString();
             datosSession.Usuario = datoUsuario["UsuarioSession"].ToString();
             datosSession.Telefono = datoUsuario["TelefonoSession"].ToString();
             datosSession.Correo = datoUsuario["CorreoSession"].ToString();
-            datosSession.Id = int.Parse(datoUsuario["UsuarioIdSession"].ToString());
-            return await new LActualizarDatos().actualizarDatos(datosRegistro, datosSession);
+            datosSession.Correo = datoUsuario["UsuarioIdSession"].ToString();
+            return await new LActualizarDatos(_context).actualizarDatos(datosRegistro, datosSession);
         }
 
-        /// <summary>
-        ///  Servicio para agregar habitacion
-        /// </summary>
-
         [HttpPost]
-        [Route("api/perfil/postAgregarhabitacion")]
+        [Route("api/perfilNC/postAgregarhabitacion")]
         public async Task<UHabitacion> postAgregarhabitacion([FromBody] JObject datoUsuario)
         {
             UHabitacion habitacion = new UHabitacion();
             habitacion.Tipo = datoUsuario["TipoHabitacion"].ToString();
             habitacion.Idhotel = int.Parse(datoUsuario["IdHotel"].ToString());
             int idTipo = int.Parse(datoUsuario["usuario"].ToString());
-            return await new LHabitacion().agregarHabitacion(idTipo,habitacion);
+            return await new LHabitacion(_context).agregarHabitacion(idTipo, habitacion);
         }
 
-        /// <summary>
-        ///  Servicio para comprar membresias
-        /// </summary>
-        /// <returns>
-        /// 
-        /// </returns>
-
         [HttpPost]
-        [Route("api/perfil/postComprarMembresias")]
+        [Route("api/perfilNC/postComprarMembresias")]
         public async Task<UMembresias> postComprarMembresias([FromBody] JObject dato)
         {
             UMembresia datoscompra = new UMembresia();
@@ -142,19 +109,11 @@ namespace ApiApplication.Controllers
             usuarioSession.Usuario = dato["UsuarioSession"].ToString();
             usuarioSession.Id = int.Parse(dato["IdUsuarioSession"].ToString());
 
-            return await new LMembresias().comprar(datoscompra,usuario,usuarioSession);
+            return await new LMembresias(_context).comprar(datoscompra, usuario, usuarioSession);
         }
 
-        /// <summary>
-        /// Servicio para cargar imagen de perfil.
-        /// </summary> 
-        /// <returns>Mensaje de aviso de subido o error</returns>
-        /// <Autor>Jonathan Cardenas</Autor>
-        /// <Fecha>2021/04/26</Fecha>
-        /// <UltimaActualizacion>2021/04/26 - Jonathan Cardenas - Creación del servicio</UltimaActualizacion>
-
         [HttpPost]
-        [Route("api/perfil/postSubirFoto")]
+        [Route("api/perfilNC/postSubirFoto")]
         public UPerfil postSubirFoto([FromBody] JObject foto)
         {
             UPerfil perfil = new UPerfil();
@@ -169,20 +128,18 @@ namespace ApiApplication.Controllers
             byte[] fotoPerfil = listadebytes.ToArray();
 
             usuario.Usuario = foto["usuario"].ToString();
-            perfil = new LPerfil().cargardatos(usuario);
+            perfil = new LPerfil(_context).cargardatos(usuario);
             usuario.Id = perfil.Datos.Id;
             string nombreArchivo = usuario.Usuario + "Perfil";
-           
+
             //string imagen = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\") + nombreArchivo;
             string ext = foto["extension"].ToString();
             string direccion = "~\\Vew\\imgusuarios\\" + nombreArchivo + ext;
             string imagenEliminar = perfil.Datos.Fotoperfil;
-            imagenEliminar = HttpContext.Current.Server.MapPath(imagenEliminar);
+            imagenEliminar = ""; // HttpContext.Current.Server.MapPath(imagenEliminar);
 
-            return  new LPerfil().subirFoto(fotoPerfil, usuario,direccion,ext,imagenEliminar);
+            return new LPerfil(_context).subirFoto(fotoPerfil, usuario, direccion, ext, imagenEliminar);
         }
-
-
 
     }
 }

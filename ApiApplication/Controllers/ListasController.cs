@@ -7,6 +7,7 @@ using System.Web.Http;
 using Utilitarios;
 using Logica;
 using System.Web.Http.Cors;
+using Newtonsoft.Json.Linq;
 
 namespace ApiApplication.Controllers
 {
@@ -91,8 +92,14 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/listas/postHabitacionesHotel")]
-        public List<UHabitacion> PostHabitacionesHotel(UHotel idE, UFiltro consulta)
+        public List<UHabitacion> PostHabitacionesHotel([FromBody] JObject hHotel )
         {
+            UHotel idE = new UHotel();
+            UFiltro consulta = new UFiltro();
+            //UHotel idE, UFiltro consulta
+            idE.Idhotel = int.Parse(hHotel["idHotel"].ToString());
+            consulta.numpersonas = int.Parse(hHotel["numPersonas"].ToString());
+
             return new Listas().habitacionesHotel(idE, consulta);
         }
 
