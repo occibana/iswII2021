@@ -19,6 +19,7 @@ namespace Logica
             UPerfil perfil = new UPerfil();
             perfil.Datos = new URegistro();
             URegistro datos = new DAOLogin().mostrarDatos(datosSession);
+
             perfil.Datos.Nombre = datos.Nombre;
             perfil.Datos.Correo = datos.Correo;
             perfil.Datos.Apellido = datos.Apellido;

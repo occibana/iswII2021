@@ -6,6 +6,7 @@ using Utilitarios.Entrada;
 //cors
 using System.Web.Http.Cors;
 using WebApiSegura.Security;
+using System;
 
 namespace ApiApplication.Controllers
 {
@@ -25,9 +26,20 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/registroLogin/postRegistroUsuario")]
-        public async Task<URegistroMensaje> PostRegistroUsuario(URegistro registro)
+        public async Task<IHttpActionResult> PostRegistroUsuario(URegistro registro)
         {
-            return await new LRegistro().registro(registro);
+            URegistroMensaje mensaje = new URegistroMensaje();
+            try
+            { 
+                mensaje = await new LRegistro().registro(registro);
+                var msj = mensaje.Mensaje;
+                return Ok(msj);
+            }
+            catch (Exception ex)
+            {
+                var error = mensaje.Mensaje;
+                return BadRequest(error+" "+ex);
+            }
         }
 
 
@@ -57,7 +69,8 @@ namespace ApiApplication.Controllers
             URegistro usuario_login = await new LLogin().ingresoLogin(login);
             if (usuario_login == null)
             {
-                return Unauthorized();
+                var mensaje = "Usuario o contraseña incorrecto";
+                return BadRequest(mensaje);
             }
             else
             {

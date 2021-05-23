@@ -37,9 +37,9 @@ namespace Data
 
 
         //select mostrar reservas
-        public List<UReserva> mostrarreservas(int disponibilidadE)
+        public List<UReserva> mostrarreservas(int idhotel)
         {
-            return new Mapeo().reserva.Where(x => x.Idhotel == disponibilidadE && x.Fecha_salida >= DateTime.Now).ToList();
+            return new Mapeo().reserva.Where(x => x.Idhotel == idhotel && x.Fecha_salida >= DateTime.Now).ToList();
         }
 
         //select mostrar reservas completadas

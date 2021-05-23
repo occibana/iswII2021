@@ -42,6 +42,11 @@ namespace Logica
             return new DAOReserva().mostrarmisreservas(disponibilidadE);
         }
 
+        public List<UHotel> mostrarMisHoteles(URegistro usuarioId)
+        {
+            return new DAOhotel().obtenerhoteles(usuarioId);
+        }
+
         public List<UHabitacion> habitacionesHotel(UHotel idE, UFiltro consulta)
         {
             return new DAOHabitacion().habitacionesHotel(idE,consulta);
@@ -65,7 +70,7 @@ namespace Logica
         //Tablas-Acciones
         public void eliminarHotelTabla(UHotel id)
         {
-              new DAOhotel().deleteHotel(id);
+              new DAOhotel().deleteHabitacion(id);
         }
 
     }

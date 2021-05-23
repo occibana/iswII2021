@@ -21,22 +21,28 @@ namespace ApiApplication.Controllers
 
         /// <summary>
         ///  Servicio para cargar información hotel seleccionado
+        ///  {
+        ///  "IdDelHotelSession","int"
+        ///  }
         /// </summary>
         /// <returns>
         /// Informacion del hotel
         /// </returns>
-
         [HttpPost]
         [Route("api/panelHotel/postInformacionDelHotel")]
         public async Task<UHotel> postInformacionDelHotel([FromBody] JObject hotel)
         {
             UHotel hotelinfo = new UHotel();
+    
             hotelinfo.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
             return await new LPanelHotel().informacion_del_hotel(hotelinfo);
         }
 
         /// <summary>
         ///  Servicio para cargar información de la habitacion seleccionada en un hotel
+        /// {
+        /// "IdHabitacionSession":"int" 
+        /// }
         /// </summary>
         /// <returns>
         /// Informacion dela habitacion
@@ -53,6 +59,9 @@ namespace ApiApplication.Controllers
 
         /// <summary>
         ///  Servicio para buscar disponibilidad en el hospedaje
+        ///  {
+        ///  "IdDelHotelSession":"int","FechaLlegada":"string aaaa-mm-dd","FechaSalida":"string aaaa-mm-dd","NumeroDePersonas":"int", "HabitacionIdSession":"int"
+        ///  }
         /// </summary>
         /// <returns>
         /// 
@@ -64,8 +73,8 @@ namespace ApiApplication.Controllers
         {
             UReserva reserva = new UReserva();
             reserva.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
-            reserva.Fecha_salida = DateTime.Parse(hotel["FechaLlegada"].ToString());
-            reserva.Fecha_llegada = DateTime.Parse(hotel["FechaSalida"].ToString());
+            reserva.Fecha_salida = DateTime.Parse(hotel["FechaSalida"].ToString());
+            reserva.Fecha_llegada = DateTime.Parse(hotel["FechaLlegada"].ToString());
             DateTime fechaMaxima = reserva.Fecha_llegada.AddDays(30);
             reserva.Numpersona = int.Parse(hotel["NumeroDePersonas"].ToString());
             reserva.Id_habitacion = int.Parse(hotel["HabitacionIdSession"].ToString());
@@ -73,6 +82,7 @@ namespace ApiApplication.Controllers
             return new LReserva().buscarDisponibilidad(reserva, fechaMaxima); 
         }
 
+        //F
         /// <summary>
         ///  Servicio para reservar hospedaje
         /// </summary>

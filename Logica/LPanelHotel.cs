@@ -22,7 +22,7 @@ namespace Logica
 
         public UHabitacion informacion_de_habitacion(UHabitacion habitacioninfo)
         {
-            habitacioninfo = new DAOHabitacion().infoHabitacion(habitacioninfo.Id);
+            habitacioninfo = new DAOHabitacion().infoHabitacion(habitacioninfo.Idhotel);
            
             return habitacioninfo;
         }

@@ -23,6 +23,7 @@ namespace ApiApplication.Controllers
     {
         /// <summary>
         ///  Servicio para cargar datos peronales en perfil
+        ///  {"usuario": "string"}
         /// </summary>
         /// <returns>
         /// datos peronales en perfil
@@ -30,18 +31,32 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/perfil/postCargarDatosPerfil")]
-        public UPerfil postCargarDatosPerfil(URegistro dato)
+        public IHttpActionResult postCargarDatosPerfil(URegistro dato)
         {
-            return new LPerfil().cargardatos(dato);
+            try
+            {
+                return Ok(new LPerfil().cargardatos(dato));
+            }
+            catch(Exception ex)
+            {
+                var mensaje = "surgio el siguente error: "+ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+            
         }
 
         /// <summary>
         ///  Servicio para actualizar contraseña
+        ///  {
+        ///  "usuario":"string",
+        ///  "Correo":"string-correo",
+        ///  "contrasenaAct":"string",
+        ///  "contrasenaNueva":"string"
+        ///  }
         /// </summary>
         /// <returns>
         /// actualizacion contraseña
         /// </returns>
-
         [HttpPut]
         [Route("api/perfil/putActualizarContrasena")]
         public async Task<IHttpActionResult> putActualizarContrasena([FromBody] JObject contrasena)
@@ -60,8 +75,10 @@ namespace ApiApplication.Controllers
 
         /// <summary>
         ///  Servicio para cerrar session - recibe usuario como parametro
+        ///  {"usuario": "string"}
         /// </summary>
-
+        
+        [Authorize]
         [HttpPost]
         [Route("api/perfil/postCerrarSesion")]
         public string postCerrarSesion([FromBody] JObject datoUsuario)
@@ -72,16 +89,29 @@ namespace ApiApplication.Controllers
         }
 
         /// <summary>
-        ///  Servicio para Actualizar datos personales
+        /// Servicio para Actualizar datos personales
+        /// {
+        ///  "NombreRegistro":"string o null",
+        ///  "ApellidoRegistro":"string o null",
+        ///  "UsuarioRegistro":"string o null",
+        ///  "TelefonoRegistro":"string o null",
+        ///  "CorreoRegistro":"string o null",
+        ///  "NombreSession":"string",
+        ///  "ApellidoSession":"string",
+        ///  "UsuarioSession":"string",
+        ///  "TelefonoSession":"string",
+        ///  "CorreoSession":"string",
+        ///  "UsuarioIdSession":int
+        /// }
         /// </summary>
 
+        [Authorize]
         [HttpPost]
         [Route("api/perfil/postActualizarDatos")]
         public async Task<UActualizarDatos> postActualizarDatos([FromBody] JObject datoUsuario)
         {
             URegistro datosRegistro = new URegistro();
             URegistro datosSession = new URegistro();
-            UPerfil perfil = new UPerfil();
             datosRegistro.Nombre = datoUsuario["NombreRegistro"].ToString();
             datosRegistro.Apellido = datoUsuario["ApellidoRegistro"].ToString();
             datosRegistro.Usuario = datoUsuario["UsuarioRegistro"].ToString();
@@ -99,8 +129,16 @@ namespace ApiApplication.Controllers
 
         /// <summary>
         ///  Servicio para agregar habitacion
+        ///  {
+        ///  "TipoHabitacion":"string o null",
+        ///  "IdHotel":int,
+        ///  "tipoHabitacion":int
+        ///  }
+        ///  tipoHabitacion 1:basica , 2:doble , 3:premium
+        ///  TipoHabitacion por defecto : --Seleccionar--
         /// </summary>
 
+        [Authorize]
         [HttpPost]
         [Route("api/perfil/postAgregarhabitacion")]
         public async Task<UHabitacion> postAgregarhabitacion([FromBody] JObject datoUsuario)
@@ -108,12 +146,25 @@ namespace ApiApplication.Controllers
             UHabitacion habitacion = new UHabitacion();
             habitacion.Tipo = datoUsuario["TipoHabitacion"].ToString();
             habitacion.Idhotel = int.Parse(datoUsuario["IdHotel"].ToString());
-            int idTipo = int.Parse(datoUsuario["usuario"].ToString());
+            int idTipo = int.Parse(datoUsuario["tipoHabitacion"].ToString());
             return await new LHabitacion().agregarHabitacion(idTipo,habitacion);
         }
 
         /// <summary>
         ///  Servicio para comprar membresias
+        ///  {
+        ///  "Cedula":"string",
+        ///  "CodigoDeSeguridad":"string",
+        ///  "DireccionPropietario":"string",
+        ///  "NombreDelPropietario":"string",
+        ///  "NumeroTarjeta":"string",
+        ///  "Usuario":"string",
+        ///  "Contrasena":"string",
+        ///  "Id":int
+        ///  "Correo":"string",
+        ///  "UsuarioSession":"string",
+        ///  "IdUsuarioSession":"string"
+        ///  }
         /// </summary>
         /// <returns>
         /// 
@@ -145,6 +196,7 @@ namespace ApiApplication.Controllers
             return await new LMembresias().comprar(datoscompra,usuario,usuarioSession);
         }
 
+        //F
         /// <summary>
         /// Servicio para cargar imagen de perfil.
         /// </summary> 

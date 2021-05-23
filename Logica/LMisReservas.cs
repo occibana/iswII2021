@@ -53,5 +53,32 @@ namespace Logica
 
             return mensaje;
         }
+
+        public async Task<UMisReservas> cancelarReserva(UReserva info)
+        {
+            UMisReservas mensaje = new UMisReservas();
+            UReserva reserva = new UReserva();
+            reserva = await new DAOReserva().inforeserva(info);
+            try
+            {
+                if (reserva.Fecha_llegada > DateTime.Now)
+                {
+                    new DAOReserva().deleteReserva(reserva);
+                    mensaje.Mensaje = "Reserva cancelada con exito";
+                }
+                else
+                {
+                    mensaje.Mensaje = "No es posible cancelar la reserva";
+                }
+                              
+            }
+            catch
+            {
+                mensaje.Mensaje = "Fallo al cancelar la reserva";
+            }
+            return mensaje;
+        }
+
+
     }
 }

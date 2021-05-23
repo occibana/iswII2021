@@ -239,7 +239,7 @@ namespace Data
         }
 
         //eliminar hotel
-        public void deleteHotel(UHotel id)
+        public void deleteHabitacion(UHotel id)
         {
             using (var db = new Mapeo())
             {

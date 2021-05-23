@@ -8,6 +8,7 @@ using Utilitarios;
 using Logica;
 using System.Web.Http.Cors;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 
 namespace ApiApplication.Controllers
 {
@@ -73,11 +74,13 @@ namespace ApiApplication.Controllers
             return new Listas().hotelesDestacados();
         }
 
+
         /// <summary>
         ///  Servicio para obtener el listado de reservas realizadas por un usuario (mis-reservas)
+        ///  {"id": "int"}
         /// </summary>
         /// <returns>Listado de reservas realizadas por un usuario (mis-reservas)</returns>
-
+        [Authorize]
         [HttpPost]
         [Route("api/listas/postMostrarMisreservas")]
         public List<UReserva> PostMostrarMisreservas(URegistro disponibilidadE)
@@ -85,8 +88,42 @@ namespace ApiApplication.Controllers
             return new Listas().mostrarMisreservas(disponibilidadE);
         }
 
+
         /// <summary>
-        ///  Servicio para obtener el listado de habitaciones por hotel
+        ///  Servicio para obtener el listado de reservas realizadas por un usuario (mis-reservas)
+        ///  {"idReserva": "int"}
+        /// </summary>
+        /// <returns>Listado de reservas realizadas por un usuario (mis-reservas)</returns>
+        [Authorize]
+        [HttpPost]
+        [Route("api/listas/postCancelarMireserva")]
+        public Task<UMisReservas> PostCancelarMireserva([FromBody] JObject idReserva)
+        {
+            UReserva Reserva = new UReserva();
+            Reserva.Id = int.Parse(idReserva["idReserva"].ToString());
+            Task<UMisReservas> cancelar = new LMisReservas().cancelarReserva(Reserva);
+            return cancelar;
+        }
+
+        /// <summary>
+        ///  Servicio para obtener el listado de hoteles agregados por un usuario (mis-reservas)
+        ///  {"idUsuario": "int"}
+        /// </summary>
+        /// <returns>Listado de hoteles agregados por un usuario (mis-reservas)</returns>
+        [Authorize]
+        [HttpPost]
+        [Route("api/listas/postMostrarMisHoteles")]
+        public List<UHotel> PostMostrarMisHoteles([FromBody] JObject usuarioId)
+        {
+            
+            URegistro RegistroInfo = new URegistro();
+            RegistroInfo.Id = int.Parse(usuarioId["idUsuario"].ToString());
+            return new Listas().obtenerHoteles(RegistroInfo);
+        }
+
+
+        /// <summary>
+        ///  Servicio para obtener el listado de habitaciones por hotel {"idHotel":"int","numPersonas":"int o null"}
         /// </summary>
         /// <returns>Listado de habitaciones por hotel</returns>
 
@@ -98,45 +135,60 @@ namespace ApiApplication.Controllers
             UFiltro consulta = new UFiltro();
             //UHotel idE, UFiltro consulta
             idE.Idhotel = int.Parse(hHotel["idHotel"].ToString());
-            consulta.numpersonas = int.Parse(hHotel["numPersonas"].ToString());
+            try
+            {
+                consulta.numpersonas = int.Parse(hHotel["numPersonas"].ToString());
+            }
+            catch
+            {
+                consulta.numpersonas = null;
+            }
+            
 
             return new Listas().habitacionesHotel(idE, consulta);
         }
-
+        
         /// <summary>
         ///  Servicio para obtener el listado de reservas realizadas por un usuario (reservas por hotel)
         /// </summary>
         /// <returns>Listado de reservas realizadas por un usuario (reservas por hotel)</returns>
-
-        [HttpPost]
+        [Authorize]
+        [HttpGet]
         [Route("api/listas/getMostrarReservas")]
-        public List<UReserva> GetMostrarReservas(int disponibilidadE)
+        public List<UReserva> GetMostrarReservas(int idHotel)
         {
-            return new Listas().mostrarreservas(disponibilidadE);
+            return new Listas().mostrarreservas(idHotel);
         }
 
+
+
+
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        //F
         /// <summary>
         ///  Servicio para obtener el listado de reservas completadas (reservas por hotel)
         /// </summary>
         /// <returns>Listado de reservas completadas (reservas por hotel)</returns>
-
+        [Authorize]
         [HttpGet]
         [Route("api/listas/getMostrarReservasCompletadas")]
-        public List<UReserva> GetMostrarReservasCompletadas(int disponibilidadE)
+        public List<UReserva> GetMostrarReservasCompletadas(int idHotel)
         {
-            return new Listas().mostrarreservascompletadas(disponibilidadE);
+            return new Listas().mostrarreservascompletadas(idHotel);
         }
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         /// <summary>
-        ///  Servicio para obtener el listado de comentarios por hotel
+        ///  Servicio para obtener el listado de comentarios por hotel {"idhotel": 67}
         /// </summary>
         /// <returns>Listado de comentarios por hotel</returns>
 
         [HttpPost]
         [Route("api/listas/postObtenerComentarios")]
-        public List<UComentarios> GetObtenerComentarios(UHotel id)
+        public List<UComentarios> GetObtenerComentarios(UHotel idHotel)
         {
-            return new Listas().obtenerComentarios(id);
+            return new Listas().obtenerComentarios(idHotel);
         }
 
 
@@ -146,11 +198,12 @@ namespace ApiApplication.Controllers
         ///  Servicio para eliminar un hotel de la tabla (mis Hoteles)
         /// </summary>
         /// <returns>Eliminar un hotel</returns>
+        [Authorize]
         [HttpPost]
         [Route("api/listas/postEliminarHotelTabla")]
-        public void PostEliminarHotelTabla(UHotel id)
+        public void PostEliminarHotelTabla(UHotel idHotel)
         {
-            new Listas().eliminarHotelTabla(id);
+            new Listas().eliminarHotelTabla(idHotel);
         }
     }
 }
