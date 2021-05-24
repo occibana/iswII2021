@@ -68,9 +68,21 @@ namespace Logica
         }
 
         //Tablas-Acciones
-        public void eliminarHotelTabla(UHotel id)
+        public string eliminarHotelTabla(UHotel id)
         {
-              new DAOhotel().deleteHabitacion(id);
+            string mensaje = null;
+            try
+            {
+                new DAOhotel().deleteHabitacion(id);
+                mensaje = "eliminado con exito";
+                return mensaje;
+            }
+            catch (Exception ex)
+            {
+                mensaje = "ha ocurrido un error: "+ ex;
+                return mensaje;
+            }
+            
         }
 
     }

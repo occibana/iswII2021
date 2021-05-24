@@ -30,12 +30,22 @@ namespace ApiApplication.Controllers
         /// </returns>
         [HttpPost]
         [Route("api/panelHotel/postInformacionDelHotel")]
-        public async Task<UHotel> postInformacionDelHotel([FromBody] JObject hotel)
+        public async Task<IHttpActionResult> postInformacionDelHotel([FromBody] JObject hotel)
         {
             UHotel hotelinfo = new UHotel();
-    
-            hotelinfo.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
-            return await new LPanelHotel().informacion_del_hotel(hotelinfo);
+
+            try
+            {
+                hotelinfo.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
+                return Ok(await new LPanelHotel().informacion_del_hotel(hotelinfo));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+
+            
         }
 
         /// <summary>
@@ -50,11 +60,20 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/panelHotel/postInformacionDelHabitacion")]
-        public UHabitacion postInformacionHabitacion([FromBody] JObject habitacion)
+        public IHttpActionResult postInformacionHabitacion([FromBody] JObject habitacion)
         {
             UHabitacion habitacionInfo = new UHabitacion();
-            habitacionInfo.Idhotel = int.Parse(habitacion["IdHabitacionSession"].ToString());
-            return new LPanelHotel().informacion_de_habitacion(habitacionInfo);
+
+            try
+            {
+                habitacionInfo.Idhotel = int.Parse(habitacion["IdHabitacionSession"].ToString());
+                return Ok(new LPanelHotel().informacion_de_habitacion(habitacionInfo));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
         }
 
         /// <summary>
@@ -69,17 +88,25 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/panelHotel/postBuscarDisponibilidadHotel")]
-        public UDatosUsuario postBuscarDisponibilidadHotel([FromBody] JObject hotel)
+        public IHttpActionResult postBuscarDisponibilidadHotel([FromBody] JObject hotel)
         {
             UReserva reserva = new UReserva();
-            reserva.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
-            reserva.Fecha_salida = DateTime.Parse(hotel["FechaSalida"].ToString());
-            reserva.Fecha_llegada = DateTime.Parse(hotel["FechaLlegada"].ToString());
-            DateTime fechaMaxima = reserva.Fecha_llegada.AddDays(30);
-            reserva.Numpersona = int.Parse(hotel["NumeroDePersonas"].ToString());
-            reserva.Id_habitacion = int.Parse(hotel["HabitacionIdSession"].ToString());
+            try
+            {
+                reserva.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
+                reserva.Fecha_salida = DateTime.Parse(hotel["FechaSalida"].ToString());
+                reserva.Fecha_llegada = DateTime.Parse(hotel["FechaLlegada"].ToString());
+                DateTime fechaMaxima = reserva.Fecha_llegada.AddDays(30);
+                reserva.Numpersona = int.Parse(hotel["NumeroDePersonas"].ToString());
+                reserva.Id_habitacion = int.Parse(hotel["HabitacionIdSession"].ToString());
 
-            return new LReserva().buscarDisponibilidad(reserva, fechaMaxima); 
+                return Ok(new LReserva().buscarDisponibilidad(reserva, fechaMaxima));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
         }
 
         //F
@@ -92,11 +119,20 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/panelHotel/postReservarHospedaje")]
-        public async Task<UHotel> postReservarHospedaje([FromBody] JObject hotel)
+        public async Task<IHttpActionResult> postReservarHospedaje([FromBody] JObject hotel)
         {
             UHotel hotelinfo = new UHotel();
-            hotelinfo.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
-            return await new LPanelHotel().informacion_del_hotel(hotelinfo);
+            try
+            {
+                hotelinfo.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
+                return Ok(await new LPanelHotel().informacion_del_hotel(hotelinfo));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+            
         }
 
         /// <summary>

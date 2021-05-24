@@ -27,9 +27,18 @@ namespace ApiApplication.Controllers
         /// <UltimaActualizacion>2021/04/26 - Jonathan Cardenas - Creación del servicio</UltimaActualizacion>
         [HttpGet]
         [Route("api/listas/getListasZonas")]
-        public List<UHotelZona> GetLisasZonas()
+        public IHttpActionResult GetLisasZonas()
         {
-            return new Listas().listaZonas();
+            try
+            {
+                return Ok(new Listas().listaZonas());
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+           
         }
 
         /// <summary>
@@ -41,9 +50,17 @@ namespace ApiApplication.Controllers
 
         [HttpGet]
         [Route("api/listas/getListasMunicipios")]
-        public List<UHotelMunicipio> GetLisasMunicipios()
+        public IHttpActionResult GetLisasMunicipios()
         {
-            return new Listas().listaMunicipios();
+            try
+            {
+                return Ok(new Listas().listaMunicipios());
+            }
+            catch(Exception ex)
+            {
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
+            }
+           
         }
 
         //tablas
@@ -56,10 +73,17 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/listas/postHotelesPrincipal")]
-        public List<UHotel> PostHotelesPrincipal(UFiltro consulta)
+        public IHttpActionResult PostHotelesPrincipal(UFiltro consulta)
         {
 
-            return new Listas().hotelesPrincipal(consulta);
+            try
+            {
+                return Ok(new Listas().hotelesPrincipal(consulta));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
+            }
         }
 
         /// <summary>
@@ -69,9 +93,16 @@ namespace ApiApplication.Controllers
 
         [HttpGet]
         [Route("api/listas/getHotelesDestacados")]
-        public List<UHotel> GetHotelesDestacados()
+        public IHttpActionResult GetHotelesDestacados()
         {
-            return new Listas().hotelesDestacados();
+            try
+            {
+                return Ok(new Listas().hotelesDestacados());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
+            }
         }
 
 
@@ -83,9 +114,17 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/listas/postMostrarMisreservas")]
-        public List<UReserva> PostMostrarMisreservas(URegistro disponibilidadE)
+        public IHttpActionResult PostMostrarMisreservas(URegistro disponibilidadE)
         {
-            return new Listas().mostrarMisreservas(disponibilidadE);
+            try
+            {
+                return Ok(new Listas().mostrarMisreservas(disponibilidadE));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
+            }
+            
         }
 
 
@@ -113,12 +152,18 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/listas/postMostrarMisHoteles")]
-        public List<UHotel> PostMostrarMisHoteles([FromBody] JObject usuarioId)
+        public IHttpActionResult PostMostrarMisHoteles([FromBody] JObject usuarioId)
         {
-            
             URegistro RegistroInfo = new URegistro();
-            RegistroInfo.Id = int.Parse(usuarioId["idUsuario"].ToString());
-            return new Listas().obtenerHoteles(RegistroInfo);
+            try
+            {
+                RegistroInfo.Id = int.Parse(usuarioId["idUsuario"].ToString());
+                return Ok(new Listas().obtenerHoteles(RegistroInfo));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
+            }        
         }
 
 
@@ -129,23 +174,28 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/listas/postHabitacionesHotel")]
-        public List<UHabitacion> PostHabitacionesHotel([FromBody] JObject hHotel )
+        public IHttpActionResult PostHabitacionesHotel([FromBody] JObject hHotel )
         {
             UHotel idE = new UHotel();
             UFiltro consulta = new UFiltro();
-            //UHotel idE, UFiltro consulta
-            idE.Idhotel = int.Parse(hHotel["idHotel"].ToString());
             try
             {
-                consulta.numpersonas = int.Parse(hHotel["numPersonas"].ToString());
+                idE.Idhotel = int.Parse(hHotel["idHotel"].ToString());
+                try
+                {
+                    consulta.numpersonas = int.Parse(hHotel["numPersonas"].ToString());
+                }
+                catch
+                {
+                    consulta.numpersonas = null;
+                }
+                return Ok(new Listas().habitacionesHotel(idE, consulta));
             }
-            catch
+            catch (Exception ex)
             {
-                consulta.numpersonas = null;
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
             }
-            
 
-            return new Listas().habitacionesHotel(idE, consulta);
         }
         
         /// <summary>
@@ -155,14 +205,17 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpGet]
         [Route("api/listas/getMostrarReservas")]
-        public List<UReserva> GetMostrarReservas(int idHotel)
+        public IHttpActionResult GetMostrarReservas(int idHotel)
         {
-            return new Listas().mostrarreservas(idHotel);
+            try
+            {
+                return Ok(new Listas().mostrarreservas(idHotel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
+            } 
         }
-
-
-
-
         ////////////////////////////////////////////////////////////////////////////////////////////////
         //F
         /// <summary>
@@ -172,9 +225,17 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpGet]
         [Route("api/listas/getMostrarReservasCompletadas")]
-        public List<UReserva> GetMostrarReservasCompletadas(int idHotel)
+        public IHttpActionResult GetMostrarReservasCompletadas(int idHotel)
         {
-            return new Listas().mostrarreservascompletadas(idHotel);
+            try
+            {
+                return Ok(new Listas().mostrarreservascompletadas(idHotel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
+            }
+            
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -186,9 +247,17 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/listas/postObtenerComentarios")]
-        public List<UComentarios> GetObtenerComentarios(UHotel idHotel)
+        public IHttpActionResult GetObtenerComentarios(UHotel idHotel)
         {
-            return new Listas().obtenerComentarios(idHotel);
+            try
+            {
+                return Ok(new Listas().obtenerComentarios(idHotel));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("surgio el siguente error: " + ex.Message.ToString());
+            }
+            
         }
 
 
@@ -201,9 +270,20 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/listas/postEliminarHotelTabla")]
-        public void PostEliminarHotelTabla(UHotel idHotel)
+        public IHttpActionResult PostEliminarHotelTabla(UHotel idHotel)
         {
-            new Listas().eliminarHotelTabla(idHotel);
+            string mensaje= null;
+            try
+            {
+                mensaje = new Listas().eliminarHotelTabla(idHotel);
+                return Ok(mensaje);
+            }
+            catch (Exception ex)
+            {
+                mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+            
         }
     }
 }
