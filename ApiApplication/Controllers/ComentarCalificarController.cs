@@ -21,6 +21,11 @@ namespace ApiApplication.Controllers
     {
         /// <summary>
         ///  Servicio para comentar un servicio de hotel
+        /// {
+        ///  "IdSession":int,
+        ///  "Comentario":"string",
+        ///  "IdHotelSession":"int"
+        /// }
         /// </summary>
 
 
@@ -49,6 +54,14 @@ namespace ApiApplication.Controllers
 
         /// <summary>
         ///  Servicio para calificar un servicio de hotel
+        /// {
+        ///  "IdSession":int,
+        ///  "IdReserva":int,
+        ///  "IdHotelSession";int,
+        ///  "Calificacion":int
+        ///  
+        /// }
+        /// (calificacion: 1-5)
         /// </summary>
 
 
