@@ -62,15 +62,24 @@ namespace ApiApplication.Controllers
         public async Task<IHttpActionResult> putActualizarContrasena([FromBody] JObject contrasena)
         {
             URegistro registro = new URegistro();
-            //registro.Id = int.Parse(contrasena["Id"].ToString());
-            registro.Usuario = contrasena["usuario"].ToString();
-            registro.Correo = contrasena["Correo"].ToString();
-            string contraAct = contrasena["contrasenaAct"].ToString();
-            string contraNueva = contrasena["contrasenaNueva"].ToString();
+            try
+            {
+                //registro.Id = int.Parse(contrasena["Id"].ToString());
+                registro.Usuario = contrasena["usuario"].ToString();
+                registro.Correo = contrasena["Correo"].ToString();
+                string contraAct = contrasena["contrasenaAct"].ToString();
+                string contraNueva = contrasena["contrasenaNueva"].ToString();
 
-            UActualizarContrasena actualizarContra = await new LActualizarContrasena().actualizarContrasena(registro, contraAct, contraNueva);
-            var datos = actualizarContra;
-            return Ok(datos);
+                UActualizarContrasena actualizarContra = await new LActualizarContrasena().actualizarContrasena(registro, contraAct, contraNueva);
+                var datos = actualizarContra;
+                return Ok(datos);
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+
         }
 
         /// <summary>
@@ -81,11 +90,20 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/perfil/postCerrarSesion")]
-        public string postCerrarSesion([FromBody] JObject datoUsuario)
+        public IHttpActionResult postCerrarSesion([FromBody] JObject datoUsuario)
         {
-            URegistro datos = new URegistro();
-            datos.Usuario = datoUsuario["usuario"].ToString();
-            return new LPerfil().cerrarsession(datos);
+            try
+            {
+                URegistro datos = new URegistro();
+                datos.Usuario = datoUsuario["usuario"].ToString();
+                return Ok(new LPerfil().cerrarsession(datos));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+            
         }
 
         /// <summary>
@@ -108,23 +126,32 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/perfil/postActualizarDatos")]
-        public async Task<UActualizarDatos> postActualizarDatos([FromBody] JObject datoUsuario)
+        public async Task<IHttpActionResult> postActualizarDatos([FromBody] JObject datoUsuario)
         {
-            URegistro datosRegistro = new URegistro();
-            URegistro datosSession = new URegistro();
-            datosRegistro.Nombre = datoUsuario["NombreRegistro"].ToString();
-            datosRegistro.Apellido = datoUsuario["ApellidoRegistro"].ToString();
-            datosRegistro.Usuario = datoUsuario["UsuarioRegistro"].ToString();
-            datosRegistro.Telefono = datoUsuario["TelefonoRegistro"].ToString();
-            datosRegistro.Correo = datoUsuario["CorreoRegistro"].ToString();
+            try
+            {
+                URegistro datosRegistro = new URegistro();
+                URegistro datosSession = new URegistro();
+                datosRegistro.Nombre = datoUsuario["NombreRegistro"].ToString();
+                datosRegistro.Apellido = datoUsuario["ApellidoRegistro"].ToString();
+                datosRegistro.Usuario = datoUsuario["UsuarioRegistro"].ToString();
+                datosRegistro.Telefono = datoUsuario["TelefonoRegistro"].ToString();
+                datosRegistro.Correo = datoUsuario["CorreoRegistro"].ToString();
 
-            datosSession.Nombre = datoUsuario["NombreSession"].ToString();
-            datosSession.Apellido = datoUsuario["ApellidoSession"].ToString();
-            datosSession.Usuario = datoUsuario["UsuarioSession"].ToString();
-            datosSession.Telefono = datoUsuario["TelefonoSession"].ToString();
-            datosSession.Correo = datoUsuario["CorreoSession"].ToString();
-            datosSession.Id = int.Parse(datoUsuario["UsuarioIdSession"].ToString());
-            return await new LActualizarDatos().actualizarDatos(datosRegistro, datosSession);
+                datosSession.Nombre = datoUsuario["NombreSession"].ToString();
+                datosSession.Apellido = datoUsuario["ApellidoSession"].ToString();
+                datosSession.Usuario = datoUsuario["UsuarioSession"].ToString();
+                datosSession.Telefono = datoUsuario["TelefonoSession"].ToString();
+                datosSession.Correo = datoUsuario["CorreoSession"].ToString();
+                datosSession.Id = int.Parse(datoUsuario["UsuarioIdSession"].ToString());
+                return Ok(await new LActualizarDatos().actualizarDatos(datosRegistro, datosSession));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+
         }
 
         /// <summary>
@@ -132,7 +159,10 @@ namespace ApiApplication.Controllers
         ///  {
         ///  "TipoHabitacion":"string o null",
         ///  "IdHotel":int,
-        ///  "tipoHabitacion":int
+        ///  "NumeroMaximoDePersonas":int
+        ///  "NumeroDeBanos":int
+        ///  "NumeroDeCamas":int
+        ///  "tipoHabitacionNumero":int
         ///  }
         ///  tipoHabitacion 1:basica , 2:doble , 3:premium
         ///  TipoHabitacion por defecto : --Seleccionar--
@@ -141,13 +171,24 @@ namespace ApiApplication.Controllers
         [Authorize]
         [HttpPost]
         [Route("api/perfil/postAgregarhabitacion")]
-        public async Task<UHabitacion> postAgregarhabitacion([FromBody] JObject datoUsuario)
+        public async Task<IHttpActionResult> postAgregarhabitacion([FromBody] JObject datoUsuario)
         {
             UHabitacion habitacion = new UHabitacion();
-            habitacion.Tipo = datoUsuario["TipoHabitacion"].ToString();
-            habitacion.Idhotel = int.Parse(datoUsuario["IdHotel"].ToString());
-            int idTipo = int.Parse(datoUsuario["tipoHabitacion"].ToString());
-            return await new LHabitacion().agregarHabitacion(idTipo,habitacion);
+            try
+            {
+                habitacion.Tipo = datoUsuario["TipoHabitacion"].ToString();
+                habitacion.Idhotel = int.Parse(datoUsuario["IdHotel"].ToString());
+                habitacion.Numpersonas = int.Parse(datoUsuario["NumeroMaximoDePersonas"].ToString());
+                habitacion.Numbanio = int.Parse(datoUsuario["NumeroDeBanos"].ToString());
+                habitacion.Numcamas = int.Parse(datoUsuario["NumeroDeCamas"].ToString());
+                int idTipo = int.Parse(datoUsuario["tipoHabitacionNumero"].ToString());
+                return Ok(await new LHabitacion().agregarHabitacion(idTipo, habitacion));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
         }
 
         /// <summary>
@@ -172,28 +213,36 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/perfil/postComprarMembresias")]
-        public async Task<UMembresias> postComprarMembresias([FromBody] JObject dato)
+        public async Task<IHttpActionResult> postComprarMembresias([FromBody] JObject dato)
         {
             UMembresia datoscompra = new UMembresia();
             URegistro usuario = new URegistro();
             URegistro usuarioSession = new URegistro();
+            try
+            {
+                datoscompra.Cedulapropietario = dato["Cedula"].ToString();
+                datoscompra.Codigoseguridad = dato["CodigoDeSeguridad"].ToString();
+                datoscompra.Direccionpropietario = dato["DireccionPropietario"].ToString();
+                datoscompra.Nombrepropietario = dato["NombreDelPropietario"].ToString();
+                datoscompra.Numerotarjeta = dato["NumeroTarjeta"].ToString();
+                datoscompra.Fecha_compra = DateTime.Now;
+                datoscompra.Fecha_vencimiento = DateTime.Now.AddYears(1);
+                usuario.Usuario = dato["Usuario"].ToString();
+                usuario.Contrasena = dato["Contrasena"].ToString();
+                usuario.Id = int.Parse(dato["Id"].ToString());
+                usuario.Correo = dato["Correo"].ToString();
 
-            datoscompra.Cedulapropietario = dato["Cedula"].ToString();
-            datoscompra.Codigoseguridad = dato["CodigoDeSeguridad"].ToString();
-            datoscompra.Direccionpropietario = dato["DireccionPropietario"].ToString();
-            datoscompra.Nombrepropietario = dato["NombreDelPropietario"].ToString();
-            datoscompra.Numerotarjeta = dato["NumeroTarjeta"].ToString();
-            datoscompra.Fecha_compra = DateTime.Now;
-            datoscompra.Fecha_vencimiento = DateTime.Now.AddYears(1);
-            usuario.Usuario = dato["Usuario"].ToString();
-            usuario.Contrasena = dato["Contrasena"].ToString();
-            usuario.Id = int.Parse(dato["Id"].ToString());
-            usuario.Correo = dato["Correo"].ToString();
+                usuarioSession.Usuario = dato["UsuarioSession"].ToString();
+                usuarioSession.Id = int.Parse(dato["IdUsuarioSession"].ToString());
 
-            usuarioSession.Usuario = dato["UsuarioSession"].ToString();
-            usuarioSession.Id = int.Parse(dato["IdUsuarioSession"].ToString());
-
-            return await new LMembresias().comprar(datoscompra,usuario,usuarioSession);
+                return Ok(await new LMembresias().comprar(datoscompra, usuario, usuarioSession));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+            
         }
 
         //F

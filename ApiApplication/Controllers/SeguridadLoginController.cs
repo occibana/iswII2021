@@ -60,16 +60,31 @@ namespace ApiApplication.Controllers
         /// <summary>
         ///  Servicio para enviar el correo con el codigo de recuperacion
         ///  de contraseña
+        /// {
+        ///  "usuario":"string",
+        ///  "correo":"string"
+        /// }
         /// </summary>
         /// <returns>
         /// token
         /// </returns>
         [HttpPost]
         [Route("postCorreoRecuperacion")]
-        [Authorize]
-        public string postCorreoRecuperacion(URegistro usuario)
+        public IHttpActionResult postCorreoRecuperacion([FromBody] JObject correoRecuperacion)
         {
-            return new LRecuperarcontrasena().enviar_token(usuario);
+            try
+            {
+                URegistro recuperar = new URegistro();
+                recuperar.Usuario = correoRecuperacion["usuario"].ToString();
+                recuperar.Correo = correoRecuperacion["correo"].ToString();
+                return Ok(new LRecuperarcontrasena().enviar_token(recuperar));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+            
         }
 
         /// <summary>
@@ -79,10 +94,15 @@ namespace ApiApplication.Controllers
         /// <returns>
         /// token
         /// </returns>
+        /// 
 
+
+
+
+
+        
         [HttpPut]
         [Route("putReactivarCuenta")]
-        [Authorize]
         public URegistro putContrasenaRecuperada([FromBody] JObject recuperacion)
         {
             URegistro datos = new URegistro();
@@ -94,8 +114,11 @@ namespace ApiApplication.Controllers
             datos.Id = perfil.Datos.Id;
 
             return new LReactivarCuenta().recuperarContrasena(codigo, datos);
-
         }
+
+
+
+
 
 
         /*

@@ -126,7 +126,7 @@ namespace Data
             }
         }
 
-
+        //traer dstos con id hotel
         //select info habitacion
         public UHabitacion infoHabitacion(int habitacionE)
         {
