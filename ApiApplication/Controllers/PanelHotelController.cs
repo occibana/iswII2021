@@ -109,9 +109,20 @@ namespace ApiApplication.Controllers
             }
         }
 
-        //F
         /// <summary>
         ///  Servicio para reservar hospedaje
+        /// {
+        /// "UsuarioSession":string
+        ///  "IdDelHotelSession":int
+        ///  "Nombre":string,
+        ///  "Apellido":string
+        ///  "IdHabitacion":int
+        ///  "FechaLlegada":string
+        ///  "Fechasalida":string
+        ///  "NumPersonas":int,
+        ///  "ModoDePago":string
+        ///  "PrecioNoche":int
+        /// }
         /// </summary>
         /// <returns>
         /// Informacion del hotel
@@ -119,13 +130,33 @@ namespace ApiApplication.Controllers
 
         [HttpPost]
         [Route("api/panelHotel/postReservarHospedaje")]
-        public async Task<IHttpActionResult> postReservarHospedaje([FromBody] JObject hotel)
+        public async Task<IHttpActionResult> postReservarHospedaje([FromBody] JObject reserva)
         {
             UHotel hotelinfo = new UHotel();
+            UReserva infoReserva = new UReserva();
+            URegistro datoUsuario = new URegistro();
+            UPerfil perfil = new UPerfil();
             try
             {
-                hotelinfo.Idhotel = int.Parse(hotel["IdDelHotelSession"].ToString());
-                return Ok(await new LPanelHotel().informacion_del_hotel(hotelinfo));
+                datoUsuario.Usuario = reserva["UsuarioSession"].ToString();
+
+
+                perfil = new LPerfil().cargardatos(datoUsuario);
+
+                hotelinfo.Idhotel = int.Parse(reserva["IdDelHotelSession"].ToString());
+                hotelinfo = await new LPanelHotel().informacion_del_hotel(hotelinfo);
+                infoReserva.Nombre = reserva["Nombre"].ToString();
+                infoReserva.Apellido = reserva["Apellido"].ToString();
+                infoReserva.PrecioNoche = int.Parse(reserva["PrecioNoche"].ToString());
+                infoReserva.Idhotel = hotelinfo.Idhotel;
+                infoReserva.Id_habitacion = int.Parse(reserva["IdHabitacion"].ToString());
+                infoReserva.Fecha_llegada = DateTime.Parse(reserva["FechaLlegada"].ToString());
+                infoReserva.Fecha_salida = DateTime.Parse(reserva["Fechasalida"].ToString());
+                infoReserva.Numpersona = int.Parse(reserva["NumPersonas"].ToString());
+                infoReserva.Mediopago = reserva["ModoDePago"].ToString();
+                infoReserva.Idusuario = perfil.Datos.Id;
+                infoReserva.Correo = perfil.Datos.Correo;
+                return Ok(await new LReserva().confirmarReserva(hotelinfo, infoReserva));
             }
             catch (Exception ex)
             {
