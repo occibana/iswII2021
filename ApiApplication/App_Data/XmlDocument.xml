@@ -484,23 +484,43 @@
         <member name="M:ApiApplication.Controllers.ComentarCalificarController.postComentar(Newtonsoft.Json.Linq.JObject)">
             <summary>
              Servicio para comentar un servicio de hotel
+            {
+             "IdSession":int,
+             "Comentario":"string",
+             "IdHotelSession":"int"
+            }
             </summary>
         </member>
         <member name="M:ApiApplication.Controllers.ComentarCalificarController.postCalificar(Newtonsoft.Json.Linq.JObject)">
             <summary>
              Servicio para calificar un servicio de hotel
+            {
+             "IdSession":int,
+             "IdReserva":int,
+             "IdHotelSession";int,
+             "Calificacion":int
+             
+            }
+            (calificacion: 1-5)
             </summary>
         </member>
         <member name="M:ApiApplication.Controllers.ListasController.GetLisasZonas">
             <summary>
              Servicio para obtener el listado de zonas municipio Cundinamarca
             </summary>
+            <param name="idzona">IdZona</param>
+            <param name="Nombre">Nombre</param>
             <returns>Listado de zonas</returns>
+            <Autor>Jonathan Cardenas</Autor>
+            <Fecha>2021/04/26</Fecha>
+            <UltimaActualizacion>2021/04/26 - Jonathan Cardenas - Creación del servicio</UltimaActualizacion>
         </member>
         <member name="M:ApiApplication.Controllers.ListasController.GetLisasMunicipios">
             <summary>
              Servicio para obtener el listado de municipios de Cundinamarca
             </summary>
+            <param name="idMunicipio">IdZona</param>
+            <param name="Nombre">Nombreeeee</param>
             <returns>Listado de municipios</returns>
         </member>
         <member name="M:ApiApplication.Controllers.ListasController.PostHotelesPrincipal(Utilitarios.UFiltro)">
@@ -518,12 +538,27 @@
         <member name="M:ApiApplication.Controllers.ListasController.PostMostrarMisreservas(Utilitarios.URegistro)">
             <summary>
              Servicio para obtener el listado de reservas realizadas por un usuario (mis-reservas)
+             {"id": "int"}
             </summary>
             <returns>Listado de reservas realizadas por un usuario (mis-reservas)</returns>
         </member>
-        <member name="M:ApiApplication.Controllers.ListasController.PostHabitacionesHotel(Utilitarios.UHotel,Utilitarios.UFiltro)">
+        <member name="M:ApiApplication.Controllers.ListasController.PostCancelarMireserva(Newtonsoft.Json.Linq.JObject)">
             <summary>
-             Servicio para obtener el listado de habitaciones por hotel
+             Servicio para obtener el listado de reservas realizadas por un usuario (mis-reservas)
+             {"idReserva": "int"}
+            </summary>
+            <returns>Listado de reservas realizadas por un usuario (mis-reservas)</returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.ListasController.PostMostrarMisHoteles(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para obtener el listado de hoteles agregados por un usuario (mis-reservas)
+             {"idUsuario": "int"}
+            </summary>
+            <returns>Listado de hoteles agregados por un usuario (mis-reservas)</returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.ListasController.PostHabitacionesHotel(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para obtener el listado de habitaciones por hotel {"idHotel":"int","numPersonas":"int o null"}
             </summary>
             <returns>Listado de habitaciones por hotel</returns>
         </member>
@@ -541,7 +576,7 @@
         </member>
         <member name="M:ApiApplication.Controllers.ListasController.GetObtenerComentarios(Utilitarios.UHotel)">
             <summary>
-             Servicio para obtener el listado de comentarios por hotel
+             Servicio para obtener el listado de comentarios por hotel {"idhotel": 67}
             </summary>
             <returns>Listado de comentarios por hotel</returns>
         </member>
@@ -554,6 +589,9 @@
         <member name="M:ApiApplication.Controllers.PanelHotelController.postInformacionDelHotel(Newtonsoft.Json.Linq.JObject)">
             <summary>
              Servicio para cargar información hotel seleccionado
+             {
+             "IdDelHotelSession","int"
+             }
             </summary>
             <returns>
             Informacion del hotel
@@ -562,14 +600,49 @@
         <member name="M:ApiApplication.Controllers.PanelHotelController.postInformacionHabitacion(Newtonsoft.Json.Linq.JObject)">
             <summary>
              Servicio para cargar información de la habitacion seleccionada en un hotel
+            {
+            "IdHabitacionSession":"int" 
+            }
             </summary>
             <returns>
             Informacion dela habitacion
             </returns>
         </member>
+        <member name="M:ApiApplication.Controllers.PanelHotelController.postBuscarDisponibilidadHotel(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para buscar disponibilidad en el hospedaje
+             {
+             "IdDelHotelSession":"int","FechaLlegada":"string aaaa-mm-dd","FechaSalida":"string aaaa-mm-dd","NumeroDePersonas":"int", "HabitacionIdSession":"int"
+             }
+            </summary>
+            <returns>
+            
+            </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.PanelHotelController.postReservarHospedaje(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para reservar hospedaje
+            {
+            "UsuarioSession":string
+             "IdDelHotelSession":int
+             "Nombre":string,
+             "Apellido":string
+             "IdHabitacion":int
+             "FechaLlegada":string
+             "Fechasalida":string
+             "NumPersonas":int,
+             "ModoDePago":string
+             "PrecioNoche":int
+            }
+            </summary>
+            <returns>
+            Informacion del hotel
+            </returns>
+        </member>
         <member name="M:ApiApplication.Controllers.PerfilController.postCargarDatosPerfil(Utilitarios.URegistro)">
             <summary>
              Servicio para cargar datos peronales en perfil
+             {"usuario": "string"}
             </summary>
             <returns>
             datos peronales en perfil
@@ -578,6 +651,12 @@
         <member name="M:ApiApplication.Controllers.PerfilController.putActualizarContrasena(Newtonsoft.Json.Linq.JObject)">
             <summary>
              Servicio para actualizar contraseña
+             {
+             "usuario":"string",
+             "Correo":"string-correo",
+             "contrasenaAct":"string",
+             "contrasenaNueva":"string"
+             }
             </summary>
             <returns>
             actualizacion contraseña
@@ -586,25 +665,71 @@
         <member name="M:ApiApplication.Controllers.PerfilController.postCerrarSesion(Newtonsoft.Json.Linq.JObject)">
             <summary>
              Servicio para cerrar session - recibe usuario como parametro
+             {"usuario": "string"}
             </summary>
         </member>
         <member name="M:ApiApplication.Controllers.PerfilController.postActualizarDatos(Newtonsoft.Json.Linq.JObject)">
             <summary>
-             Servicio para Actualizar datos personales
+            Servicio para Actualizar datos personales
+            {
+             "NombreRegistro":"string o null",
+             "ApellidoRegistro":"string o null",
+             "UsuarioRegistro":"string o null",
+             "TelefonoRegistro":"string o null",
+             "CorreoRegistro":"string o null",
+             "NombreSession":"string",
+             "ApellidoSession":"string",
+             "UsuarioSession":"string",
+             "TelefonoSession":"string",
+             "CorreoSession":"string",
+             "UsuarioIdSession":int
+            }
             </summary>
         </member>
         <member name="M:ApiApplication.Controllers.PerfilController.postAgregarhabitacion(Newtonsoft.Json.Linq.JObject)">
             <summary>
              Servicio para agregar habitacion
+             {
+             "TipoHabitacion":"string o null",
+             "IdHotel":int,
+             "NumeroMaximoDePersonas":int
+             "NumeroDeBanos":int
+             "NumeroDeCamas":int
+             "tipoHabitacionNumero":int
+             }
+             tipoHabitacion 1:basica , 2:doble , 3:premium
+             TipoHabitacion por defecto : --Seleccionar--
             </summary>
         </member>
         <member name="M:ApiApplication.Controllers.PerfilController.postComprarMembresias(Newtonsoft.Json.Linq.JObject)">
             <summary>
              Servicio para comprar membresias
+             {
+             "Cedula":"string",
+             "CodigoDeSeguridad":"string",
+             "DireccionPropietario":"string",
+             "NombreDelPropietario":"string",
+             "NumeroTarjeta":"string",
+             "Usuario":"string",
+             "Contrasena":"string",
+             "Id":int
+             "Correo":"string",
+             "UsuarioSession":"string",
+             "IdUsuarioSession":"string"
+             }
             </summary>
             <returns>
             
             </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.PerfilController.postSubirFoto(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+            Servicio para cargar imagen de perfil.
+            </summary> 
+            <returns>Mensaje de aviso de subido o error</returns>
+            <Autor>Jonathan Cardenas</Autor>
+            <Fecha>2021/04/26</Fecha>
+            <UltimaActualizacion>2021/04/26 - Jonathan Cardenas - Creación del servicio</UltimaActualizacion>
         </member>
         <member name="M:ApiApplication.Controllers.RegistroLoginController.PostRegistroUsuario(Utilitarios.URegistro)">
             <summary>
@@ -628,13 +753,49 @@
             token
             </returns>
         </member>
-        <member name="T:ApiApplication.Seguridad.TokenGenerator">
+        <member name="M:ApiApplication.Controllers.SeguridadLoginController.postCorreoRecuperacion(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para enviar el correo con el codigo de recuperacion
+             de contraseña
+            {
+             "usuario":"string",
+             "correo":"string"
+            }
+            </summary>
+            <returns>
+            token
+            </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.SeguridadLoginController.postCorreoRecuperacionTransversal(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio para enviar el correo con el codigo de recuperacion Transversal
+             de contraseña
+            {
+             "usuario":"string",
+             "correo":"string"
+            }
+            </summary>
+            <returns>
+            token
+            </returns>
+        </member>
+        <member name="M:ApiApplication.Controllers.SeguridadLoginController.putContrasenaRecuperada(Newtonsoft.Json.Linq.JObject)">
+            <summary>
+             Servicio que valida el codigo de recuperacion de contraseña
+             y actuzaliza la contraseña con la nueva contreseña
+            </summary>
+            <returns>
+            token
+            </returns>
+            
+        </member>
+        <member name="T:WebApiSegura.Security.TokenGenerator">
             <summary>
             JWT Token generator class using "secret-key"
             more info: https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html
             </summary>
         </member>
-        <member name="T:WebApiSegura.Controllers.TokenValidationHandler">
+        <member name="T:WebApiSegura.Security.TokenValidationHandler">
             <summary>
             Token validator for Authorization Request using a DelegatingHandler
             </summary>

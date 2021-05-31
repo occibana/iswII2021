@@ -63,6 +63,8 @@ namespace Data
                         }).ToList().Select(m => new UReserva
                         {
                             Id = m.r.Id,
+                            Idusuario = m.r.Idusuario,
+                            Id_habitacion= m.r.Id_habitacion,
                             Idhotel = m.h.Idhotel,
                             Numpersona = m.r.Numpersona,
                             Nombrehotel = m.h.Nombre,

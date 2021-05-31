@@ -88,6 +88,36 @@ namespace ApiApplication.Controllers
         }
 
         /// <summary>
+        ///  Servicio para enviar el correo con el codigo de recuperacion Transversal
+        ///  de contraseña
+        /// {
+        ///  "usuario":"string",
+        ///  "correo":"string"
+        /// }
+        /// </summary>
+        /// <returns>
+        /// token
+        /// </returns>
+        [HttpPost]
+        [Route("postCorreoRecuperacionTransversal")]
+        public IHttpActionResult postCorreoRecuperacionTransversal([FromBody] JObject correoRecuperacion)
+        {
+            try
+            {
+                URegistro recuperar = new URegistro();
+                recuperar.Usuario = correoRecuperacion["usuario"].ToString();
+                recuperar.Correo = correoRecuperacion["correo"].ToString();
+                return Ok(new LRecuperarcontrasena().enviar_token(recuperar));
+            }
+            catch (Exception ex)
+            {
+                var mensaje = "surgio el siguente error: " + ex.Message.ToString();
+                return BadRequest(mensaje);
+            }
+
+        }
+
+        /// <summary>
         ///  Servicio que valida el codigo de recuperacion de contraseña
         ///  y actuzaliza la contraseña con la nueva contreseña
         /// </summary>
@@ -100,7 +130,7 @@ namespace ApiApplication.Controllers
 
 
 
-        
+
         [HttpPut]
         [Route("putReactivarCuenta")]
         public URegistro putContrasenaRecuperada([FromBody] JObject recuperacion)

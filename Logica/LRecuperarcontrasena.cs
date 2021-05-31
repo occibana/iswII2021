@@ -52,17 +52,17 @@ namespace Logica
         //    return msj;
         //}
 
-        public string enviar_token(URegistro recuperar)
+        public UToken enviar_token(URegistro recuperar)
         {
+            UToken token = new UToken();
             recuperar = new DAOLogin().verificarusuarioparatoken(recuperar);
-            string msj = null;
             if (recuperar.Usuario == null)
             {
-                msj = "Usuario no se encuentra reistrado";
+                token.MensajeTransversal = "Usuario no se encuentra reistrado";
             }
             else if (recuperar.Correo == null)
             {
-                msj = "Verifique si su correo electronico fue con el que se registro";
+                token.MensajeTransversal = "Verifique si su correo electronico fue con el que se registro";
             }
             else if ((recuperar.Usuario != null) && (recuperar.Correo != null))
             {
@@ -70,11 +70,10 @@ namespace Logica
 
                 if (validartoken != null)
                 {
-                    msj = "Ya existe una recuperacion de contraseña activa, porfavor espere a que pueda realizar una de nuevo";
+                    token.MensajeTransversal = "Ya existe una recuperacion de contraseña activa, porfavor espere a que pueda realizar una de nuevo";
                 }
                 else
                 {
-                    UToken token = new UToken();
                     token.Fecha_inicio = DateTime.Now;
                     token.Fecha_caducidad = DateTime.Now.AddHours(1);
                     token.User_id = recuperar.Id;
@@ -84,10 +83,10 @@ namespace Logica
                     Mailrecuperarcontrasena mail = new Mailrecuperarcontrasena();
                     string linkacceso = "Su codigo de acceso es: " + token.Tokengenerado;
                     mail.enviarmail(recuperar.Correo, token.Tokengenerado, linkacceso);
-                    msj = "Verifique su correo electónico para continuar con la recuperacion de contraseña";
+                    token.MensajeTransversal = "Verifique su correo electónico para continuar con la recuperacion de contraseña";
                 }
             }
-            return msj;
+            return token;
         }
 
         private string encriptar(string input)

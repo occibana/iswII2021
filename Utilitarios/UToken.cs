@@ -15,6 +15,9 @@ namespace Utilitarios
         private DateTime fecha_inicio;
         private DateTime fecha_caducidad;
 
+        [NotMapped]
+        private string mensajeTransversal;
+
         [Key]
         [Column("id")]
         public int Id { get => id; set => id = value; }
@@ -26,5 +29,7 @@ namespace Utilitarios
         public DateTime Fecha_inicio { get => fecha_inicio; set => fecha_inicio = value; }
         [Column("fecha_caducidad")]
         public DateTime Fecha_caducidad { get => fecha_caducidad; set => fecha_caducidad = value; }
+        [NotMapped]
+        public string MensajeTransversal { get => mensajeTransversal; set => mensajeTransversal = value; }
     }
 }
