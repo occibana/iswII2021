@@ -31,7 +31,7 @@ namespace LogicaNC
 
         public List<UReserva> listaMisReservas(URegistro usuario)
         {
-            List<UReserva> listaMisHoteles = new DAOReserva().mostrarmisreservas(usuario);
+            List<UReserva> listaMisHoteles = new DAOReserva(_context).mostrarmisreservas(usuario);
             return listaMisHoteles;
         }
     }

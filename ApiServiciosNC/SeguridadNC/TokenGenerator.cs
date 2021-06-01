@@ -14,7 +14,7 @@ namespace ApiServiciosNC.Security
     /// </summary>
     internal static class TokenGenerator
     {
-        public static string GenerateTokenJwt(URegistro user, string secretKey, string audienceToken, string issuerToken, string expira, Mapeo _context)
+        public static string GenerateTokenJwt(URegistro user, string secretKey, string audienceToken, string issuerToken, string expira)
         {
             //TODO: appsetting for Demo JWT - protect correctly this settings
 
@@ -41,12 +41,7 @@ namespace ApiServiciosNC.Security
 
             var jwtTokenString = tokenHandler.WriteToken(jwtSecurityToken);
 
-            LoginToken token = new LoginToken();
-            token.FechaGenerado = DateTime.Now;
-            token.FechaVigencia = DateTime.Now.AddMinutes(15);
-            token.User_id = user.Id;
-            token.Token = jwtTokenString;
-            new LLogin(_context).guardarToken(token);
+
             return jwtTokenString;
         }
     }

@@ -18,11 +18,9 @@ namespace DataNC
 
         public List<UComentarios> obtenerComentarios(UHotel id)
         {
-            using (var db = _context)
-            {
 
-                List<UComentarios> comentariosHotel = (from ch in db.comentario
-                                                      join us in db.usuario on ch.Id_usuario equals us.Id
+                List<UComentarios> comentariosHotel = (from ch in _context.comentario
+                                                      join us in _context.usuario on ch.Id_usuario equals us.Id
 
                                                       select new
                                                       {
@@ -42,18 +40,17 @@ namespace DataNC
                 }
 
                 return comentariosHotel;
-            }
+            
         }
 
 
 
         public void insertComentario(UComentarios coment)
         {
-            using (var db = _context)
-            {
-                db.comentario.Add(coment);
-                db.SaveChanges();
-            }
+          
+            _context.comentario.Add(coment);
+            _context.SaveChanges();
+            
         }
 
 

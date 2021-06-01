@@ -11,6 +11,13 @@ namespace LogicaNC
 {
     public class LMisReservas
     {
+        private readonly Mapeo _context;
+
+        public LMisReservas(Mapeo context)
+        {
+            _context = context;
+        }
+
         public async Task<UMisReservas> accionCalificarComentar(int idreserva, string accion)
         {
             UMisReservas mensaje = new UMisReservas();
@@ -19,7 +26,7 @@ namespace LogicaNC
                 
                 UReserva inforeserva = new UReserva();
                 inforeserva.Id = idreserva;
-                inforeserva = await new DAOReserva().inforeserva(inforeserva);
+                inforeserva = await new DAOReserva(_context).inforeserva(inforeserva);
                 UHotel hotelinfo = new UHotel();
                 hotelinfo.Idhotel = int.Parse((inforeserva.Idhotel).ToString());
                 mensaje.Infohotel = hotelinfo;
@@ -31,7 +38,7 @@ namespace LogicaNC
             {
                 UReserva inforeserva = new UReserva();
                 inforeserva.Id = idreserva;
-                inforeserva = await new DAOReserva().inforeserva(inforeserva);
+                inforeserva = await new DAOReserva(_context).inforeserva(inforeserva);
                 if (inforeserva.Fecha_salida <= DateTime.Now)
                 {
                     mensaje.Mensaje = "No es posible eliminar una reserva ya realizada";
@@ -39,7 +46,7 @@ namespace LogicaNC
                 }
                 else if (inforeserva.Fecha_llegada > DateTime.Now)
                 {
-                    new DAOReserva().deleteReserva(inforeserva);
+                    new DAOReserva(_context).deleteReserva(inforeserva);
                     mensaje.Mensaje = "Reserva eliminada con exito";
                     //this.RegisterStartupScript("mensaje", "<script type='text/javascript'>alert('Reserva eliminada con exito');</script>");
                 }

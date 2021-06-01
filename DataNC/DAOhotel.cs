@@ -27,19 +27,16 @@ namespace DataNC
         //insert registro
         public void insertHotel(UHotel hotelE)
         {
-            using (var db = _context)
-            {
-                db.hotel.Add(hotelE);
-                db.SaveChanges();
-            }
+            _context.hotel.Add(hotelE);
+            _context.SaveChanges();
+            
         }
 
         //lista de hoteles destacados
         public List<UHotel> hotelesdestacados()
         {
-            using (var db = _context)
-            {
-                List<UHotel> hotelesdestacados = (from h in db.hotel
+
+                List<UHotel> hotelesdestacados = (from h in _context.hotel
                                                  orderby (h.Promediocalificacion != null ? h.Promediocalificacion : -1) descending
 
                                                  //where h.Numhabitacion > 4
@@ -54,7 +51,7 @@ namespace DataNC
                                                      Promediocalificacion = m.h.Promediocalificacion,
                                                  }).ToList();
                 return hotelesdestacados;
-            }
+            
         }
 
         //lista de hoteles por usuario 
@@ -71,11 +68,10 @@ namespace DataNC
             if (consulta != null && (consulta.fecha_antesde != null && consulta.fecha_despuesde != null))
             {
 
-                using (var db = _context)
-                {
-                    List<UHotel> elementos = (from h in db.hotel
-                                             join hm in db.hotelmunicipio on h.Idmunicipio equals hm.Idmunicipio
-                                             join hz in db.hotelzona on h.Idzona equals hz.Idzona
+
+                    List<UHotel> elementos = (from h in _context.hotel
+                                             join hm in _context.hotelmunicipio on h.Idmunicipio equals hm.Idmunicipio
+                                             join hz in _context.hotelzona on h.Idzona equals hz.Idzona
                                              //join rh in db.reserva on h.Idhotel equals rh.Idhotel
 
                                              select new
@@ -87,9 +83,9 @@ namespace DataNC
                                              }).OrderBy(h => h.h.Nombre).ToList().Select(m => new UHotel
                                              {
 
-                                                 NumHabitDisponibles = ((db.habitacion.Where(x => x.Idhotel == m.h.Idhotel).Count()) - (db.reserva.Where(x => (x.Idhotel == m.h.Idhotel) &&
+                                                 NumHabitDisponibles = ((_context.habitacion.Where(x => x.Idhotel == m.h.Idhotel).Count()) - (_context.reserva.Where(x => (x.Idhotel == m.h.Idhotel) &&
                                                                         ((consulta.fecha_despuesde >= x.Fecha_llegada && consulta.fecha_despuesde <= x.Fecha_salida) || (consulta.fecha_antesde >= x.Fecha_salida && consulta.fecha_antesde <= x.Fecha_salida))).Count()) < 0 ? 0
-                                                                        : (db.habitacion.Where(x => x.Idhotel == m.h.Idhotel).Count()) - (db.reserva.Where(x => (x.Idhotel == m.h.Idhotel) &&
+                                                                        : (_context.habitacion.Where(x => x.Idhotel == m.h.Idhotel).Count()) - (_context.reserva.Where(x => (x.Idhotel == m.h.Idhotel) &&
                                                                         ((consulta.fecha_despuesde >= x.Fecha_llegada && consulta.fecha_despuesde <= x.Fecha_salida) || (consulta.fecha_antesde >= x.Fecha_salida && consulta.fecha_antesde <= x.Fecha_salida))).Count())),
 
                                                  Promediocalificacion = m.h.Promediocalificacion,
@@ -106,18 +102,16 @@ namespace DataNC
 
                                              }).Where(x => x.NumHabitDisponibles > 0).ToList();
                     return elementos;
-                }
+                
 
 
             }
             else
             {
-                using (var db = _context)
-                {
 
-                    List<UHotel> elementos = (from h in db.hotel
-                                             join hm in db.hotelmunicipio on h.Idmunicipio equals hm.Idmunicipio
-                                             join hz in db.hotelzona on h.Idzona equals hz.Idzona
+                    List<UHotel> elementos = (from h in _context.hotel
+                                             join hm in _context.hotelmunicipio on h.Idmunicipio equals hm.Idmunicipio
+                                             join hz in _context.hotelzona on h.Idzona equals hz.Idzona
 
                                              //join rh in db.reserva on h.Idhotel equals rh.Idhotel
                                              //join hhab in db.habitacion on h.Idhotel equals hhab.Idhotel
@@ -131,7 +125,7 @@ namespace DataNC
                                              }).OrderBy(h => h.h.Nombre).ToList().Select(m => new UHotel
                                              {
 
-                                                 NumHabitDisponibles = db.habitacion.Where(x => x.Idhotel == m.h.Idhotel).Count(),
+                                                 NumHabitDisponibles = _context.habitacion.Where(x => x.Idhotel == m.h.Idhotel).Count(),
                                                  Promediocalificacion = m.h.Promediocalificacion,
                                                  Idhotel = m.h.Idhotel,
                                                  Nombre = m.h.Nombre,
@@ -141,7 +135,7 @@ namespace DataNC
                                                  Imagen = m.h.Imagen,
                                                  Municipio = m.hm.Nombre,
                                                  Zona = m.hz.Nombre,
-                                                 NumMaxPersonas = db.habitacion.Where(x => x.Numpersonas == num && x.Idhotel == m.h.Idhotel).Count() == 0 ? 0 : 1,
+                                                 NumMaxPersonas = _context.habitacion.Where(x => x.Numpersonas == num && x.Idhotel == m.h.Idhotel).Count() == 0 ? 0 : 1,
 
                                              }).Where(x => num > 0 ? x.NumMaxPersonas > 0 : x.NumMaxPersonas == 0).ToList();
                     if (consulta == null)
@@ -218,7 +212,7 @@ namespace DataNC
                     }
 
                     return elementos;
-                }
+                
             }
         }
         //select info hotel panel hotel
@@ -247,41 +241,32 @@ namespace DataNC
         //eliminar hotel
         public void deleteHotel(UHotel id)
         {
-            using (var db = _context)
-            {
-                UHotel mihotel = db.hotel.Where(x => x.Idhotel == id.Idhotel).First();
-                List<UHabitacion> mihabitacion = db.habitacion.Where(x => x.Idhotel == id.Idhotel).ToList();
-                db.habitacion.RemoveRange(mihabitacion);
-                db.hotel.Remove(mihotel);
-                db.SaveChanges();
-            }
+            UHotel mihotel = _context.hotel.Where(x => x.Idhotel == id.Idhotel).First();
+            List<UHabitacion> mihabitacion = _context.habitacion.Where(x => x.Idhotel == id.Idhotel).ToList();
+            _context.habitacion.RemoveRange(mihabitacion);
+            _context.hotel.Remove(mihotel);
+            _context.SaveChanges();
         }
 
         //Agregar habitación en el hotel
         public void actualizarhabiatacion(UHabitacion idE)
         {
-            using (var db = _context)
-            {
-                UHotel datoanterior = db.hotel.Where(x => x.Idhotel == idE.Idhotel).First();
-                var idanterior = datoanterior.Numhabitacion;
-                datoanterior.Numhabitacion = idanterior + 1;
-                var entry = db.Entry(datoanterior);
-                entry.State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            UHotel datoanterior = _context.hotel.Where(x => x.Idhotel == idE.Idhotel).First();
+            var idanterior = datoanterior.Numhabitacion;
+            datoanterior.Numhabitacion = idanterior + 1;
+            var entry = _context.Entry(datoanterior);
+            entry.State = EntityState.Modified;
+            _context.SaveChanges(); 
         }
 
         //actualizar calificacion
         public void actualizarcalificacion(UHotel hotelE)
         {
-            using (var db = _context)
-            {
-                UHotel datoanterior = db.hotel.Where(x => x.Idhotel == hotelE.Idhotel).First();
-                datoanterior.Promediocalificacion = hotelE.Promediocalificacion;
-                var entry = db.Entry(datoanterior);
-                entry.State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            UHotel datoanterior = _context.hotel.Where(x => x.Idhotel == hotelE.Idhotel).First();
+            datoanterior.Promediocalificacion = hotelE.Promediocalificacion;
+            var entry = _context.Entry(datoanterior);
+            entry.State = EntityState.Modified;
+            _context.SaveChanges();   
         }
     }
 }

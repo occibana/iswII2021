@@ -18,11 +18,6 @@ namespace DataNC
         public DbSet<UComentarios> comentario { get; set; }
         public DbSet<LoginToken> login_token { get; set; }
 
-        public Mapeo()
-        {
-
-        }
-
         public Mapeo(DbContextOptions<Mapeo> options) : base(options) { }
     }
 }

@@ -90,61 +90,6 @@ namespace Logica
            
         }
 
-        //public UPerfil subirFoto(FileUpload foto, URegistro session, string direccion, string imagen, string imagenEliminar)
-        //{
-        //    UPerfil datos = new UPerfil();
-        //    if (foto.HasFile)
-        //    {
-        //        string ext = System.IO.Path.GetExtension(foto.FileName);//obtiene la extencion del archivo
-        //        ext = ext.ToLower();//minusculas
-
-        //        int tam = foto.PostedFile.ContentLength;//obtiene tamano archivo
-        //                                                //string fotoperfil;
-
-        //        if ((ext == ".jpg" || ext == ".png" || ext == ".jpeg") && (tam < 1048576))//menor a 1MB en bytes
-        //        {
-
-        //            try
-        //            {
-        //                //imagen
-        //                foto.PostedFile.SaveAs(imagen);//mapea y guarda el archivo en la direccion
-        //            }
-        //            catch
-        //            {
-        //                datos.Mensaje = "*Verifique la imagen y cargue nuevamente";
-        //            }
-        //            datos.Mensaje = "*Imagen aceptada";
-        //            //actualiza foto de perfil
-        //            URegistro nuevodat = new URegistro();
-        //            nuevodat.Id = session.Id;
-        //            nuevodat.Fotoperfil = direccion;
-        //            new DAOLogin().actualizarfoto(nuevodat);
-
-
-        //            if (File.Exists(imagenEliminar))
-        //            {
-        //                File.Delete(imagenEliminar);
-        //            }
-
-        //            session.Fotoperfil = nuevodat.Fotoperfil;
-        //            datos.Fotoperfil = nuevodat.Fotoperfil;
-        //            datos.Mensaje = "*Imagen cargada con exito";
-        //        }
-        //        else
-        //        {
-        //            datos.Mensaje = "*Imagen no esta en formato correcto o es muy pesada";
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        datos.Mensaje = "*Selecciona una imagen";
-        //    }
-
-        //    return datos;
-        //}
-
-
         public UPerfil subirFoto(byte[] foto, URegistro session, string direccion, string ext, string imagenEliminar)
         {
             UPerfil datos = new UPerfil();

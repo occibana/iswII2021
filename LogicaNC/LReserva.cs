@@ -116,8 +116,8 @@ namespace LogicaNC
                         }
                         else if (reserva.Fecha_llegada <=reserva.Fecha_salida)
                         {
-                            var hdisponibles = new DAOReserva().habitacionesdisponibles(reserva);//numero de habitaciones en ese hotel para ese numero maximo de personas
-                            var fechasreservadas = new DAOReserva().fechasdisponibles(reserva);
+                            var hdisponibles = new DAOReserva(_context).habitacionesdisponibles(reserva);//numero de habitaciones en ese hotel para ese numero maximo de personas
+                            var fechasreservadas = new DAOReserva(_context).fechasdisponibles(reserva);
                             //var disponibilidad = hdisponibles - fechasreservadas;
                             if (hdisponibles >= 1)
                             {
@@ -153,8 +153,8 @@ namespace LogicaNC
             UHotel hotel = new UHotel();
             hotel = await new DAOhotel(_context).infohotel(infoHotel);
 
-            var fechasreservadas = new DAOReserva().fechasdisponibles(infoReserva);
-            int cantReservas = new DAOReserva().verificarreserva(infoReserva);
+            var fechasreservadas = new DAOReserva(_context).fechasdisponibles(infoReserva);
+            int cantReservas = new DAOReserva(_context).verificarreserva(infoReserva);
 
             string fechaLlegada = (infoReserva.Fecha_llegada).ToString();
             string fechaSalida = (infoReserva.Fecha_salida).ToString();
@@ -171,7 +171,7 @@ namespace LogicaNC
                 {
                     if (infoReserva.Idusuario != 0)
                     {    
-                        new DAOReserva().insertReserva(infoReserva);
+                        new DAOReserva(_context).insertReserva(infoReserva);
                         hotel.Mensaje = "La reserva ha sido exitosa";
                         hotel.Mensaje2 = null;
                         //cm.RegisterClientScriptBlock(this.GetType(), "", "<script type='text/javascript'>alert('La reserva ha sido exitosa');</script>");
@@ -179,7 +179,7 @@ namespace LogicaNC
                     }
                     else
                     {
-                        new DAOReserva().insertReserva(infoReserva);
+                        new DAOReserva(_context).insertReserva(infoReserva);
                         new Mail().mailconfirmarreserva(infoReserva);
                         hotel.Mensaje = "La reserva ha sido exitosa";
                         hotel.Mensaje2 = "ESTA RESERVA SE ENCUENTRA OCUPADA";

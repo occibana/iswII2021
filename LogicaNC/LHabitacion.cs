@@ -34,14 +34,14 @@ namespace LogicaNC
                 {
                     habitacion.Precio = infohotel.PrecioNochePremium;
                 }
-                int cantHabitaciones = new DAOHabitacion().cantidadHabitaciones(habitacion);
+                int cantHabitaciones = new DAOHabitacion(_context).cantidadHabitaciones(habitacion);
                 if (cantHabitaciones == 150)
                 {
                     mensaje.Mensaje = " Limite de habitaciones alcanzado";
                 }
                 else
                 {
-                    new DAOHabitacion().insertHabitacion(habitacion);
+                    new DAOHabitacion(_context).insertHabitacion(habitacion);
                     new DAOhotel(_context).actualizarhabiatacion(habitacion);
                     mensaje.Mensaje = " Habitacion añadida con exito";
                     mensaje.Tb_NumPersonas = "";

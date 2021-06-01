@@ -6,6 +6,7 @@ using LogicaNC;
 using ApiServiciosNC.Security;
 using DataNC;
 using Microsoft.Extensions.Configuration;
+using System;
 
 namespace ApiServiciosNC.Controllers
 {
@@ -56,8 +57,16 @@ namespace ApiServiciosNC.Controllers
                 var JWT_AUDIENCE_TOKEN = _configuration["JWT_AUDIENCE_TOKEN"];
                 var JWT_ISSUER_TOKEN = _configuration["JWT_ISSUER_TOKEN"];
                 var JWT_EXPIRE_HOURS = _configuration["JWT_EXPIRE_HOURS"];
-                var token = TokenGenerator.GenerateTokenJwt(usuario_login, JWT_SECRET_KEY, JWT_AUDIENCE_TOKEN, JWT_ISSUER_TOKEN, JWT_EXPIRE_HOURS, _context);
-                return Ok(token);
+
+                LoginToken token = new LoginToken();
+                token.FechaGenerado = DateTime.Now;
+                token.FechaVigencia = DateTime.Now.AddMinutes(15);
+                token.User_id = usuario_login.Id;
+                //token.Token = jwtTokenString;
+
+                token.Token = TokenGenerator.GenerateTokenJwt(usuario_login, JWT_SECRET_KEY, JWT_AUDIENCE_TOKEN, JWT_ISSUER_TOKEN, JWT_EXPIRE_HOURS);
+                await new LLogin(_context).guardarToken(token);
+                return Ok(token.Token);
             }
         }
 

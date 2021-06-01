@@ -20,4 +20,9 @@
     <ProjectReference Include="..\LogicaNC\LogicaNC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="bin\Debug\netcoreapp2.2\" />
+    <Folder Include="bin\Release\netcoreapp2.2\" />
+  </ItemGroup>
+
 </Project>

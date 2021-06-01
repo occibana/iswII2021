@@ -8,18 +8,24 @@ namespace DataNC
 {
     public class DAOHabitacion
     {
+        private readonly Mapeo _context;
+
+        public DAOHabitacion(Mapeo context)
+        {
+            _context = context;
+        }
+
         public void insertHabitacion(UHabitacion habitE)
         {
-            using (var db = new Mapeo())
-            {
-                db.habitacion.Add(habitE);
-                db.SaveChanges();
-            }
+
+            _context.habitacion.Add(habitE);
+            _context.SaveChanges();
+            
         }
 
         public int cantidadHabitaciones(UHabitacion habitE)
         {
-            return new Mapeo().habitacion.Where(x => x.Idhotel == habitE.Idhotel).ToList().Count();
+            return _context.habitacion.Where(x => x.Idhotel == habitE.Idhotel).ToList().Count();
         }
 
 
@@ -30,9 +36,8 @@ namespace DataNC
             {
                 if (consulta.numpersonas == null)
                 {
-                    using (var db = new Mapeo())
-                    {
-                        List<UHabitacion> habitaciones = (from hhab in db.habitacion
+                    
+                        List<UHabitacion> habitaciones = (from hhab in _context.habitacion
 
                                                           select new
                                                           {
@@ -49,13 +54,12 @@ namespace DataNC
 
                                                           }).Where(x => x.Idhotel == idE.Idhotel).ToList();
                         return habitaciones;
-                    }
+                    
                 }
                 else
                 {
-                    using (var db = new Mapeo())
-                    {
-                        List<UHabitacion> habitaciones = (from hhab in db.habitacion
+                
+                        List<UHabitacion> habitaciones = (from hhab in _context.habitacion
 
                                                           select new
                                                           {
@@ -72,16 +76,15 @@ namespace DataNC
 
                                                           }).Where(x => (x.Idhotel == idE.Idhotel) && (x.Numpersonas == consulta.numpersonas)).ToList();
                         return habitaciones;
-                    }
+                    
                 }
             }
             catch
             {
                 if (consulta == null)
                 {
-                    using (var db = new Mapeo())
-                    {
-                        List<UHabitacion> habitaciones = (from hhab in db.habitacion
+
+                        List<UHabitacion> habitaciones = (from hhab in _context.habitacion
 
                                                           select new
                                                           {
@@ -98,13 +101,12 @@ namespace DataNC
 
                                                           }).Where(x => x.Idhotel == idE.Idhotel).ToList();
                         return habitaciones;
-                    }
+                    
                 }
                 else
                 {
-                    using (var db = new Mapeo())
-                    {
-                        List<UHabitacion> habitaciones = (from hhab in db.habitacion
+
+                        List<UHabitacion> habitaciones = (from hhab in _context.habitacion
 
                                                           select new
                                                           {
@@ -122,7 +124,7 @@ namespace DataNC
                                                           }).Where(x => (x.Idhotel == idE.Idhotel) && (x.Numpersonas == consulta.numpersonas)).ToList();
                         return habitaciones;
                     }
-                }
+                
             }
         }
 
@@ -130,7 +132,7 @@ namespace DataNC
         //select info habitacion
         public UHabitacion infoHabitacion(int habitacionE)
         {
-            return new Mapeo().habitacion.Where(x =>( x.Id == habitacionE)).FirstOrDefault();
+            return _context.habitacion.Where(x =>( x.Id == habitacionE)).FirstOrDefault();
         }
 
 

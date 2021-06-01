@@ -20,11 +20,8 @@ namespace DataNC
 
         public void insertartoken(UToken tokenE)
         {
-            using (var db = _context)
-            {
-                db.token.Add(tokenE);
-                db.SaveChanges();
-            }
+            _context.token.Add(tokenE);
+            _context.SaveChanges();            
         }
         
         public UToken getTokenusuario(int userid)
@@ -40,77 +37,63 @@ namespace DataNC
         //actualiza contraseña
         public void actualizarcontrasenarecuperacion(URegistro datoE)
         {
-            using (var db = _context)
-            {
-                URegistro datoanterior = db.usuario.Where(x => x.Id == datoE.Id).First();
-                datoanterior.Contrasena = datoE.Contrasena;
 
-                var entry = db.Entry(datoanterior);
-                entry.State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            URegistro datoanterior = _context.usuario.Where(x => x.Id == datoE.Id).First();
+            datoanterior.Contrasena = datoE.Contrasena;
+            var entry = _context.Entry(datoanterior);
+            entry.State = EntityState.Modified;
+            _context.SaveChanges();
+            
         }
 
         //Insertar registro de acceso
-        public void insertarAcceso(UAcceso acceso)
+        public async Task insertarAcceso(UAcceso acceso)
         {
-            using (var db = _context)
-            {
-                db.acceso.Add(acceso);
-                db.SaveChanges();
-            }
+
+            _context.acceso.Add(acceso);
+            await _context.SaveChangesAsync(); 
 
         }
         //capturar momento de des-logeo
         public void cerrarAcceso(int userid)
         {
-            using (var db = _context)
-            {
-                UAcceso acceso = new UAcceso();
-                acceso = db.acceso.Where(x=> x.Userid == userid && x.FechaFin == null).FirstOrDefault();
-                acceso.FechaFin = DateTime.Now;
 
-                db.acceso.Attach(acceso);
-                var entry = db.Entry(acceso);
-                entry.State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            UAcceso acceso = new UAcceso();
+            acceso = _context.acceso.Where(x=> x.Userid == userid && x.FechaFin == null).FirstOrDefault();
+            acceso.FechaFin = DateTime.Now;
+
+            _context.acceso.Attach(acceso);
+            var entry = _context.Entry(acceso);
+            entry.State = EntityState.Modified;
+            _context.SaveChanges();
+            
         }
 
         //berra token de autenticacion del login - API
         public void borrarTokenLogin(URegistro idUsuario)
         {
-            using (var db = _context)
-            {
-                LoginToken usuario = db.login_token.Where(x => x.User_id == idUsuario.Id).First();   
-                db.login_token.Remove(usuario);
-                db.SaveChanges();
-            }
+            LoginToken usuario = _context.login_token.Where(x => x.User_id == idUsuario.Id).First();
+            _context.login_token.Remove(usuario);
+            _context.SaveChanges();
         }
 
         //guardar datos de compra
         public void insertarCompra(UMembresia datos)
         {
-            using (var db = _context)
-            {
-                db.membresia.Add(datos);
-                db.SaveChanges();
-            }
+            _context.membresia.Add(datos);
+            _context.SaveChanges(); 
         }
         
         
         //actualizar estado membresia
         public void actualizarmembresia(URegistro datoE)
         {
-            using (var db = _context)
-            {
-                URegistro datoanterior = db.usuario.Where(x => x.Id == datoE.Id).First();
-                datoanterior.Idestado = datoE.Idestado;
+            URegistro datoanterior = _context.usuario.Where(x => x.Id == datoE.Id).First();
+            datoanterior.Idestado = datoE.Idestado;
 
-                var entry = db.Entry(datoanterior);
-                entry.State = EntityState.Modified;
-                db.SaveChanges();
-            }
+            var entry = _context.Entry(datoanterior);
+            entry.State = EntityState.Modified;
+            _context.SaveChanges();    
         }
     
         //verifica vencimiento usuario con membresia
@@ -137,13 +120,9 @@ namespace DataNC
        
         public async Task guardarTokenLogin(LoginToken token)
         {
-            using (var db = _context)
-            {
-                db.login_token.Add(token);
-                db.SaveChanges();
-            }
+            _context.login_token.Add(token);
+            _context.SaveChanges();
         }
-
     }
 }
     

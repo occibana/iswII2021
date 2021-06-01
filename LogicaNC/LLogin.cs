@@ -10,10 +10,15 @@ namespace LogicaNC
     public class LLogin
     {
         private readonly Mapeo _context;
+        private readonly DAOSeguridad _daoSeguridad;
+        private readonly DAOLogin _daoLogin;
 
         public LLogin(Mapeo context)
         {
             _context = context;
+            //_daoSeguridad = new DAOSeguridad(_context);
+            _daoLogin = new DAOLogin(_context);
+
         }
 
         public async Task<URegistro> ingresoLogin(LoginRequest login)
@@ -29,7 +34,7 @@ namespace LogicaNC
             acceso.Mac = conexion.mac();
             acceso.Session = "fgcypsr1u0ya0t5qd3o2runw";
 
-            return await new DAOLogin(_context).verificarLogin(user,acceso);
+            return await _daoLogin.verificarLogin(user,acceso);
         }
         
         public async Task guardarToken(LoginToken token){
@@ -38,7 +43,7 @@ namespace LogicaNC
 
         public async Task<URegistro> ingreso(URegistro login)
         {
-            return await new DAOLogin(_context).verificar(login);
+            return await _daoLogin.verificar(login);
         }
 
 

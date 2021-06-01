@@ -41,22 +41,22 @@ namespace LogicaNC
 
         public List<UReserva> mostrarMisreservas(URegistro disponibilidadE)
         {
-            return new DAOReserva().mostrarmisreservas(disponibilidadE);
+            return new DAOReserva(_context).mostrarmisreservas(disponibilidadE);
         }
 
         public List<UHabitacion> habitacionesHotel(UHotel idE, UFiltro consulta)
         {
-            return new DAOHabitacion().habitacionesHotel(idE,consulta);
+            return new DAOHabitacion(_context).habitacionesHotel(idE,consulta);
         }
 
         public List<UReserva> mostrarreservas(int disponibilidadE)
         {
-            return new DAOReserva().mostrarreservas(disponibilidadE);
+            return new DAOReserva(_context).mostrarreservas(disponibilidadE);
         }
 
         public List<UReserva> mostrarreservascompletadas(int disponibilidadE)
         {
-            return new DAOReserva().mostrarreservascompletadas(disponibilidadE);
+            return new DAOReserva(_context).mostrarreservascompletadas(disponibilidadE);
         }
 
         public List<UComentarios> obtenerComentarios(UHotel id)

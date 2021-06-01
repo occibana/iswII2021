@@ -70,7 +70,7 @@ namespace LogicaNC
 
             if (inforeserva != null)
             {
-                inforeserva = await new DAOReserva().inforeserva(inforeserva);
+                inforeserva = await new DAOReserva(_context).inforeserva(inforeserva);
                 try
                 {
 
@@ -109,10 +109,10 @@ namespace LogicaNC
 
                             if (inforeserva.Calificacion != null)
                             {
-                                new DAOReserva().actualizarcalificacion(inforeserva);
+                                new DAOReserva(_context).actualizarcalificacion(inforeserva);
                                 mensaje.Mensaje = "Calificacion realizada con exito";
-                                new DAOReserva().cantidaddereservasconcalificacion(inforeserva);
-                                var promediocalificacion = new DAOReserva().cantidaddereservasconcalificacion(inforeserva);
+                                new DAOReserva(_context).cantidaddereservasconcalificacion(inforeserva);
+                                var promediocalificacion = new DAOReserva(_context).cantidaddereservasconcalificacion(inforeserva);
                                 UHotel hotel = new UHotel();
                                 hotel.Idhotel = int.Parse((inforeserva.Idhotel).ToString());
                                 hotel.Promediocalificacion = promediocalificacion;

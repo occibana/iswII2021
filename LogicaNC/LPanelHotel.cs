@@ -29,7 +29,7 @@ namespace LogicaNC
 
         public UHabitacion informacion_de_habitacion(UHabitacion habitacioninfo)
         {
-            habitacioninfo = new DAOHabitacion().infoHabitacion(habitacioninfo.Id);
+            habitacioninfo = new DAOHabitacion(_context).infoHabitacion(habitacioninfo.Id);
            
             return habitacioninfo;
         }
