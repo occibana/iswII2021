@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.UI.WebControls;
 using Data;
 using Utilitarios;
@@ -33,26 +35,32 @@ namespace Logica
             hotel.Condicionesbioseguridad = datosHotel.Condicionesbioseguridad;
             hotel.Direccion = datosHotel.Direccion;
 
-            if (imagenPrincipal.HasFile)
+            if (imagenPrincipal != null)
             {
-                string ext = System.IO.Path.GetExtension(imagenPrincipal.FileName);//obtiene la extencion del archivo
-                ext = ext.ToLower();
-                int tam = imagenPrincipal.PostedFile.ContentLength;
-                if ((ext == ".jpg" || ext == ".png" || ext == ".jpeg") && (tam < 1048576))
+                string ext = dir1.ToLower();//obtiene la extencion del archivo
+
+                // int tam = imagenPrincipal.PostedFile.ContentLength;
+                if ((ext == ".jpg" || ext == ".png" || ext == ".jpeg"))  //&& (tam < 1048576)
                 {
-                    imagenPrincipal.SaveAs(dir1);
-                    //hotel.Mensaje = "*Imagen Aceptada";
-                    hotel.Mensaje = null;
+                    string direc1 = HttpContext.Current.Server.MapPath(direccion1);
+                    FileStream fileStream = new FileStream(direc1, FileMode.Create, FileAccess.ReadWrite);
+                    fileStream.Write(imagenPrincipal, 0, imagenPrincipal.Length);//mapea y guarda el archivo en la direccion
+                    fileStream.Close();
+                    hotel.Mensaje = "*Imagen aceptada";
                     hotel.Imagen = direccion1;
 
-                    if (imagenSecundaria.HasFile) //secundaria1
+                    if (imagenSecundaria != null) //secundaria1
                     {
-                        string exts = System.IO.Path.GetExtension(imagenSecundaria.FileName);//obtiene la extencion del archivo
-                        exts = exts.ToLower();
-                        int tams = imagenSecundaria.PostedFile.ContentLength;
-                        if ((exts == ".jpg" || exts == ".png" || exts == ".jpeg") && (tams < 1048576))
+
+                        string exts = dir2.ToLower();
+                        //int tams = imagenSecundaria.PostedFile.ContentLength;
+                        if ((exts == ".jpg" || exts == ".png" || exts == ".jpeg")) //&& (tams < 1048576)
                         {
-                            imagenSecundaria.SaveAs(dir2);
+                            string direc2 = HttpContext.Current.Server.MapPath(direccion2);
+                            fileStream = new FileStream(direc2, FileMode.Create, FileAccess.ReadWrite);
+                            fileStream.Write(imagenPrincipal, 0, imagenPrincipal.Length);
+                            fileStream.Close();
+                            //imagenSecundaria.SaveAs(dir2);
                             hotel.Mensaje2 = "*Imagen Aceptada";
                             hotel.Imagen_secundaria = direccion2;
                         }
@@ -67,14 +75,18 @@ namespace Logica
                         hotel.Imagen_secundaria = null;
                     }
 
-                    if (imagenSecundaria2.HasFile) //secundaria2
+                    if (imagenSecundaria2 != null) //secundaria2
                     {
-                        string extt = System.IO.Path.GetExtension(imagenSecundaria2.FileName);//obtiene la extencion del archivo
-                        extt = extt.ToLower();
-                        int tamt = imagenSecundaria2.PostedFile.ContentLength;
-                        if ((extt == ".jpg" || extt == ".png" || extt == ".jpeg") && (tamt < 1048576))
+
+                        string extt = dir3.ToLower();
+                        // int tamt = imagenSecundaria2.PostedFile.ContentLength;
+                        if ((extt == ".jpg" || extt == ".png" || extt == ".jpeg")) // && (tamt < 1048576)
                         {
-                            imagenSecundaria2.SaveAs(dir3);
+                            string direc3 = HttpContext.Current.Server.MapPath(direccion3);
+                            fileStream = new FileStream(direc3, FileMode.Create, FileAccess.ReadWrite);
+                            fileStream.Write(imagenPrincipal, 0, imagenPrincipal.Length);
+                            fileStream.Close();
+
                             hotel.Mensaje3 = "*Imagen Aceptada";
                             hotel.Imagen_secundaria2 = direccion3;
                         }
