@@ -31,7 +31,7 @@ namespace Logica
 
             if (perfil.Datos.Fotoperfil == null)
             {
-                perfil.Datos.Fotoperfil = "~/Vew/img/perfilvacio.jpg";
+                perfil.Datos.Fotoperfil = "~/Views/img/perfilvacio.jpg";
             }
 
             if (perfil.Datos.Idestado == 1) //1 Es con menbresia, 0 sin membresia

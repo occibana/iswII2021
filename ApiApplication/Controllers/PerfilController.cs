@@ -264,23 +264,17 @@ namespace ApiApplication.Controllers
         {
             UPerfil perfil = new UPerfil();
             URegistro usuario = new URegistro();
+            String imagenPerfil = foto["imagen"].ToString();
 
-            JToken imagenPerfil = foto["imagen"];
-            List<byte> listadebytes = new List<byte>();
-            foreach (JToken bite in imagenPerfil)
-            {
-                listadebytes.Add(byte.Parse(bite.ToString()));
-            }
-            byte[] fotoPerfil = listadebytes.ToArray();
+            byte[] fotoPerfil = Convert.FromBase64String(imagenPerfil);
 
             usuario.Usuario = foto["usuario"].ToString();
             perfil = new LPerfil().cargardatos(usuario);
             usuario.Id = perfil.Datos.Id;
-            string nombreArchivo = usuario.Usuario + "Perfil";
+            string nombreArchivo = usuario.Usuario + "Perfil2";
            
-            //string imagen = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\") + nombreArchivo;
             string ext = foto["extension"].ToString();
-            string direccion = "~\\Vew\\imgusuarios\\" + nombreArchivo + ext;
+            string direccion = "~\\Views\\imgusuarios\\" + nombreArchivo + ext;
             string imagenEliminar = perfil.Datos.Fotoperfil;
             imagenEliminar = HttpContext.Current.Server.MapPath(imagenEliminar);
 
