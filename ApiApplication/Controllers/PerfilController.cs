@@ -245,9 +245,13 @@ namespace ApiApplication.Controllers
             
         }
 
-        //F
         /// <summary>
         /// Servicio para cargar imagen de perfil.
+        /// {
+        /// "imagen":string,
+        /// "usuario":string,
+        /// "extension":string
+        /// }
         /// </summary> 
         /// <returns>Mensaje de aviso de subido o error</returns>
         /// <Autor>Jonathan Cardenas</Autor>
