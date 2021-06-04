@@ -76,6 +76,7 @@ namespace Data
                             Mediopago = m.r.Mediopago,
                             Calificacion = m.r.Calificacion,
                             PrecioNoche = m.r.PrecioNoche,
+                            Limite_comentario = m.r.Limite_comentario
                         }).ToList();
             }
             //return new Mapeo().reserva.Where(x => x.Idusuario == disponibilidadE.Id).ToList();

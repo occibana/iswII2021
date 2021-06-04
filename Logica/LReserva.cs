@@ -151,6 +151,7 @@ namespace Logica
 
             string fechaLlegada = (infoReserva.Fecha_llegada).ToString();
             string fechaSalida = (infoReserva.Fecha_salida).ToString();
+            infoReserva.Limite_comentario = infoReserva.Fecha_salida.AddDays(3);
 
             if (fechasreservadas == 1)
             {

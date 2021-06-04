@@ -49,7 +49,7 @@ namespace Logica
                 }
                 else
                 {
-                    datos.Mensaje = "No puede comentar";
+                    datos.Mensaje = "No puede comentar, inicie sesion o verifique si ha pasado mucho tiempo desde esta reserva";
                 }
             }
             else
