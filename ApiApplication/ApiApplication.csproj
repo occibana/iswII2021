@@ -270,7 +270,6 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\imgusuarios\asantiboPerfil2.jpg" />
     <Content Include="Views\img\fotoefectos.com_.jpg" />
     <Content Include="Views\img\hotelvacio.png" />
     <Content Include="Views\img\lupaicon.png" />
@@ -295,6 +294,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Views\hoteles\imgadicional\" />
+    <Folder Include="Views\hoteles\imgprincipal\" />
+    <Folder Include="Views\imgusuarios\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

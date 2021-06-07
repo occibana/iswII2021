@@ -168,6 +168,32 @@ namespace ApiApplication.Controllers
 
         /// <summary>
         ///  Servicio para subir 
+        ///  
+        /// {
+        /// "nombreH": String,
+        /// "municipio":string,
+        /// "idMunicipio":int,
+        /// "precioBasica":int,
+        /// "precioDoble":int,
+        /// "precioPremium":int,
+        /// "Descripcion":String,
+        /// "Condicion":string,
+        /// "Checkin":string,
+        /// "Checkout":string,
+        /// "UsuarioEncargadoSession":string,
+        /// "idUsuario":int,
+        /// "Idzona":int,
+        /// "Condicionesbioseguridad":string,
+        /// "Direccion":string,
+        /// "imagenPrincipal":string,
+        /// "imagenPrincipal-extension":string,
+        /// "imagen2":string,
+        /// "imagen2-extension":string,
+        /// "imagen3":string,
+        /// "imagen3-extension":string
+        /// 
+        /// }
+        /// 
         /// </summary>
         /// <returns>
         /// Informacion del hotel
@@ -184,7 +210,6 @@ namespace ApiApplication.Controllers
                 hotel.Nombre = datosHotel["nombreH"].ToString();
                 hotel.Municipio = datosHotel["municipio"].ToString();
                 hotel.Idmunicipio = int.Parse(datosHotel["idMunicipio"].ToString());
-                // hotel.Numhabitacion = datosHotel.Numhabitacion;
                 hotel.Precionoche = int.Parse(datosHotel["precioBasica"].ToString());
                 hotel.PrecioNocheDoble = int.Parse(datosHotel["precioDoble"].ToString());
                 hotel.PrecioNochePremium = int.Parse(datosHotel["precioPremium"].ToString());
@@ -192,81 +217,85 @@ namespace ApiApplication.Controllers
                 hotel.Condicion = datosHotel["Condicion"].ToString();
                 hotel.Checkin = datosHotel["Checkin"].ToString();
                 hotel.Checkout = datosHotel["Checkout"].ToString();
-                hotel.Usuarioencargado = datosHotel["UsuarioEncargado"].ToString();
+                hotel.Usuarioencargado = datosHotel["UsuarioEncargadoSession"].ToString();
                 hotel.Idusuario = int.Parse(datosHotel["idUsuario"].ToString());
                 hotel.Idzona = int.Parse(datosHotel["Idzona"].ToString());
                 hotel.Condicionesbioseguridad = datosHotel["Condicionesbioseguridad"].ToString();
                 hotel.Direccion = datosHotel["Direccion"].ToString();
 
-                JToken imagenPrin = datosHotel["imagenPrincipal"];
-                List<byte> listadebytes = new List<byte>();
+                
+                String imagenPrin = datosHotel["imagenPrincipal"].ToString();
+                byte[] fotoImagenPrin = Convert.FromBase64String(imagenPrin);
+
+                /*List<byte> listadebytes = new List<byte>();
                 foreach (JToken bite in imagenPrin)
                 {
                     listadebytes.Add(byte.Parse(bite.ToString()));
                 }
-                byte[] imagenPrincipal = listadebytes.ToArray();
+                byte[] imagenPrincipal = listadebytes.ToArray();*/
 
-                JToken imagensec = datosHotel["imagen2"];
-                List<byte> listadebytes2 = new List<byte>();
+                String imagensec = datosHotel["imagen2"].ToString();  
+                byte[] fotoImagensec = Convert.FromBase64String(imagensec);
+
+                /*List<byte> listadebytes2 = new List<byte>();
                 foreach (JToken bite in imagensec)
                 {
                     listadebytes2.Add(byte.Parse(bite.ToString()));
                 }
-                byte[] imagen2 = listadebytes2.ToArray();
+                byte[] imagen2 = listadebytes2.ToArray();*/
 
-                JToken imagenter = datosHotel["imagen3"];
-                List<byte> listadebytes3 = new List<byte>();
+                String imagenter = datosHotel["imagen3"].ToString();
+                byte[] fotoImagenter = Convert.FromBase64String(imagenter);
+
+                /*List<byte> listadebytes3 = new List<byte>();
                 foreach (JToken bite in imagenter)
                 {
                     listadebytes3.Add(byte.Parse(bite.ToString()));
                 }
-                byte[] imagen3 = listadebytes3.ToArray();
+                byte[] imagen3 = listadebytes3.ToArray();*/
 
                 string nombreArchivo1;
-                string ext1;
                 string direccion1;
                 string nombreArchivo2;
                 string nombreArchivo3;
-                string ext2 = null;
-                string ext3 = null;
+                string imagensecExtension = null;
+                string imagensterExtension = null;
                 string direccion2 = null;
                 string direccion3 = null;
-                if (imagenPrincipal != null)
+                if (imagenPrin != null)
                 {
                     nombreArchivo1 = usuario.Usuario + "Principal";
-                    ext1 = datosHotel["ext1"].ToString();
-                    direccion1 = "~\\Imagenes\\imagenesHotel\\" + nombreArchivo1 + ext1;
-                    if (imagen2 == null)
+                    String imagenPrinExtension = datosHotel["imagenPrincipal-extension"].ToString();
+                    
+                    direccion1 = "~\\Views\\hoteles\\imgprincipal\\" + nombreArchivo1 + hotel.Nombre + imagenPrinExtension;
+                    if (imagensec == null)
                     {
                         nombreArchivo2 = null;
-                        ext2 = null;
+                        imagensecExtension = null;
 
                     }
-                    else if (imagen3 == null)
+                    else if (imagenter == null)
                     {
                         nombreArchivo3 = null;
-                        ext3 = null;
+                        imagensterExtension = null;
                     }
                     else
                     {
                         nombreArchivo2 = usuario.Usuario + "Secundaria";
                         nombreArchivo3 = usuario.Usuario + "Terciaria";
-                        //string imagen = HttpContext.Current.Server.MapPath("~\\Vew\\imgusuarios\\") + nombreArchivo;
 
-                        ext2 = datosHotel["ext2"].ToString();
-                        ext3 = datosHotel["ext3"].ToString();
+                        imagensecExtension = datosHotel["imagen2-extension"].ToString();
+                        imagensterExtension = datosHotel["imagen3-extension"].ToString();
 
-                        direccion2 = "~\\Imagenes\\imagenesHotel\\" + nombreArchivo2 + ext2;
-                        direccion3 = "~\\Imagenes\\imagenesHotel\\" + nombreArchivo3 + ext3;
+                        direccion2 = "~\\Views\\hoteles\\imgadicional\\" + nombreArchivo2 + hotel.Nombre + imagensecExtension;
+                        direccion3 = "~\\Views\\hoteles\\imgadicional\\" + nombreArchivo3 + hotel.Nombre + imagensterExtension;
                     }
-                    return Ok(new LAgregarServicioHotel().insertHotel(imagenPrincipal, imagen2, imagen3, direccion1, direccion2, direccion3, ext1, ext2, ext3, hotel));
+                    return Ok(new LAgregarServicioHotel().insertHotel(fotoImagenPrin, fotoImagensec, fotoImagenter, direccion1, direccion2, direccion3, imagenPrinExtension, imagensecExtension, imagensterExtension, hotel));
                 }
                 else
                 {
                     return BadRequest("Debe cargar una imagen principal");
                 }
-                // string imagenEliminar = perfil.Datos.Fotoperfil;
-                //imagenEliminar = HttpContext.Current.Server.MapPath(imagenEliminar);
 
             }
             catch (Exception ex)

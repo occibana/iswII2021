@@ -120,15 +120,16 @@ namespace ApiApplication.Controllers
         /// <summary>
         ///  Servicio que valida el codigo de recuperacion de contraseña
         ///  y actuzaliza la contraseña con la nueva contreseña
+        /// {
+        /// "usuario":string,
+        /// "contrasena":string,
+        /// "codigo":string
+        /// }
         /// </summary>
         /// <returns>
         /// token
         /// </returns>
         /// 
-
-
-
-
 
 
         [HttpPut]

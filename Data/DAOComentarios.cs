@@ -28,6 +28,7 @@ namespace Data
                                                           Comentario = m.ch.Comentario,
                                                           Id_usuario = m.ch.Id_usuario,
                                                           Id_hotel = m.ch.Id_hotel,
+                                                          Fecha_comentario = m.ch.Fecha_comentario
                                                       }).ToList<UComentarios>();
 
                 if (comentariosHotel != null && id.Idhotel != null)

@@ -271,7 +271,7 @@ namespace ApiApplication.Controllers
             usuario.Usuario = foto["usuario"].ToString();
             perfil = new LPerfil().cargardatos(usuario);
             usuario.Id = perfil.Datos.Id;
-            string nombreArchivo = usuario.Usuario + "Perfil2";
+            string nombreArchivo = usuario.Usuario + "Perfil";
            
             string ext = foto["extension"].ToString();
             string direccion = "~\\Views\\imgusuarios\\" + nombreArchivo + ext;
